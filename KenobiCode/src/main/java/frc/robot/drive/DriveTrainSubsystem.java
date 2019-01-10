@@ -17,8 +17,8 @@ public class DriveTrainSubsystem extends Subsystem {
         leftSlave.follow(leftMaster);
         rightSlave.follow(rightMaster);
         
-        rightMaster.setInverted(true);
-        rightSlave.setInverted(true);
+        leftMaster.setInverted(true);
+        leftSlave.setInverted(true);
     }
 
     @Override
@@ -26,9 +26,19 @@ public class DriveTrainSubsystem extends Subsystem {
         new DriveCom();
     }
 
-    public void drive(double left, double right) {
+    public void tankDrive(double left, double right) {
         leftMaster.set(ControlMode.PercentOutput, left);
         rightMaster.set(ControlMode.PercentOutput, right);
+    }
+
+    public void curveDrive(double v, double h) {
+        if (v > 0) {
+            leftMaster.set(ControlMode.PercentOutput, (v + h));
+            rightMaster.set(ControlMode.PercentOutput, (v - h));
+        } else if (v < 0) {
+            leftMaster.set(ControlMode.PercentOutput, (-v - h));
+            rightMaster.set(ControlMode.PercentOutput, (-v + h));
+        }
     }
 
 }
