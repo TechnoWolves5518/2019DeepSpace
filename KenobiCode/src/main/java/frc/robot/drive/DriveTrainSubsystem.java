@@ -3,40 +3,36 @@ package frc.robot.drive;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
-import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.RobotMap;
 
 public class DriveTrainSubsystem extends Subsystem {
-    
+
     private TalonSRX leftMaster = new TalonSRX(RobotMap.leftMasterId);
     private TalonSRX leftSlave = new TalonSRX(RobotMap.leftSlaveId);
-    SpeedControllerGroup difLeft = new SpeedControllerGroup((SpeedController)leftMaster, (SpeedController)leftSlave);
-    //Creates a compact way to refer to the left motors.
-
     private TalonSRX rightMaster = new TalonSRX(RobotMap.rightMasterId);
     private TalonSRX rightSlave = new TalonSRX(RobotMap.rightSlaveId);
-    SpeedControllerGroup difRight = new SpeedControllerGroup((SpeedController)rightMaster, (SpeedController)rightSlave);
-    //Creates a compact way to refer to the right motors.
-
-    DifferentialDrive difDrive = new DifferentialDrive(difLeft, difRight);
-    //This creates the Differential Drive Method.
 
     public DriveTrainSubsystem() {
         leftSlave.follow(leftMaster);
         rightSlave.follow(rightMaster);
-        //This tells the leftSlave motor to 'mimic' the leftMaster motor. Same for the right motors.
+        
         leftMaster.setInverted(true);
         leftSlave.setInverted(true);
-        //This inverts the left motors so they are in sync with the right motors.
+
+        leftEnc = new Encoder(RobotMap.LEFT_ENC_A, RobotMap.LEFT_ENC_B, true, EncodingType.k4X);
+	rightEnc = new Encoder(RobotMap.RIGHT_ENC_A, RobotMap.RIGHT_ENC_B, false, EncodingType.k4X);
+
+	leftEnc.setDistancePerPulse(kDistancePerPulse);
+	rightEnc.setDistancePerPulse(kDistancePerPulse);
+	leftEnc.setMaxPeriod(0.1);
+	rightEnc.setMaxPeriod(0.1);
+
     }
 
     @Override
     protected void initDefaultCommand() {
         new DriveCom();
-        //This starts the 'DriveCom' file so it can be seen.
     }
 
     public void tankDrive(double left, double right) {
@@ -44,17 +40,30 @@ public class DriveTrainSubsystem extends Subsystem {
         rightMaster.set(ControlMode.PercentOutput, right);
     }
 
-    public void curveDrive(double v, double r, boolean quickturn) {
-        difDrive.curvatureDrive(v, r, quickturn);
-     //This section of code creates the curveDrive method, which subsequently calls the curvatureDrive function.    
-        
-        // if (v > 0) {
-        //     leftMaster.set(ControlMode.PercentOutput, (v + h));
-        //     rightMaster.set(ControlMode.PercentOutput, (v - h));
-        // } else if (v < 0) {
-        //     leftMaster.set(ControlMode.PercentOutput, (-v - h));
-        //     rightMaster.set(ControlMode.PercentOutput, (-v + h));
-        // }
+    public void curveDrive(double v, double h) {
+        if (v > 0) {
+            leftMaster.set(ControlMode.PercentOutput, (v + h));
+            rightMaster.set(ControlMode.PercentOutput, (v - h));
+        } else if (v < 0) {
+            leftMaster.set(ControlMode.PercentOutput, (-v - h));
+            rightMaster.set(ControlMode.PercentOutput, (-v + h));
+
+    private Encoder leftEnc, rightEnc;
+    private double kWheelCircumference = MEASURE VALUE
+    private double kDistancePerRevolution = kWheelCircumference * Math.PI
+    private double kPulsesPerRevolution = 256;
+    private double kDistancePerPulse = kDistancePerRevolution / kPulsesPerRevolution
+
+    public int getLeftEncoderPos() {
+        return leftEnc.get();
+    }
+    public int getRightEncoderPos() {
+	return rightEnc.get();
+    }
+    public double getWheelCircumference() {
+	return kWheelCircumference * 0.0254;
+    }
+        }
     }
 
 }
