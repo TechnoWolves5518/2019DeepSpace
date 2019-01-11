@@ -20,13 +20,13 @@ public class DriveTrainSubsystem extends Subsystem {
         leftMaster.setInverted(true);
         leftSlave.setInverted(true);
 
-        leftEnc = new Encoder(RobotMap.LEFT_ENC_A, RobotMap.LEFT_ENC_B, true, EncodingType.k4X);
-	rightEnc = new Encoder(RobotMap.RIGHT_ENC_A, RobotMap.RIGHT_ENC_B, false, EncodingType.k4X);
+        //leftEnc = new Encoder(RobotMap.LEFT_ENC_A, RobotMap.LEFT_ENC_B, true, EncodingType.k4X);
+	//rightEnc = new Encoder(RobotMap.RIGHT_ENC_A, RobotMap.RIGHT_ENC_B, false, EncodingType.k4X);
 
-	leftEnc.setDistancePerPulse(kDistancePerPulse);
-	rightEnc.setDistancePerPulse(kDistancePerPulse);
-	leftEnc.setMaxPeriod(0.1);
-	rightEnc.setMaxPeriod(0.1);
+	//leftEnc.setDistancePerPulse(kDistancePerPulse);
+	//rightEnc.setDistancePerPulse(kDistancePerPulse);
+	//leftEnc.setMaxPeriod(0.1);
+	//rightEnc.setMaxPeriod(0.1);
 
     }
 
@@ -48,21 +48,21 @@ public class DriveTrainSubsystem extends Subsystem {
             leftMaster.set(ControlMode.PercentOutput, (-v - h));
             rightMaster.set(ControlMode.PercentOutput, (-v + h));
 
-    private Encoder leftEnc, rightEnc;
-    private double kWheelCircumference = MEASURE VALUE
-    private double kDistancePerRevolution = kWheelCircumference * Math.PI
-    private double kPulsesPerRevolution = 256;
-    private double kDistancePerPulse = kDistancePerRevolution / kPulsesPerRevolution
+    //private Encoder leftEnc, rightEnc;
+    //private double kWheelCircumference = MEASURE VALUE
+    //private double kDistancePerRevolution = kWheelCircumference * Math.PI
+    //private double kPulsesPerRevolution = 256;
+    //private double kDistancePerPulse = kDistancePerRevolution / kPulsesPerRevolution
 
-    public int getLeftEncoderPos() {
-        return leftEnc.get();
-    }
-    public int getRightEncoderPos() {
-	return rightEnc.get();
-    }
-    public double getWheelCircumference() {
-	return kWheelCircumference * 0.0254;
-    }
+    //public int getLeftEncoderPos() {
+        //return leftEnc.get();
+    //}
+    //public int getRightEncoderPos() {
+	//return rightEnc.get();
+    //}
+    //public double getWheelCircumference() {
+	//return kWheelCircumference * 0.0254;
+    //}
         }
     }
 
