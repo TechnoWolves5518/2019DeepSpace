@@ -12,6 +12,7 @@ public class DriveCom extends Command {
     private double deadzone = 0.04;
 
     private double v, h;
+    private boolean quickturn;
 
     public DriveCom() {
         requires(Robot.driveTrain);
@@ -23,6 +24,7 @@ public class DriveCom extends Command {
         rightSpeed = 0;
         v = 0;
         h = 0;
+        quickturn = false;
     }
 
     @Override
@@ -38,9 +40,11 @@ public class DriveCom extends Command {
 
         v = Robot.oi.driver.getY(Hand.kLeft);
         h = Robot.oi.driver.getX(Hand.kLeft);
+        quickturn = Robot.oi.driver.getAButton();
         Robot.driveTrain.curveDrive(
             configSpeed(v),
-            configSpeed(h)
+            configSpeed(h),
+            quickturn
         );
     }
 
