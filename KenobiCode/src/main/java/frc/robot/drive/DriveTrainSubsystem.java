@@ -49,11 +49,11 @@ public class DriveTrainSubsystem extends Subsystem {
      //This section of code creates the curveDrive method, which subsequently calls the curvatureDrive function.    
         
         // if (v > 0) {
-        //     leftMaster.set(ControlMode.PercentOutput, (v + h));
-        //     rightMaster.set(ControlMode.PercentOutput, (v - h));
+        //     leftMaster.set(ControlMode.PercentOutput, (v + r));
+        //     rightMaster.set(ControlMode.PercentOutput, (v - r));
         // } else if (v < 0) {
-        //     leftMaster.set(ControlMode.PercentOutput, (-v - h));
-        //     rightMaster.set(ControlMode.PercentOutput, (-v + h));
+        //     leftMaster.set(ControlMode.PercentOutput, (-v - r));
+        //     rightMaster.set(ControlMode.PercentOutput, (-v + r));
         // }
     }
 
