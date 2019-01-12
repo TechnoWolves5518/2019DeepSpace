@@ -19,4 +19,6 @@ public class RobotMap {
   public static int RIGHT_ENC_A = 5;
   public static int RIGHT_ENC_B = 6;
 
+  public static double topSpeed = 0.5;
+
 }

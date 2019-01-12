@@ -3,6 +3,7 @@ package frc.robot.drive;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class DriveCom extends Command {
 
@@ -55,6 +56,7 @@ public class DriveCom extends Command {
             s = 0;
         // cubes the speeds for sensitivity control
         s = Math.pow(s, 3);
+        s *= RobotMap.topSpeed;
         return s;
     }
 
