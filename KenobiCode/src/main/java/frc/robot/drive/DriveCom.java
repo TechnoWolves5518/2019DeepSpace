@@ -31,10 +31,10 @@ public class DriveCom extends Command {
         leftSpeed = Robot.oi.driver.getY(Hand.kLeft);
         rightSpeed = Robot.oi.driver.getY(Hand.kRight);
         // calls tankdrive method in drive subsystem with given speeds
-        Robot.driveTrain.tankDrive(
-            configSpeed(leftSpeed),
-            configSpeed(rightSpeed)
-        );
+        // Robot.driveTrain.tankDrive(
+        //     configSpeed(leftSpeed),
+        //     configSpeed(rightSpeed)
+        // );
 
         v = Robot.oi.driver.getY(Hand.kLeft);
         h = Robot.oi.driver.getX(Hand.kLeft);
@@ -42,6 +42,9 @@ public class DriveCom extends Command {
             configSpeed(v),
             configSpeed(h)
         );
+
+        System.out.println("Left: " + Robot.driveTrain.getLeftEncoderPos() +
+            "Right: " + Robot.driveTrain.getRightEncoderPos());
     }
 
     public double configSpeed(double s) {
