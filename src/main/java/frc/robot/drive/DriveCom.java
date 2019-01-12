@@ -13,6 +13,7 @@ public class DriveCom extends Command {
     private double deadzone = 0.04;
 
     private double v, h;
+    private boolean quickturn;
 
     public DriveCom() {
         requires(Robot.driveTrain);
@@ -26,6 +27,7 @@ public class DriveCom extends Command {
         v = 0;
         h = 0;
         System.out.println("Command initialize");
+        quickturn = false;
     }
 
     @Override
