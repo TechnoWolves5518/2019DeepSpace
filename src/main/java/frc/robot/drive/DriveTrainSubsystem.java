@@ -65,14 +65,20 @@ public class DriveTrainSubsystem extends Subsystem {
         }
     }
 
-    public int getLeftEncoderPos() {
+    public int getLeftEncoder() {
         return leftEnc.get();
     }
-    public int getRightEncoderPos() {
-    return rightEnc.get();
+    public int getRightEncoder() {
+        return rightEnc.get();
     }
+
+    public void resetEncoders() {
+        leftEnc.reset();
+        rightEnc.reset();
+    }
+
     public double getWheelDiameter() {
-    return kWheelDiameter * 0.0254;
+        return kWheelDiameter * 0.0254;
     }
 
 }

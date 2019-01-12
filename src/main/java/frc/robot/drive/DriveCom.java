@@ -46,8 +46,8 @@ public class DriveCom extends Command {
         //     configSpeed(h)
         // );
 
-        System.out.println("Left: " + Robot.driveTrain.getLeftEncoderPos() +
-            "\tRight: " + Robot.driveTrain.getRightEncoderPos());
+        System.out.println("Left: " + Robot.driveTrain.getLeftEncoder() +
+            "\tRight: " + Robot.driveTrain.getRightEncoder());
     }
 
     public double configSpeed(double s) {
