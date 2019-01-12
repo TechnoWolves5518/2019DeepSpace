@@ -9,14 +9,14 @@ package frc.robot;
 
 public class RobotMap {
 
-  public static int leftMasterId = 0;
-  public static int leftSlaveId = 1;
-  public static int rightMasterId = 2;
-  public static int rightSlaveId = 3;
+  public static int leftMasterId = 1;
+  public static int leftSlaveId = 2;
+  public static int rightMasterId = 3;
+  public static int rightSlaveId = 0;
   
-  //public static int LEFT_ENC_A = PORT;
-  //public static int LEFT_ENC_B = PORT;
-  //public static int RIGHT_ENC_A = PORT;
-  //public static int RIGHT_ENC_B = PORT;
+  public static int LEFT_ENC_A = 3;
+  public static int LEFT_ENC_B = 4;
+  public static int RIGHT_ENC_A = 5;
+  public static int RIGHT_ENC_B = 6;
 
 }

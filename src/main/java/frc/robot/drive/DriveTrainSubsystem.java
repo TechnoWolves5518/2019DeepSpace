@@ -13,11 +13,11 @@ public class DriveTrainSubsystem extends Subsystem {
     private TalonSRX rightMaster = new TalonSRX(RobotMap.rightMasterId);
     private TalonSRX rightSlave = new TalonSRX(RobotMap.rightSlaveId);
 
-    //private Encoder leftEnc, rightEnc;
-    //private double kWheelCircumference = MEASURE VALUE
-    //private double kDistancePerRevolution = kWheelCircumference * Math.PI
-    //private double kPulsesPerRevolution = 256;
-    //private double kDistancePerPulse = kDistancePerRevolution / kPulsesPerRevolution
+    private Encoder leftEnc, rightEnc;
+    private double kWheelDiameter = 8;
+    private double kDistancePerRevolution = kWheelDiameter * Math.PI;
+    private double kPulsesPerRevolution = 360;
+    private double kDistancePerPulse = kDistancePerRevolution / kPulsesPerRevolution;
 
     public DriveTrainSubsystem() {
         leftSlave.follow(leftMaster);
@@ -26,13 +26,13 @@ public class DriveTrainSubsystem extends Subsystem {
         leftMaster.setInverted(true);
         leftSlave.setInverted(true);
 
-        //leftEnc = new Encoder(RobotMap.LEFT_ENC_A, RobotMap.LEFT_ENC_B, true, EncodingType.k4X);
-        //leftEnc.setDistancePerPulse(kDistancePerPulse);
-        //leftEnc.setMaxPeriod(0.1);
+        leftEnc = new Encoder(RobotMap.LEFT_ENC_A, RobotMap.LEFT_ENC_B, true, EncodingType.k4X);
+        leftEnc.setDistancePerPulse(kDistancePerPulse);
+        leftEnc.setMaxPeriod(0.1);
 
-        //rightEnc = new Encoder(RobotMap.RIGHT_ENC_A, RobotMap.RIGHT_ENC_B, false, EncodingType.k4X);
-        //rightEnc.setDistancePerPulse(kDistancePerPulse);
-        //rightEnc.setMaxPeriod(0.1);
+        rightEnc = new Encoder(RobotMap.RIGHT_ENC_A, RobotMap.RIGHT_ENC_B, false, EncodingType.k4X);
+        rightEnc.setDistancePerPulse(kDistancePerPulse);
+        rightEnc.setMaxPeriod(0.1);
     }
 
     @Override
@@ -55,14 +55,14 @@ public class DriveTrainSubsystem extends Subsystem {
         }
     }
 
-    //public int getLeftEncoderPos() {
-        //return leftEnc.get();
-    //}
-    //public int getRightEncoderPos() {
-    //return rightEnc.get();
-    //}
-    //public double getWheelCircumference() {
-    //return kWheelCircumference * 0.0254;
-    //}
+    public int getLeftEncoderPos() {
+        return leftEnc.get();
+    }
+    public int getRightEncoderPos() {
+    return rightEnc.get();
+    }
+    public double getWheelDiameter() {
+    return kWheelDiameter * 0.0254;
+    }
 
 }
