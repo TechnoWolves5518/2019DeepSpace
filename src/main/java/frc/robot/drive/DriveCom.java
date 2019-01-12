@@ -15,6 +15,7 @@ public class DriveCom extends Command {
 
     public DriveCom() {
         requires(Robot.driveTrain);
+        System.out.println("Command constructor");
     }
 
     @Override
@@ -23,28 +24,29 @@ public class DriveCom extends Command {
         rightSpeed = 0;
         v = 0;
         h = 0;
+        System.out.println("Command initialize");
     }
 
     @Override
     protected void execute() {
         // gets speeds from joysticks
-        leftSpeed = Robot.oi.driver.getY(Hand.kLeft);
-        rightSpeed = Robot.oi.driver.getY(Hand.kRight);
+        leftSpeed = -Robot.oi.driver.getY(Hand.kLeft);
+        rightSpeed = -Robot.oi.driver.getY(Hand.kRight);
         // calls tankdrive method in drive subsystem with given speeds
-        // Robot.driveTrain.tankDrive(
-        //     configSpeed(leftSpeed),
-        //     configSpeed(rightSpeed)
-        // );
-
-        v = Robot.oi.driver.getY(Hand.kLeft);
-        h = Robot.oi.driver.getX(Hand.kLeft);
-        Robot.driveTrain.curveDrive(
-            configSpeed(v),
-            configSpeed(h)
+        Robot.driveTrain.tankDrive(
+            configSpeed(leftSpeed),
+            configSpeed(rightSpeed)
         );
 
+        // v = Robot.oi.driver.getY(Hand.kLeft);
+        // h = Robot.oi.driver.getX(Hand.kLeft);
+        // Robot.driveTrain.curveDrive(
+        //     configSpeed(v),
+        //     configSpeed(h)
+        // );
+
         System.out.println("Left: " + Robot.driveTrain.getLeftEncoderPos() +
-            "Right: " + Robot.driveTrain.getRightEncoderPos());
+            "\tRight: " + Robot.driveTrain.getRightEncoderPos());
     }
 
     public double configSpeed(double s) {

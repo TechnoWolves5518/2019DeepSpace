@@ -6,6 +6,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 public class DriveTrainSubsystem extends Subsystem {
@@ -39,12 +40,16 @@ public class DriveTrainSubsystem extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-        new DriveCom();
+        System.out.println("setup command");
+        // new DriveCom();
+        setDefaultCommand(Robot.drive);
     }
 
     public void tankDrive(double left, double right) {
         leftMaster.set(ControlMode.PercentOutput, left);
+        leftSlave.set(ControlMode.PercentOutput, left);
         rightMaster.set(ControlMode.PercentOutput, right);
+        rightSlave.set(ControlMode.PercentOutput, right);
     }
 
     public void curveDrive(double v, double h) {
