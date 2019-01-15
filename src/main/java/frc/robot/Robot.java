@@ -24,7 +24,13 @@ public class Robot extends TimedRobot {
   public static OI oi = new OI();
   public static DriveTrainSubsystem driveTrain;
   public static DriveCom drive;
+  
+  public long TimeAnchor = (System.nanoTime() / 1000000000); //Sets a 'start time' reference, in seconds.
 
+  public long TimeStamp() {
+    long TimeNow = (System.nanoTime() / 1000000000); //This function will return how long it has been since initialization, in seconds.
+    return (TimeAnchor - TimeNow);
+  }
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
