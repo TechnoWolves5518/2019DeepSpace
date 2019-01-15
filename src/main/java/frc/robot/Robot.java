@@ -9,6 +9,8 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import frc.robot.auto.AutoDriveCom;
+import frc.robot.auto.AutoDriveSub;
 import frc.robot.drive.DriveCom;
 import frc.robot.drive.DriveTrainSubsystem;
 
@@ -22,8 +24,12 @@ import frc.robot.drive.DriveTrainSubsystem;
 public class Robot extends TimedRobot {
 
   public static OI oi = new OI();
+
   public static DriveTrainSubsystem driveTrain;
   public static DriveCom drive;
+
+  public static AutoDriveSub autoDrive;
+  public static AutoDriveCom autoDriveCom;
 
   /**
    * This function is run when the robot is first started up and should be
@@ -34,7 +40,9 @@ public class Robot extends TimedRobot {
     // initializes the robot
     System.out.println("initialize the robot");
     driveTrain = new DriveTrainSubsystem();
-    drive = new DriveCom();
+    // drive = new DriveCom();
+    autoDrive = new AutoDriveSub();
+    autoDriveCom = new AutoDriveCom();
   }
 
   /**
