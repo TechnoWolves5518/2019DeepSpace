@@ -14,12 +14,17 @@ public class RobotMap {
   public static int rightMasterId = 3; //CAN values
   public static int rightSlaveId = 0;
   public static int specfuncWench = 5; //CAN values 
-      //CAN values are assigned to Victor motor controllers
+  //CAN values are assigned to Victor motor controllers
   
+  public static int elevatorId = 5; //CAN values
+
   public static int LEFT_ENC_A = 2;
   public static int LEFT_ENC_B = 3;
   public static int RIGHT_ENC_A = 0;
   public static int RIGHT_ENC_B = 1;
+
+  public static int ELEVATOR_ENC_A = 4;
+  public static int ELEVATOR_ENC_B = 5;
 
   public static double topSpeed = 0.5;
 
