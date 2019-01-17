@@ -9,7 +9,7 @@ public class DriveCom extends Command {
 
     // speed values taken in from controllers
     private double leftX, leftY, rightX, rightY;
-    private double leftJoyZ, leftJoyX, leftJoyY, rightJoyX, rightJoyY, rightJoyZ, leftJoySlider;
+    public double leftJoyZ, leftJoyX, leftJoyY, rightJoyX, rightJoyY, rightJoyZ, leftJoySlider;
     private boolean rightMainTrigger, rightFunButton, rightTopRightButton, rightMidRightButton, rightMidLeftButton;
     private boolean rightBottomTrigger, leftThumb, leftEButton, right1Up, right1Down, right2Up, right2Down;
     private boolean right3Up, right3Down, rightMainTriggerHard, rightTopLeftUp;
