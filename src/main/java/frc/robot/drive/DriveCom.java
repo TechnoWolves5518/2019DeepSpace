@@ -8,48 +8,105 @@ import frc.robot.RobotMap;
 public class DriveCom extends Command {
 
     // speed values taken in from controllers
-    private double leftSpeed, rightSpeed;
+    private double leftX, leftY, rightX, rightY;
+    private double leftJoyZ, leftJoyX, leftJoyY, rightJoyX, rightJoyY, rightJoyZ, leftJoySlider;
+    private boolean rightMainTrigger, rightFunButton, rightTopRightButton, rightMidRightButton, rightMidLeftButton;
+    private boolean rightBottomTrigger, leftThumb, leftEButton, right1Up, right1Down, right2Up, right2Down;
+    private boolean right3Up, right3Down, rightMainTriggerHard, rightTopLeftUp;
     // deadzone of controller joystick
-    private double deadzone = 0.04;
+    private double deadzone = 0.05;
 
-    private double v, h;
+    private boolean isMoving;
+    private boolean reverseMotors;
     private boolean quickturn;
 
     public DriveCom() {
         requires(Robot.driveTrain);
-        System.out.println("Command constructor");
+        System.out.println("Drive Train Com constructor");
     }
 
     @Override
     protected void initialize() {
-        leftSpeed = 0;
-        rightSpeed = 0;
-        v = 0;
-        h = 0;
-        System.out.println("Command initialize");
+        leftX = 0;
+        leftY = 0;
+        rightX = 0;
+        rightY = 0;
+
+        leftJoyX = 0;
+        leftJoyY = 0;
+        leftJoyZ = 0;
+        rightJoyX = 0;
+        rightJoyY = 0;
+        rightJoyZ = 0;
+        rightMainTrigger = false;
+        rightFunButton = false;
+        rightTopRightButton = false;
+        rightMidRightButton = false;
+        rightMidLeftButton = false;
+        rightBottomTrigger = false;
+        leftThumb = false;
+        leftEButton = false;
+        right1Up = false;
+        right1Down = false;
+        right2Up = false;
+        right2Down = false;
+        right3Up = false;
+        right3Down = false;
+        rightMainTriggerHard = false;
+        rightTopLeftUp = false;
+        
+        System.out.println("Drive Train Com initialize");
         quickturn = false;
+        reverseMotors = false;
     }
 
     @Override
     protected void execute() {
         // gets speeds from joysticks
-        leftSpeed = -Robot.oi.driver.getY(Hand.kLeft);
-        rightSpeed = -Robot.oi.driver.getY(Hand.kRight);
-        // calls tankdrive method in drive subsystem with given speeds
-        Robot.driveTrain.tankDrive(
-            configSpeed(leftSpeed),
-            configSpeed(rightSpeed)
-        );
+        leftX = Robot.oi.driver.getX(Hand.kLeft);
+        leftY = -Robot.oi.driver.getY(Hand.kLeft);
+        rightX = Robot.oi.driver.getX(Hand.kRight);
+        rightY = -Robot.oi.driver.getY(Hand.kRight);
 
-        // v = Robot.oi.driver.getY(Hand.kLeft);
-        // h = Robot.oi.driver.getX(Hand.kLeft);
-        // Robot.driveTrain.curveDrive(
-        //     configSpeed(v),
-        //     configSpeed(h)
+        quickturn = Robot.oi.driver.getXButton();
+
+        rightJoyX = Robot.oi.stick.getRawAxis(0);
+        rightJoyY = -Robot.oi.stick.getRawAxis(1);
+        rightJoyZ = Robot.oi.stick.getRawAxis(5);
+        leftJoyX = Robot.oi.stick.getRawAxis(3);
+        leftJoyY = Robot.oi.stick.getRawAxis(4);
+        leftJoyZ = -Robot.oi.stick.getRawAxis(2);
+
+        System.out.println("RightJoyX = " + rightJoyX + "  RightJoyY = " + rightJoyY + "  RightJoyZ = " + rightJoyZ +
+            "  LeftJoyX = "
+             + leftJoyX + "  LeftJoyY = " + leftJoyY + "  LeftJoyZ = " + leftJoyZ);
+
+        // isMoving = (leftY != 0 && rightY != 0); // thank drive
+        isMoving = (leftY != 0 && leftX != 0); // curvy drive
+
+        if (Robot.oi.driver.getBumperPressed(Hand.kRight) && !isMoving) {
+            reverseMotors = !reverseMotors;
+            Robot.driveTrain.reverseMotors(reverseMotors);
+        }
+
+        Robot.driveTrain.arcadeDrive(leftJoyZ, (rightJoyX));
+
+        // calls tankdrive method in drive subsystem with given speeds
+        // Robot.driveTrain.tankDrive(
+        //     configSpeed(leftY),
+        //     configSpeed(rightY)
         // );
 
-        System.out.println("Left: " + Robot.driveTrain.getLeftEncoder() +
-            "\tRight: " + Robot.driveTrain.getRightEncoder());
+        // Robot.driveTrain.curvyDrive(
+        //     configSpeed(leftY),
+        //     configSpeed(leftX),
+        //     quickturn
+        // );
+
+        // System.out.println("Speed: " + leftY + "\tRotation: " + configSpeed(leftX));
+
+        // System.out.println("Left: " + Robot.driveTrain.getLeftEncoder() +
+        //     "\tRight: " + Robot.driveTrain.getRightEncoder());
     }
 
     public double configSpeed(double s) {

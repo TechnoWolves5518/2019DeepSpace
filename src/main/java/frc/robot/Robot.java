@@ -46,9 +46,9 @@ public class Robot extends TimedRobot {
     // initializes the robot
     System.out.println("initialize the robot");
     driveTrain = new DriveTrainSubsystem();
-    // drive = new DriveCom();
-    autoDrive = new AutoDriveSub();
-    autoDriveCom = new AutoDriveCom();
+    drive = new DriveCom();
+    // autoDrive = new AutoDriveSub();
+    // autoDriveCom = new AutoDriveCom();
   }
 
   /**

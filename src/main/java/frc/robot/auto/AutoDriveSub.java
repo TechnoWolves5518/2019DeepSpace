@@ -9,7 +9,7 @@ public class AutoDriveSub extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(Robot.autoDriveCom);
+        // setDefaultCommand(Robot.autoDriveCom);
     }
 
     public AutoDriveSub() {

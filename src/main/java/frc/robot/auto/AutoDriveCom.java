@@ -8,7 +8,7 @@ public class AutoDriveCom extends Command {
     private double speed;
 
     public AutoDriveCom() {
-        requires(Robot.autoDrive);
+        // requires(Robot.autoDrive);
     }
 
     @Override
