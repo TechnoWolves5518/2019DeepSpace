@@ -1,33 +1,32 @@
 package frc.robot.drive;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import frc.robot.CommandBase;
-import frc.robot.Robot;
+import frc.robot.OI;
 import frc.robot.RobotMap;
 
 public class DriveCom extends CommandBase {
 
-    private XboxController driver = Robot.oi.driver;
+    private static XboxController driver = OI.driver;
+    private static Joystick stick = OI.stick;
 
     // speed values taken in from controllers
     private double leftX, leftY, rightX, rightY;
-    public double leftJoyZ, leftJoyX, leftJoyY, rightJoyX, rightJoyY, rightJoyZ, leftJoySlider;
-    private boolean rightMainTrigger, rightFunButton, rightTopRightButton, rightMidRightButton, rightMidLeftButton;
-    private boolean rightBottomTrigger, leftThumb, leftEButton, right1Up, right1Down, right2Up, right2Down;
-    private boolean right3Up, right3Down, rightMainTriggerHard, rightTopLeftUp;
-    public boolean fastMode;
+    private double leftJoyZ, leftJoyX, leftJoyY, rightJoyX, rightJoyY, rightJoyZ, leftJoySlider;
+
     // deadzone of controller joystick
     private double deadzone = 0.05;
 
     private boolean isMoving;
     private boolean reverseMotors;
+    private boolean slowMode;
     private boolean quickturn;
 
     public DriveCom() {
         requires(driveTrain);
-        System.out.println("Drive Train Com constructor");
     }
 
     @Override
@@ -43,24 +42,7 @@ public class DriveCom extends CommandBase {
         rightJoyX = 0;
         rightJoyY = 0;
         rightJoyZ = 0;
-        rightMainTrigger = false;
-        rightFunButton = false;
-        rightTopRightButton = false;
-        rightMidRightButton = false;
-        rightMidLeftButton = false;
-        rightBottomTrigger = false;
-        leftThumb = false;
-        leftEButton = false;
-        right1Up = false;
-        right1Down = false;
-        right2Up = false;
-        right2Down = false;
-        right3Up = false;
-        right3Down = false;
-        rightMainTriggerHard = false;
-        rightTopLeftUp = false;
         
-        System.out.println("Drive Train Com initialize");
         quickturn = false;
         reverseMotors = false;
     }
@@ -75,28 +57,28 @@ public class DriveCom extends CommandBase {
 
         quickturn = driver.getXButton();
 
-        rightJoyX = Robot.oi.stick.getRawAxis(0);
-        rightJoyY = -Robot.oi.stick.getRawAxis(1);
-        rightJoyZ = Robot.oi.stick.getRawAxis(5);
-        leftJoyX = Robot.oi.stick.getRawAxis(3);
-        leftJoyY = Robot.oi.stick.getRawAxis(4);
-        leftJoyZ = -Robot.oi.stick.getRawAxis(2);
+        rightJoyX = stick.getRawAxis(0);
+        rightJoyY = -stick.getRawAxis(1);
+        rightJoyZ = stick.getRawAxis(5);
+        leftJoyX = stick.getRawAxis(3);
+        leftJoyY = stick.getRawAxis(4);
+        leftJoyZ = -stick.getRawAxis(2);
 
         System.out.println("RightJoyX = " + rightJoyX + "  RightJoyY = " + rightJoyY + "  RightJoyZ = " + rightJoyZ +
-            "  LeftJoyX = " + leftJoyX + "  LeftJoyY = " + leftJoyY + "  LeftJoyZ = " + leftJoyZ + "  Fast Mode = " + fastMode);
+            "  LeftJoyX = " + leftJoyX + "  LeftJoyY = " + leftJoyY + "  LeftJoyZ = " + leftJoyZ + "  Fast Mode = " + slowMode);
 
-        curvy();
+        curvy(false);
         
         if (leftJoyX == -1) {
             driveTrain.arcadeDrive(leftJoyZ, rightJoyX);
-            fastMode = true;
+            slowMode = true;
         } else {
             driveTrain.arcadeDrive(configSpeed(leftJoyZ), rightJoyX);
-            fastMode = false;
+            slowMode = false;
         }
     }
 
-    public void tank() {
+    public void tank(boolean config) {
         isMoving = (leftY != 0 && rightY != 0);
         if (driver.getBumperPressed(Hand.kRight) && !isMoving) {
             driver.setRumble(RumbleType.kRightRumble, 1);
@@ -104,10 +86,13 @@ public class DriveCom extends CommandBase {
             driveTrain.reverseMotors(reverseMotors);
         }
 
-        driveTrain.tankDrive(configSpeed(leftY), configSpeed(rightY));
+        if (config)
+            driveTrain.tankDrive(configSpeed(leftY), configSpeed(rightY));
+        else
+            driveTrain.tankDrive(leftY, rightY);
     }
 
-    public void curvy() {
+    public void curvy(boolean config) {
         isMoving = (leftY != 0 && leftX != 0);
         if (driver.getBumperPressed(Hand.kRight) && !isMoving) {
             driver.setRumble(RumbleType.kRightRumble, 1);
@@ -115,7 +100,10 @@ public class DriveCom extends CommandBase {
             driveTrain.reverseMotors(reverseMotors);
         }
 
-        driveTrain.curvyDrive(configSpeed(leftY), configSpeed(leftX), quickturn);
+        if (config)
+            driveTrain.curvyDrive(configSpeed(leftY), configSpeed(leftX), quickturn);
+        else
+            driveTrain.curvyDrive(leftY, leftX, quickturn);
     }
 
     public double configSpeed(double s) {

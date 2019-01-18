@@ -18,8 +18,8 @@ public class DriveTrainSubsystem extends Subsystem {
     private WPI_TalonSRX rightMaster = new WPI_TalonSRX(RobotMap.rightMasterId);
     private WPI_TalonSRX rightSlave = new WPI_TalonSRX(RobotMap.rightSlaveId);
 
-    private SpeedControllerGroup rightSide = new SpeedControllerGroup(rightSlave);
-    private SpeedControllerGroup leftSide = new SpeedControllerGroup(leftSlave);
+    private SpeedControllerGroup rightSide = new SpeedControllerGroup(rightMaster, rightSlave);
+    private SpeedControllerGroup leftSide = new SpeedControllerGroup(leftMaster, leftSlave);
 
     private DifferentialDrive driveTrain = new DifferentialDrive(leftSide, rightSide);
 
@@ -29,6 +29,7 @@ public class DriveTrainSubsystem extends Subsystem {
     private double kPulsesPerRevolution = 360;
     private double kDistancePerPulse = kDistancePerRevolution / kPulsesPerRevolution;
 
+    
     public DriveTrainSubsystem() {
         leftSlave.follow(leftMaster);
         rightSlave.follow(rightMaster);
@@ -44,7 +45,6 @@ public class DriveTrainSubsystem extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-        System.out.println("setup command");
         setDefaultCommand(Robot.drive);
     }
 
