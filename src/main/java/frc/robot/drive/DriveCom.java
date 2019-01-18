@@ -1,11 +1,15 @@
 package frc.robot.drive;
 
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
+import frc.robot.CommandBase;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
-public class DriveCom extends Command {
+public class DriveCom extends CommandBase {
+
+    private XboxController driver = Robot.oi.driver;
 
     // speed values taken in from controllers
     private double leftX, leftY, rightX, rightY;
@@ -22,7 +26,7 @@ public class DriveCom extends Command {
     private boolean quickturn;
 
     public DriveCom() {
-        requires(Robot.driveTrain);
+        requires(driveTrain);
         System.out.println("Drive Train Com constructor");
     }
 
@@ -64,12 +68,12 @@ public class DriveCom extends Command {
     @Override
     protected void execute() {
         // gets speeds from joysticks
-        leftX = Robot.oi.driver.getX(Hand.kLeft);
-        leftY = -Robot.oi.driver.getY(Hand.kLeft);
-        rightX = Robot.oi.driver.getX(Hand.kRight);
-        rightY = -Robot.oi.driver.getY(Hand.kRight);
+        leftX = driver.getX(Hand.kLeft);
+        leftY = -driver.getY(Hand.kLeft);
+        rightX = driver.getX(Hand.kRight);
+        rightY = -driver.getY(Hand.kRight);
 
-        quickturn = Robot.oi.driver.getXButton();
+        quickturn = driver.getXButton();
 
         rightJoyX = Robot.oi.stick.getRawAxis(0);
         rightJoyY = -Robot.oi.stick.getRawAxis(1);
@@ -79,40 +83,39 @@ public class DriveCom extends Command {
         leftJoyZ = -Robot.oi.stick.getRawAxis(2);
 
         System.out.println("RightJoyX = " + rightJoyX + "  RightJoyY = " + rightJoyY + "  RightJoyZ = " + rightJoyZ +
-            "  LeftJoyX = "
-             + leftJoyX + "  LeftJoyY = " + leftJoyY + "  LeftJoyZ = " + leftJoyZ + "  Fast Mode = " + fastMode);
+            "  LeftJoyX = " + leftJoyX + "  LeftJoyY = " + leftJoyY + "  LeftJoyZ = " + leftJoyZ + "  Fast Mode = " + fastMode);
 
-        // isMoving = (leftY != 0 && rightY != 0); // thank drive
-        isMoving = (leftY != 0 && leftX != 0); // curvy drive
-
-        if (Robot.oi.driver.getBumperPressed(Hand.kRight) && !isMoving) {
-            reverseMotors = !reverseMotors;
-            Robot.driveTrain.reverseMotors(reverseMotors);
-        }
+        curvy();
+        
         if (leftJoyX == -1) {
-            Robot.driveTrain.arcadeDrive(leftJoyZ, rightJoyX);
+            driveTrain.arcadeDrive(leftJoyZ, rightJoyX);
             fastMode = true;
         } else {
-            Robot.driveTrain.arcadeDrive(configSpeed(leftJoyZ), rightJoyX);
+            driveTrain.arcadeDrive(configSpeed(leftJoyZ), rightJoyX);
             fastMode = false;
         }
+    }
 
-        // calls tankdrive method in drive subsystem with given speeds
-        // Robot.driveTrain.tankDrive(
-        //     configSpeed(leftY),
-        //     configSpeed(rightY)
-        // );
+    public void tank() {
+        isMoving = (leftY != 0 && rightY != 0);
+        if (driver.getBumperPressed(Hand.kRight) && !isMoving) {
+            driver.setRumble(RumbleType.kRightRumble, 1);
+            reverseMotors = !reverseMotors;
+            driveTrain.reverseMotors(reverseMotors);
+        }
 
-        // Robot.driveTrain.curvyDrive(
-        //     configSpeed(leftY),
-        //     configSpeed(leftX),
-        //     quickturn
-        // );
+        driveTrain.tankDrive(configSpeed(leftY), configSpeed(rightY));
+    }
 
-        // System.out.println("Speed: " + leftY + "\tRotation: " + configSpeed(leftX));
+    public void curvy() {
+        isMoving = (leftY != 0 && leftX != 0);
+        if (driver.getBumperPressed(Hand.kRight) && !isMoving) {
+            driver.setRumble(RumbleType.kRightRumble, 1);
+            reverseMotors = !reverseMotors;
+            driveTrain.reverseMotors(reverseMotors);
+        }
 
-        // System.out.println("Left: " + Robot.driveTrain.getLeftEncoder() +
-        //     "\tRight: " + Robot.driveTrain.getRightEncoder());
+        driveTrain.curvyDrive(configSpeed(leftY), configSpeed(leftX), quickturn);
     }
 
     public double configSpeed(double s) {

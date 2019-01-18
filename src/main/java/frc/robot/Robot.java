@@ -25,7 +25,6 @@ public class Robot extends TimedRobot {
 
   public static OI oi = new OI();
 
-  public static DriveTrainSubsystem driveTrain;
   public static DriveCom drive;
   
   public long TimeAnchor = (System.nanoTime() / 1000000000); //Sets a 'start time' reference, in seconds.
@@ -45,10 +44,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // initializes the robot
     System.out.println("initialize the robot");
-    driveTrain = new DriveTrainSubsystem();
     drive = new DriveCom();
-    // autoDrive = new AutoDriveSub();
-    // autoDriveCom = new AutoDriveCom();
   }
 
   /**
