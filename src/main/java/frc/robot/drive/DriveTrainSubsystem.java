@@ -16,15 +16,15 @@ import frc.robot.RobotMap;
 
 public class DriveTrainSubsystem extends Subsystem {
 
-    private TalonSRX leftMaster = new TalonSRX(RobotMap.leftMasterId);
+    //private TalonSRX leftMaster = new TalonSRX(RobotMap.leftMasterId);
     // private TalonSRX leftSlave = new TalonSRX(RobotMap.leftSlaveId);
-    private TalonSRX rightMaster = new TalonSRX(RobotMap.rightMasterId);
+    //private TalonSRX rightMaster = new TalonSRX(RobotMap.rightMasterId);
     // private TalonSRX rightSlave = new TalonSRX(RobotMap.rightSlaveId);
 
-    // private VictorSP leftMaster = new VictorSP(RobotMap.leftMasterId);
-    private VictorSP leftSlave = new VictorSP(RobotMap.leftSlaveId);
-    // private VictorSP rightMaster = new VictorSP(RobotMap.rightMasterId);
-    private VictorSP rightSlave = new VictorSP(RobotMap.rightSlaveId);
+    private VictorSPX leftMaster = new VictorSPX(RobotMap.leftMasterId); //CAN
+    private VictorSP leftSlave = new VictorSP(RobotMap.leftSlaveId); //PWM
+    private VictorSPX rightMaster = new VictorSPX(RobotMap.rightMasterId); //CAN
+    private VictorSP rightSlave = new VictorSP(RobotMap.rightSlaveId); //PWM
 
     private SpeedControllerGroup rightSide = new SpeedControllerGroup(rightSlave);
     private SpeedControllerGroup leftSide = new SpeedControllerGroup(leftSlave);
@@ -64,7 +64,7 @@ public class DriveTrainSubsystem extends Subsystem {
     }
 
     public void tankDrive(double left, double right) {
-        leftMaster.set(ControlMode.PercentOutput, left);
+        leftMaster.set(ControlMode.PercentOutput, right);
         leftSlave.set(left);
         rightMaster.set(ControlMode.PercentOutput, right);
         rightSlave.set(right);
@@ -72,7 +72,7 @@ public class DriveTrainSubsystem extends Subsystem {
 
     public void curvyDrive(double speed, double rotation, boolean quickTurn) {
         leftMaster.set(ControlMode.PercentOutput, leftSlave.get());
-        rightMaster.set(ControlMode.PercentOutput, rightSlave.get());
+        rightMaster.set(ControlMode.PercentOutput, (rightSlave.get()));
     }
 
     public void reverseMotors(boolean state) {
