@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
-import frc.robot.drive.DriveCom;
 
 public class DriveTrainSubsystem extends Subsystem {
 
@@ -31,9 +30,6 @@ public class DriveTrainSubsystem extends Subsystem {
     private SpeedControllerGroup leftSide = new SpeedControllerGroup(leftSlave);
 
     private DifferentialDrive driveTrain = new DifferentialDrive(leftSide, rightSide);
-
-    public double leftJoyX = Robot.drive.leftJoyX;
-
 
     private Encoder leftEnc, rightEnc;
     private double kWheelDiameter = 8;
@@ -64,12 +60,7 @@ public class DriveTrainSubsystem extends Subsystem {
     }
 
     public void arcadeDrive(double speed, double rotation) {
-
-        if (leftJoyX >= 0); {
-            driveTrain.arcadeDrive(speed, rotation);
-        if (leftJoyX < 0);
-            driveTrain.arcadeDrive(Robot.drive.configSpeed(speed), rotation);
-        }
+        driveTrain.arcadeDrive(speed, rotation);
     }
 
     public void tankDrive(double left, double right) {

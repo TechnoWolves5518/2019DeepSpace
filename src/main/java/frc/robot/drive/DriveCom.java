@@ -13,6 +13,7 @@ public class DriveCom extends Command {
     private boolean rightMainTrigger, rightFunButton, rightTopRightButton, rightMidRightButton, rightMidLeftButton;
     private boolean rightBottomTrigger, leftThumb, leftEButton, right1Up, right1Down, right2Up, right2Down;
     private boolean right3Up, right3Down, rightMainTriggerHard, rightTopLeftUp;
+    public boolean fastMode;
     // deadzone of controller joystick
     private double deadzone = 0.05;
 
@@ -79,7 +80,7 @@ public class DriveCom extends Command {
 
         System.out.println("RightJoyX = " + rightJoyX + "  RightJoyY = " + rightJoyY + "  RightJoyZ = " + rightJoyZ +
             "  LeftJoyX = "
-             + leftJoyX + "  LeftJoyY = " + leftJoyY + "  LeftJoyZ = " + leftJoyZ);
+             + leftJoyX + "  LeftJoyY = " + leftJoyY + "  LeftJoyZ = " + leftJoyZ + "  Fast Mode = " + fastMode);
 
         // isMoving = (leftY != 0 && rightY != 0); // thank drive
         isMoving = (leftY != 0 && leftX != 0); // curvy drive
@@ -88,8 +89,13 @@ public class DriveCom extends Command {
             reverseMotors = !reverseMotors;
             Robot.driveTrain.reverseMotors(reverseMotors);
         }
-
-        Robot.driveTrain.arcadeDrive(leftJoyZ, (rightJoyX));
+        if (leftJoyX == -1) {
+            Robot.driveTrain.arcadeDrive(leftJoyZ, rightJoyX);
+            fastMode = true;
+        } else {
+            Robot.driveTrain.arcadeDrive(configSpeed(leftJoyZ), rightJoyX);
+            fastMode = false;
+        }
 
         // calls tankdrive method in drive subsystem with given speeds
         // Robot.driveTrain.tankDrive(
