@@ -90,13 +90,6 @@ public class DriveCom extends CommandBase {
     }
 
     public void curvy(boolean config) {
-        isMoving = (rightJoyY != 0 && rightJoyX != 0);
-        if (driver.getBumperPressed(Hand.kRight) && !isMoving) {
-            driver.setRumble(RumbleType.kRightRumble, 1);
-            reverseMotors = !reverseMotors;
-            driveTrain.reverseMotors(reverseMotors);
-        }
-
         quickturn = driver.getXButton();
 
         if (config)
