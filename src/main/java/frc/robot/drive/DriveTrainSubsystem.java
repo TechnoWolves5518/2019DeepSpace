@@ -34,8 +34,9 @@ public class DriveTrainSubsystem extends Subsystem {
     public DriveTrainSubsystem() {
         // leftSlave.follow(leftMaster);
         // rightSlave.follow(rightMaster);
-        rightMaster.setInverted(true);
-        rightSlave.setInverted(true);
+
+        // rightMaster.setInverted(true);
+        // rightSlave.setInverted(true);
 
         leftEnc = new Encoder(RobotMap.LEFT_ENC_A, RobotMap.LEFT_ENC_B, true, EncodingType.k4X);
         leftEnc.setDistancePerPulse(kDistancePerPulse);
