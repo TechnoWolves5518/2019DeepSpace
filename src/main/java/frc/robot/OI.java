@@ -16,9 +16,22 @@ public class OI {
   public static XboxController driver = new XboxController(0);
   public static Joystick stick = new Joystick(1);
 
-  public JoystickButton rightMainTrigger, rightFunButton, rightTopRightButton, rightMidRightButton, rightMidLeftButton,
-    rightBottomTrigger, leftThumb, leftEButton, right1Up, right1Down, right2Up, right2Down, right3Up, right3Down,
-    rightMainTriggerHard, rightTopLeftUp, fastMode;
+  public static JoystickButton rightMainTrigger = new JoystickButton(stick, 1);
+  public static JoystickButton rightFunButton = new JoystickButton(stick, 1);
+  public static JoystickButton rightTopRightButton = new JoystickButton(stick, 1);
+  public static JoystickButton rightMidRightButton = new JoystickButton(stick, 1);
+  public static JoystickButton rightMidLeftButton = new JoystickButton(stick, 1);
+  public static JoystickButton rightBottomTrigger = new JoystickButton(stick, 1);
+  public static JoystickButton leftThumb = new JoystickButton(stick, 1);
+  public static JoystickButton leftEButtonright1Up = new JoystickButton(stick, 1);
+  public static JoystickButton right1Down = new JoystickButton(stick, 1);
+  public static JoystickButton right2Up = new JoystickButton(stick, 1);
+  public static JoystickButton right2Down = new JoystickButton(stick, 1);
+  public static JoystickButton right3Up = new JoystickButton(stick, 1);
+  public static JoystickButton right3Down = new JoystickButton(stick, 1);
+  public static JoystickButton rightMainTriggerHard = new JoystickButton(stick, 1);
+  public static JoystickButton rightTopLeftUp = new JoystickButton(stick, 1);
+  public static JoystickButton fastMode = new JoystickButton(stick, 1);
 
   public OI() {
 

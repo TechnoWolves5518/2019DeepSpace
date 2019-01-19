@@ -90,7 +90,7 @@ public class DriveCom extends CommandBase {
     }
 
     public void curvy(boolean config) {
-        quickturn = driver.getXButton();
+        quickturn = OI.rightMainTrigger.get();
 
         if (config)
             driveTrain.curvyDrive(configSpeed(rightJoyY), configSpeed(rightJoyX), quickturn);

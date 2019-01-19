@@ -66,6 +66,7 @@ public class DriveTrainSubsystem extends Subsystem {
 
     public void curvyDrive(double speed, double rotation, boolean quickTurn) {
         driveTrain.curvatureDrive(speed, rotation, quickTurn);
+        System.out.println("Speed: " + speed + "  Rotation: " + rotation + "  Quick: " + quickTurn);
     }
 
     public void reverseMotors(boolean state) {
