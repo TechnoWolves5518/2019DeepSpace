@@ -22,7 +22,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     CommandBase.init();
     timeAnchor = System.currentTimeMillis() / 1000;
-    camera = CameraServer.getInstance().startAutomaticCapture("camera", 0);
+    // camera = CameraServer.getInstance().startAutomaticCapture("camera", 0);
   }
 
   @Override

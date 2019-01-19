@@ -64,7 +64,7 @@ public class DriveCom extends CommandBase {
         leftJoyY = stick.getRawAxis(4);
         leftJoyZ = -stick.getRawAxis(2);
 
-        curvy(false);
+        tank(false);
         
         // if (leftJoyX == -1) {
         //     driveTrain.arcadeDrive(leftJoyZ, rightJoyX);

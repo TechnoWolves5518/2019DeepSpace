@@ -2,8 +2,10 @@ package frc.robot.drive;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -12,10 +14,10 @@ import frc.robot.RobotMap;
 
 public class DriveTrainSubsystem extends Subsystem {
 
-    private WPI_TalonSRX leftMaster = new WPI_TalonSRX(RobotMap.leftMasterId);
-    private WPI_TalonSRX leftSlave = new WPI_TalonSRX(RobotMap.leftSlaveId);
-    private WPI_TalonSRX rightMaster = new WPI_TalonSRX(RobotMap.rightMasterId);
-    private WPI_TalonSRX rightSlave = new WPI_TalonSRX(RobotMap.rightSlaveId);
+    private WPI_VictorSPX leftMaster = new WPI_VictorSPX(RobotMap.leftMasterId);
+    private VictorSP leftSlave = new VictorSP(RobotMap.leftSlaveId);
+    private WPI_VictorSPX rightMaster = new WPI_VictorSPX(RobotMap.rightMasterId);
+    private VictorSP rightSlave = new VictorSP(RobotMap.rightSlaveId);
 
     private SpeedControllerGroup rightSide = new SpeedControllerGroup(rightMaster, rightSlave);
     private SpeedControllerGroup leftSide = new SpeedControllerGroup(leftMaster, leftSlave);
@@ -30,8 +32,10 @@ public class DriveTrainSubsystem extends Subsystem {
 
     
     public DriveTrainSubsystem() {
-        leftSlave.follow(leftMaster);
-        rightSlave.follow(rightMaster);
+        // leftSlave.follow(leftMaster);
+        // rightSlave.follow(rightMaster);
+        rightMaster.setInverted(true);
+        rightSlave.setInverted(true);
 
         leftEnc = new Encoder(RobotMap.LEFT_ENC_A, RobotMap.LEFT_ENC_B, true, EncodingType.k4X);
         leftEnc.setDistancePerPulse(kDistancePerPulse);
@@ -40,6 +44,8 @@ public class DriveTrainSubsystem extends Subsystem {
         rightEnc = new Encoder(RobotMap.RIGHT_ENC_A, RobotMap.RIGHT_ENC_B, false, EncodingType.k4X);
         rightEnc.setDistancePerPulse(kDistancePerPulse);
         rightEnc.setMaxPeriod(0.1);
+
+        driveTrain.setSafetyEnabled(false);
     }
 
     @Override
@@ -52,7 +58,7 @@ public class DriveTrainSubsystem extends Subsystem {
     }
 
     public void tankDrive(double left, double right) {
-        leftMaster.set(ControlMode.PercentOutput, right);
+        leftMaster.set(ControlMode.PercentOutput, left);
         leftSlave.set(left);
         rightMaster.set(ControlMode.PercentOutput, right);
         rightSlave.set(right);
