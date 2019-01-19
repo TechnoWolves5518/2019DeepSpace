@@ -1,5 +1,6 @@
 # WPILib
 bin/
+bin/*
 build/
 dist/
 sysProps.xml

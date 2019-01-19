@@ -17,21 +17,21 @@ public class OI {
   public static Joystick stick = new Joystick(1);
 
   public static JoystickButton rightMainTrigger = new JoystickButton(stick, 1);
-  public static JoystickButton rightFunButton = new JoystickButton(stick, 1);
-  public static JoystickButton rightTopRightButton = new JoystickButton(stick, 1);
-  public static JoystickButton rightMidRightButton = new JoystickButton(stick, 1);
-  public static JoystickButton rightMidLeftButton = new JoystickButton(stick, 1);
-  public static JoystickButton rightBottomTrigger = new JoystickButton(stick, 1);
-  public static JoystickButton leftThumb = new JoystickButton(stick, 1);
-  public static JoystickButton leftEButtonright1Up = new JoystickButton(stick, 1);
-  public static JoystickButton right1Down = new JoystickButton(stick, 1);
-  public static JoystickButton right2Up = new JoystickButton(stick, 1);
-  public static JoystickButton right2Down = new JoystickButton(stick, 1);
-  public static JoystickButton right3Up = new JoystickButton(stick, 1);
-  public static JoystickButton right3Down = new JoystickButton(stick, 1);
-  public static JoystickButton rightMainTriggerHard = new JoystickButton(stick, 1);
-  public static JoystickButton rightTopLeftUp = new JoystickButton(stick, 1);
-  public static JoystickButton fastMode = new JoystickButton(stick, 1);
+  public static JoystickButton rightFunButton = new JoystickButton(stick, 2);
+  public static JoystickButton rightTopRightButton = new JoystickButton(stick, 3);
+  public static JoystickButton rightMidRightButton = new JoystickButton(stick, 4);
+  public static JoystickButton rightMidLeftButton = new JoystickButton(stick, 5);
+  public static JoystickButton rightBottomTrigger = new JoystickButton(stick, 6);
+  public static JoystickButton leftThumb = new JoystickButton(stick, 7);
+  public static JoystickButton leftEButtonright1Up = new JoystickButton(stick, 8);
+  public static JoystickButton right1Up = new JoystickButton(stick, 9);
+  public static JoystickButton right1Down = new JoystickButton(stick, 10);
+  public static JoystickButton right2Up = new JoystickButton(stick, 11);
+  public static JoystickButton right2Down = new JoystickButton(stick, 12);
+  public static JoystickButton right3Up = new JoystickButton(stick, 13);
+  public static JoystickButton right3Down = new JoystickButton(stick, 14);
+  public static JoystickButton rightMainTriggerHard = new JoystickButton(stick, 15);
+  public static JoystickButton rightTopLeftUp = new JoystickButton(stick, 16);
 
   public OI() {
 
