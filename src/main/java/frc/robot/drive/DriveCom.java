@@ -64,18 +64,15 @@ public class DriveCom extends CommandBase {
         leftJoyY = stick.getRawAxis(4);
         leftJoyZ = -stick.getRawAxis(2);
 
-        System.out.println("RightJoyX = " + rightJoyX + "  RightJoyY = " + rightJoyY + "  RightJoyZ = " + rightJoyZ +
-            "  LeftJoyX = " + leftJoyX + "  LeftJoyY = " + leftJoyY + "  LeftJoyZ = " + leftJoyZ + "  Fast Mode = " + slowMode);
-
         curvy(false);
         
-        if (leftJoyX == -1) {
-            driveTrain.arcadeDrive(leftJoyZ, rightJoyX);
-            slowMode = true;
-        } else {
-            driveTrain.arcadeDrive(configSpeed(leftJoyZ), rightJoyX);
-            slowMode = false;
-        }
+        // if (leftJoyX == -1) {
+        //     driveTrain.arcadeDrive(leftJoyZ, rightJoyX);
+        //     slowMode = true;
+        // } else {
+        //     driveTrain.arcadeDrive(configSpeed(leftJoyZ), rightJoyX);
+        //     slowMode = false;
+        // }
     }
 
     public void tank(boolean config) {
@@ -93,7 +90,7 @@ public class DriveCom extends CommandBase {
     }
 
     public void curvy(boolean config) {
-        isMoving = (leftY != 0 && leftX != 0);
+        isMoving = (rightJoyY != 0 && rightJoyX != 0);
         if (driver.getBumperPressed(Hand.kRight) && !isMoving) {
             driver.setRumble(RumbleType.kRightRumble, 1);
             reverseMotors = !reverseMotors;
@@ -101,7 +98,7 @@ public class DriveCom extends CommandBase {
         }
 
         if (config)
-            driveTrain.curvyDrive(configSpeed(leftY), configSpeed(leftX), quickturn);
+            driveTrain.curvyDrive(configSpeed(rightJoyY), configSpeed(rightJoyX), quickturn);
         else
             driveTrain.curvyDrive(leftY, leftX, quickturn);
     }
