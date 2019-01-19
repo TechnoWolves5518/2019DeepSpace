@@ -65,8 +65,7 @@ public class DriveTrainSubsystem extends Subsystem {
     }
 
     public void curvyDrive(double speed, double rotation, boolean quickTurn) {
-        leftMaster.set(ControlMode.PercentOutput, leftSlave.get());
-        rightMaster.set(ControlMode.PercentOutput, (rightSlave.get()));
+        driveTrain.curvatureDrive(speed, rotation, quickTurn);
     }
 
     public void reverseMotors(boolean state) {

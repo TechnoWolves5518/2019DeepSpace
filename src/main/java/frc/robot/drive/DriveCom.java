@@ -55,8 +55,6 @@ public class DriveCom extends CommandBase {
         rightX = driver.getX(Hand.kRight);
         rightY = -driver.getY(Hand.kRight);
 
-        quickturn = driver.getXButton();
-
         rightJoyX = stick.getRawAxis(0);
         rightJoyY = -stick.getRawAxis(1);
         rightJoyZ = stick.getRawAxis(5);
@@ -64,7 +62,7 @@ public class DriveCom extends CommandBase {
         leftJoyY = stick.getRawAxis(4);
         leftJoyZ = -stick.getRawAxis(2);
 
-        tank(false);
+        curvy(false);
         
         // if (leftJoyX == -1) {
         //     driveTrain.arcadeDrive(leftJoyZ, rightJoyX);
@@ -83,6 +81,8 @@ public class DriveCom extends CommandBase {
             driveTrain.reverseMotors(reverseMotors);
         }
 
+        quickturn = driver.getXButton();
+
         if (config)
             driveTrain.tankDrive(configSpeed(leftY), configSpeed(rightY));
         else
@@ -97,10 +97,12 @@ public class DriveCom extends CommandBase {
             driveTrain.reverseMotors(reverseMotors);
         }
 
+        quickturn = driver.getXButton();
+
         if (config)
             driveTrain.curvyDrive(configSpeed(rightJoyY), configSpeed(rightJoyX), quickturn);
         else
-            driveTrain.curvyDrive(leftY, leftX, quickturn);
+            driveTrain.curvyDrive(rightJoyY, rightJoyX, quickturn);
     }
 
     public double configSpeed(double s) {
