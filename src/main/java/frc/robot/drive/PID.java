@@ -24,10 +24,11 @@ public class PID extends Subsystem { //This creates the P.I.D. class.
     public Encoder leftEnc, rightEnc, eleEnc;
     public int targetLocation = 0; //This is our desired distance in pulses.
     
-    PID() {
+    public PID() {
         leftEnc = new Encoder(RobotMap.LEFT_ENC_A, RobotMap.LEFT_ENC_B, true, EncodingType.k4X);
         leftEnc = new Encoder(RobotMap.RIGHT_ENC_A, RobotMap.RIGHT_ENC_B, true, EncodingType.k4X);
     }
+    
     public int currentLocationLeft = getLeftEncoder(); //This is our left-side's current location in pulses.
     public int currentLocationRight = getRightEncoder(); //This is our right-side's current location in pulses.
     public int currentLocationAverage = (currentLocationLeft + currentLocationRight) / 2; //This is our average current location in pulses.
