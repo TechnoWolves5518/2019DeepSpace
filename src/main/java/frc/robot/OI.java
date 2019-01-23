@@ -34,7 +34,6 @@ public class OI {
   public static JoystickButton rightTopLeftUp = new JoystickButton(stick, 16);
 
   public OI() {
-
   }
 
 }

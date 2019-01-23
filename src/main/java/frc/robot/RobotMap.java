@@ -9,23 +9,37 @@ package frc.robot;
 
 public class RobotMap {
 
-  public static int leftMasterId = 1; //CAN values
-  public static int leftSlaveId = 2;
-  public static int rightMasterId = 3; //CAN values
-  public static int rightSlaveId = 0;
-  public static int specfuncWench = 5; //CAN values 
-    
-  public static int elevatorId = 5; //CAN values
+  /* Drive Train Motor Controllers */
+  public static final int leftMasterId = 1;
+  public static final int leftSlaveId = 2;
+  public static final int rightMasterId = 3;
+  public static final int rightSlaveId = 0;
 
-  public static int LEFT_ENC_A = 2;
-  public static int LEFT_ENC_B = 3;
-  public static int RIGHT_ENC_A = 0;
-  public static int RIGHT_ENC_B = 1;
+  /* Drive Train Constants */
+  public static final double topSpeed = 0.5;
 
-  public static int ELEVATOR_ENC_A = 4;
-  public static int ELEVATOR_ENC_B = 5;
+  public static final int LEFT_ENC_A = 2;
+  public static final int LEFT_ENC_B = 3;
+  public static final int RIGHT_ENC_A = 0;
+  public static final int RIGHT_ENC_B = 1;
 
-  public static double topSpeed = 0.5;
+
+  /* Elevator Motor Controllers */
+  public static final int winch = 5;
+
+  /* Elevator Constants */
+  public static final double kP = 1.0;
+  public static final double kI = 0.0;
+  public static final double kD = 0.0;
+  
+  // positions are measured in encoder pulses
+  public static final int startingPosition = 0;
+  public static final int bottomPosition = 1;
+  public static final int middlePosition = 2;
+  public static final int topPosition = 3;
+
+  public static final int ELEVATOR_ENC_A = 4;
+  public static final int ELEVATOR_ENC_B = 5;
 
 
 }
