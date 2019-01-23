@@ -1,13 +1,10 @@
 package frc.robot.elevator;
 
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
-import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
-
 
 public class ElevatorSubsystem extends PIDSubsystem {
 
@@ -57,7 +54,7 @@ public class ElevatorSubsystem extends PIDSubsystem {
 
     @Override
     protected void initDefaultCommand() {
-        
+        setDefaultCommand(new ElevatorPosition());
     }
 
 }

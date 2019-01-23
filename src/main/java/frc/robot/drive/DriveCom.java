@@ -2,27 +2,20 @@ package frc.robot.drive;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
-import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import frc.robot.CommandBase;
 import frc.robot.OI;
 import frc.robot.RobotMap;
 
 public class DriveCom extends CommandBase {
 
-    private static XboxController driver = OI.driver;
     private static Joystick stick = OI.stick;
 
     // speed values taken in from controllers
-    private double leftX, leftY, rightX, rightY;
-    private double leftJoyZ, leftJoyX, leftJoyY, rightJoyX, rightJoyY, rightJoyZ, leftJoySlider;
+    private double h, v;
 
     // deadzone of controller joystick
     private double deadzone = 0.05;
 
-    private boolean isMoving;
-    private boolean reverseMotors;
-    private boolean slowMode;
     private boolean quickturn;
 
     public DriveCom() {
@@ -31,71 +24,28 @@ public class DriveCom extends CommandBase {
 
     @Override
     protected void initialize() {
-        leftX = 0;
-        leftY = 0;
-        rightX = 0;
-        rightY = 0;
-
-        leftJoyX = 0;
-        leftJoyY = 0;
-        leftJoyZ = 0;
-        rightJoyX = 0;
-        rightJoyY = 0;
-        rightJoyZ = 0;
-        
-        quickturn = false;
-        reverseMotors = false;
+        h = 0;
+        v = 0;
     }
 
     @Override
     protected void execute() {
-        // gets speeds from joysticks
-        leftX = driver.getX(Hand.kLeft);
-        leftY = -driver.getY(Hand.kLeft);
-        rightX = driver.getX(Hand.kRight);
-        rightY = -driver.getY(Hand.kRight);
-
-        rightJoyX = stick.getRawAxis(0);
-        rightJoyY = -stick.getRawAxis(1);
-        rightJoyZ = stick.getRawAxis(5);
-        leftJoyX = stick.getRawAxis(3);
-        leftJoyY = stick.getRawAxis(4);
-        leftJoyZ = -stick.getRawAxis(2);
+        h = stick.getRawAxis(OI.rightJoyX);
+        v = -stick.getRawAxis(OI.rightJoyY);
 
         curvy(false);
-        
-        // if (leftJoyX == -1) {
-        //     driveTrain.arcadeDrive(leftJoyZ, rightJoyX);
-        //     slowMode = true;
-        // } else {
-        //     driveTrain.arcadeDrive(configSpeed(leftJoyZ), rightJoyX);
-        //     slowMode = false;
-        // }
     }
 
     public void tank(boolean config) {
-        isMoving = (leftY != 0 && rightY != 0);
-        if (driver.getBumperPressed(Hand.kRight) && !isMoving) {
-            driver.setRumble(RumbleType.kRightRumble, 1);
-            reverseMotors = !reverseMotors;
-            driveTrain.reverseMotors(reverseMotors);
-        }
-
-        quickturn = driver.getXButton();
-
-        if (config)
-            driveTrain.tankDrive(configSpeed(leftY), configSpeed(rightY));
-        else
-            driveTrain.tankDrive(leftY, rightY);
     }
 
     public void curvy(boolean config) {
         quickturn = OI.rightMainTrigger.get();
 
         if (config)
-            driveTrain.curvyDrive(configSpeed(rightJoyY), configSpeed(rightJoyX), quickturn);
+            driveTrain.curvyDrive(configSpeed(v), configSpeed(h), quickturn);
         else
-            driveTrain.curvyDrive(rightJoyY, rightJoyX, quickturn);
+            driveTrain.curvyDrive(v, h, quickturn);
     }
 
     public double configSpeed(double s) {

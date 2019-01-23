@@ -33,6 +33,16 @@ public class OI {
   public static JoystickButton rightMainTriggerHard = new JoystickButton(stick, 15);
   public static JoystickButton rightTopLeftUp = new JoystickButton(stick, 16);
 
+  public static int rightJoyX = 0;
+  public static int rightJoyY = 1;
+  public static int leftJoyZ = 2;
+  public static int leftJoyX = 3;
+  public static int leftJoyY = 4;
+  public static int rightJoyZ = 5;
+  public static int leftJoySlider = 6;
+
+  
+
   public OI() {
   }
 
