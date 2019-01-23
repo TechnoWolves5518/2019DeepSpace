@@ -28,7 +28,7 @@ public class PID extends Subsystem { //This creates the P.I.D. class.
         leftEnc = new Encoder(RobotMap.LEFT_ENC_A, RobotMap.LEFT_ENC_B, true, EncodingType.k4X);
         leftEnc = new Encoder(RobotMap.RIGHT_ENC_A, RobotMap.RIGHT_ENC_B, true, EncodingType.k4X);
     }
-    
+
     public int currentLocationLeft = getLeftEncoder(); //This is our left-side's current location in pulses.
     public int currentLocationRight = getRightEncoder(); //This is our right-side's current location in pulses.
     public int currentLocationAverage = (currentLocationLeft + currentLocationRight) / 2; //This is our average current location in pulses.
@@ -62,7 +62,7 @@ public class PID extends Subsystem { //This creates the P.I.D. class.
     //}
     public double createInt() {
         return runningTotalError += distanceErrorAverage; //Maintains a running total of the error; a sum of all error thus far.
-        }
+    }
     
     public double createDeriv() { //Fancy derivitive function yay me
         if (InitialRun = false) { //If this isn't the first instance...
@@ -71,7 +71,7 @@ public class PID extends Subsystem { //This creates the P.I.D. class.
             timeLast = timeNow; //Sets up the just-used time for the next instance. Out with the old, in with the new.
             errorLast = errorNow; //Sets up the just-used error for the next instance. Out with the old, in with the new.
             InitialRun = false;
-       }    
+        }    
         if (InitialRun = true) { //If this is the first instance...
             errorLast = distanceErrorAverage; //Used for non-initial instances.
             timeLast = 0;  //Since no time has passed yet.
