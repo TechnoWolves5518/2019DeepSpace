@@ -4,11 +4,13 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import frc.robot.OI;
 import frc.robot.RobotMap;
+import frc.robot.drive.*;
 
 public class ElevatorSubsystem extends PIDSubsystem {
 
-    private VictorSP elevator = new VictorSP(RobotMap.winch);
+    private VictorSP PID = new VictorSP(RobotMap.winch);
 
     private Encoder elevatorEnc;
 
@@ -16,6 +18,8 @@ public class ElevatorSubsystem extends PIDSubsystem {
     private double kGearDistancePerRev = kGearDiameter * Math.PI;
     private double kPulsesPerRev = 360;
     private double kDistancePerPulse = kGearDistancePerRev / kPulsesPerRev;
+
+    PID altPID = null;
 
     public ElevatorSubsystem() {
         super("Elevator", 0.005, 0.001, 0.005);
@@ -31,6 +35,17 @@ public class ElevatorSubsystem extends PIDSubsystem {
         enable();
     }
 
+    // public void altPID() {
+    //     if (OI.right1Down.get()) {
+    //         altPID = new PID(RobotMap.bottomPosition);
+    //     } else if (OI.right2Down.get()) {
+    //         altPID = new PID(RobotMap.middlePosition);
+    //     } else if (OI.right3Down.get()) {
+    //         altPID = new PID(RobotMap.topPosition);
+    //     }
+    // altPID.PIDMagic(0.005, 0.001, 0.005);
+    // }
+
     @Override
     protected double returnPIDInput() {
         return getElevatorEnc();
@@ -38,7 +53,7 @@ public class ElevatorSubsystem extends PIDSubsystem {
 
     @Override
     protected void usePIDOutput(double output) {
-        elevator.set(output);
+        PID.set(output);
         System.out.println("Value: " + getElevatorEnc());
     }
 
