@@ -31,22 +31,6 @@ public class ElevatorSubsystem extends PIDSubsystem {
 
         setSetpoint(RobotMap.startingPosition);
         enable();
-
-        //Alternate PID stuff
-        //this big area that's boxed in green represents the alternate PID, which is an us-made PID that SHOULD
-        //perform the same task as the above, EXCEPT WE MADE IT SO IT'S COOLER.
-        int targetPos = RobotMap.startingPosition;{ //Sets intial target position to the starting position.
-        if (OI.right1Down.get()) {
-            targetPos = RobotMap.bottomPosition; //If you press DownBut1, targetPos is set to the BOTTOM position.
-        }
-        else if (OI.right2Down.get()) {
-            targetPos = RobotMap.middlePosition; //If you press DownBut2, targetPos is set to the MIDDLE position.
-        } 
-        else if (OI.right3Down.get()) {
-            targetPos = RobotMap.topPosition;} //If you press DownBut3, targetPos is set to the TOP position.
-        }
-        altPID altPID = new altPID();
-        PID.set(altPID.PIDMagic(targetPos)); //Creates a new object of the altPID class, and makes it work.
     }
 
 
