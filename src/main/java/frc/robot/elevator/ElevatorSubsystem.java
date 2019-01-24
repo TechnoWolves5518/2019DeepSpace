@@ -18,9 +18,10 @@ public class ElevatorSubsystem extends PIDSubsystem {
     private double kDistancePerPulse = kGearDistancePerRev / kPulsesPerRev;
 
     public ElevatorSubsystem() {
-        super("Elevator", 1.0, 0.0, 0.0);
+        super("Elevator", 0.005, 0.001, 0.005);
         setAbsoluteTolerance(0.5);
         getPIDController().setContinuous(false);
+        getPIDController().setOutputRange(-0.5, 0.5);
 
         elevatorEnc = new Encoder(RobotMap.ELEVATOR_ENC_A, RobotMap.ELEVATOR_ENC_B, true, EncodingType.k4X);
         elevatorEnc.setDistancePerPulse(kDistancePerPulse);
@@ -38,6 +39,7 @@ public class ElevatorSubsystem extends PIDSubsystem {
     @Override
     protected void usePIDOutput(double output) {
         elevator.set(output);
+        System.out.println("Value: " + getElevatorEnc());
     }
 
     public int getElevatorEnc() {

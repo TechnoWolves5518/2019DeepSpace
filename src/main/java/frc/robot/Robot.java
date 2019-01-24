@@ -20,7 +20,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
-    CameraServer.getInstance().startAutomaticCapture();
+    // CameraServer.getInstance().startAutomaticCapture();
     CommandBase.init();
     timeAnchor = System.currentTimeMillis() / 1000;
   }
@@ -41,6 +41,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopInit() {
     CommandBase.driveTrain.resetEncoders();
+    CommandBase.elevator.resetElevatorEnc();
   }
 
   @Override

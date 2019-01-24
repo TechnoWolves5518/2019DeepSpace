@@ -11,9 +11,9 @@ public class RobotMap {
 
   /* Drive Train Motor Controllers */
   public static final int leftMasterId = 1;
-  public static final int leftSlaveId = 2;
+  public static final int leftSlaveId = 5; // 2
   public static final int rightMasterId = 3;
-  public static final int rightSlaveId = 0;
+  public static final int rightSlaveId = 4; // 0
 
   /* Drive Train Constants */
   public static final double topSpeed = 0.5;
@@ -25,7 +25,7 @@ public class RobotMap {
 
 
   /* Elevator Motor Controllers */
-  public static final int winch = 5;
+  public static final int winch = 0;
 
   /* Elevator Constants */
   public static final double kP = 1.0;
