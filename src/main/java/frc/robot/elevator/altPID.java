@@ -1,13 +1,12 @@
 package frc.robot.elevator;
 
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.*;
+import frc.robot.OI;
+import frc.robot.RobotMap;
 import frc.robot.elevator.ElevatorPosition;
-import frc.robot.elevator.ElevatorSubsystem;
 
 public class altPID extends Subsystem {
 
