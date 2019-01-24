@@ -9,6 +9,8 @@ public class ElevatorPosition extends CommandBase {
 
     int active = -1;
 
+    int setpoint = 0;
+
     private static Joystick stick = OI.stick;
     double adjust = 0;
 
@@ -26,24 +28,26 @@ public class ElevatorPosition extends CommandBase {
         adjust = stick.getRawAxis(OI.leftJoyY);
         int offset = (int)(adjust * RobotMap.maxOffset);
 
-        if (active == 0) {
-            RobotMap.bottomPosition += offset;
-        } else if (active == 1) {
-            RobotMap.middlePosition += offset;
-        } else if (active == 2) {
-            RobotMap.topPosition += offset;
-        }
+        // if (active == 0) {
+        //     bottom += offset;
+        // } else if (active == 1) {
+        //     middle += offset;
+        // } else if (active == 2) {
+        //     top += offset;
+        // }
 
         if (OI.right1Down.get()) {
-            elevator.setSetpoint(RobotMap.bottomPosition);
+            setpoint = RobotMap.bottomPosition;
             active = 0;
         } else if (OI.right2Down.get()) {
-            elevator.setSetpoint(RobotMap.middlePosition);
+            setpoint = RobotMap.middlePosition;
             active = 1;
         } else if (OI.right3Down.get()) {
-            elevator.setSetpoint(RobotMap.topPosition);
+            setpoint = RobotMap.topPosition;
             active = 2;
         }
+
+        elevator.setSetpoint(setpoint + offset);
     }
 
     @Override
