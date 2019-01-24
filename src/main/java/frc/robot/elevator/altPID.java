@@ -9,7 +9,7 @@ import frc.robot.*;
 import frc.robot.elevator.ElevatorPosition;
 import frc.robot.elevator.ElevatorSubsystem;
 
-public class PID extends Subsystem {
+public class altPID extends Subsystem {
 
     private VictorSP altPIDElevator = new VictorSP(RobotMap.winch);
     
