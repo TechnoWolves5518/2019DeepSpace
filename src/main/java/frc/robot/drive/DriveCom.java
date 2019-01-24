@@ -1,7 +1,6 @@
 package frc.robot.drive;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.CommandBase;
 import frc.robot.OI;
 import frc.robot.RobotMap;

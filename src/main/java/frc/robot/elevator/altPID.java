@@ -10,7 +10,7 @@ public class AltPID extends CommandBase {
     public int targetPos = 0;
 
     public AltPID() {
-        
+        targetPos = RobotMap.startingPosition;
     }
 
     @Override
