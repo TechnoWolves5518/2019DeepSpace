@@ -9,7 +9,14 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.HashMap;
 
+import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.vision.VisionPipeline;
+import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.vision.VisionRunner;
+import edu.wpi.first.wpilibj.vision.VisionThread;
+
 
 import org.opencv.core.*;
 import org.opencv.core.Core.*;
@@ -37,29 +44,14 @@ public class RetroTape implements VisionPipeline {
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 	}
 
-	@Override	public void robotInit() {
-		Usbcamera camera = CameraServer.getInstance().startAutomaticCapture();
-		camera.setResolution(IMG_WIDTH, IMG_HEIGHT);
-
-		visionThread = new VisionThread(camera, new MyVisionPipeline(), pipeline -> {
-			if (!pipeline.filterContoursOutput().isEmpty()) {
-				Rect r = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0));
-				synchronized (imgLock) {
-					centerX = r.x + (r.width / 2);
-				}
-			}
-		});
-		visionThread.start();
-			
-		drive = new RobotDrive(1, 2);
-	}
-
+	@Override	public  frc.robotInit()	{
+	UsbCamera UsbCamera = CameraServer.getInstance().StartAutomaticCapture();
 	/**
 	 * This is the primary method that runs the entire pipeline and updates the outputs.
 	 */
 	@Override	public void process(Mat Webcam1) {
 		// Step HSL_Threshold0:
-		Mat hslThresholdInput = source0;
+		Mat hslThresholdInput = Webcam1;
 		double[] hslThresholdHue = {74.46043165467627, 180.0};
 		double[] hslThresholdSaturation = {107.77877697841727, 255.0};
 		double[] hslThresholdLuminance = {210.68019987923026, 254.70897685764754};
