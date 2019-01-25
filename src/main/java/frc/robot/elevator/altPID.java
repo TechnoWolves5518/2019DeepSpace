@@ -4,12 +4,13 @@ import frc.robot.CommandBase;
 import frc.robot.OI;
 import frc.robot.RobotMap;
 
-public class AltPID extends CommandBase {
+public class altPID extends CommandBase {
 
     // UNIVERSAL VALUES
     public int targetPos = 0;
 
-    public AltPID() {
+    public altPID() {
+        requires(altElevator);
         targetPos = RobotMap.startingPosition;
     }
 
