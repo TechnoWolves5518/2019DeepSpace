@@ -53,10 +53,27 @@ public class AltElevatorSub extends Subsystem {
 
     // INT VARIABLES
     public double IntegralFinal;
+    public long IntTimeNow;
+    public long IntTimeLast;
+    public boolean InitialRun2 = true;
+    public long dTime;
 
     // INT CALCULATION
     public double calcInt(int targetPos) {
-        return IntegralFinal += (targetPos - getAltElevatorEnc());
+        if (InitialRun2 == false) {
+            IntTimeNow = System.currentTimeMillis();
+            dTime = (IntTimeNow - IntTimeLast);
+            IntegralFinal = ((targetPos - getAltElevatorEnc()) * dTime);
+            IntTimeLast = IntTimeNow;
+        }
+        if (InitialRun2 == true) {
+            IntTimeNow = System.currentTimeMillis();
+            IntTimeLast = System.currentTimeMillis();
+            dTime = (IntTimeNow - IntTimeLast);
+            IntegralFinal = ((targetPos - getAltElevatorEnc()) * dTime);
+            InitialRun2 = false;
+        }
+        return IntegralFinal;
     }
 
     public double PIDMagic(int targetPos) { // This creates our PID function.
@@ -67,16 +84,16 @@ public class AltElevatorSub extends Subsystem {
         // double I = 0.0005; // see above
         // double D = 0.0007; // see above
 
-        double P = (OI.stick.getRawAxis(OI.leftJoyY) + 1.000001) * 0.009;
-        double I = (OI.stick.getRawAxis(OI.leftJoyX) + 1.000001) * 0.009;
-        double D = (-OI.stick.getRawAxis(OI.leftJoyZ) + 1.000001) * 0.009;
+        double P = (OI.stick.getRawAxis(OI.leftJoyY) + 1.000001) * 0.0045;
+        double I = (OI.stick.getRawAxis(OI.leftJoyX) + 1.000001) * 0.0002;
+        double D = (-OI.stick.getRawAxis(OI.leftJoyZ) + 1.000001) * 0.1;
 
         double PIDSpeed;
 
         PIDSpeed = ((P * errorNow) + (I * IntegralFinal) + (D * DerivitiveFinal)); // Finds our modified speed value.
 
         altPIDElevator.set(PIDSpeed);
-        System.out.println("  P: " + P + "  I: " + I + "  D: "+ D + "     Enc: " + getAltElevatorEnc());
+        System.out.println("  P: " + P + "  I: " + I + "  D: "+ D + "     Enc: " + getAltElevatorEnc()  +  "  Deriv : " + DerivitiveFinal + "  Int  : " + IntegralFinal);
         return PIDSpeed; // This gives us our 'Output' speed.
     }
 
