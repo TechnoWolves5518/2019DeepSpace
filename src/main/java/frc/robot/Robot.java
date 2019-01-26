@@ -46,7 +46,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopInit() {
     CommandBase.driveTrain.resetEncoders();
-    CommandBase.elevator.resetElevatorEnc();
+    // CommandBase.elevator.resetElevatorEnc();
   }
 
   @Override
