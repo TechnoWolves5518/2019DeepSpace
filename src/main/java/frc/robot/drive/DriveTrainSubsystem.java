@@ -1,5 +1,6 @@
 package frc.robot.drive;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 // import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
@@ -13,10 +14,15 @@ import frc.robot.RobotMap;
 
 public class DriveTrainSubsystem extends Subsystem {
 
-    private WPI_VictorSPX leftMaster = new WPI_VictorSPX(RobotMap.leftMasterId);
-    private VictorSP leftSlave = new VictorSP(RobotMap.leftSlaveId);
-    private WPI_VictorSPX rightMaster = new WPI_VictorSPX(RobotMap.rightMasterId);
-    private VictorSP rightSlave = new VictorSP(RobotMap.rightSlaveId);
+    // private WPI_VictorSPX leftMaster = new WPI_VictorSPX(RobotMap.leftMasterId);
+    // private VictorSP leftSlave = new VictorSP(RobotMap.leftSlaveId);
+    // private WPI_VictorSPX rightMaster = new WPI_VictorSPX(RobotMap.rightMasterId);
+    // private VictorSP rightSlave = new VictorSP(RobotMap.rightSlaveId);
+
+    private WPI_TalonSRX leftMaster = new WPI_TalonSRX(RobotMap.leftMasterId);
+    private WPI_TalonSRX leftSlave = new WPI_TalonSRX(RobotMap.leftSlaveId);
+    private WPI_TalonSRX rightMaster = new WPI_TalonSRX(RobotMap.rightMasterId);
+    private WPI_TalonSRX rightSlave = new WPI_TalonSRX(RobotMap.rightSlaveId);
 
     private SpeedControllerGroup rightSide = new SpeedControllerGroup(rightMaster, rightSlave);
     private SpeedControllerGroup leftSide = new SpeedControllerGroup(leftMaster, leftSlave);
