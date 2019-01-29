@@ -1,7 +1,10 @@
 package frc.robot.elevator;
 
+import com.revrobotics.CANEncoder;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.OI;
@@ -9,13 +12,14 @@ import frc.robot.RobotMap;
 
 public class AltElevatorSub extends Subsystem {
 
-    private VictorSP altPIDElevator = new VictorSP(RobotMap.winch);
+    private CANSparkMax altPIDElevator = new CANSparkMax(RobotMap.winchEnc, MotorType.kBrushless);
+    private CANEncoder winchEnc = new CANEncoder(altPIDElevator);
 
     private Encoder altElevatorEnc;
 
     private double kGearDiameter = 0;
     private double kGearDistancePerRev = kGearDiameter * Math.PI;
-    private double kPulsesPerRev = 360;
+    private double kPulsesPerRev = 1024;
     private double kDistancePerPulse = kGearDistancePerRev / kPulsesPerRev;
 
     public AltElevatorSub() {

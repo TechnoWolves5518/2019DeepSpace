@@ -7,6 +7,9 @@
 
 package frc.robot;
 
+import com.revrobotics.CANEncoder;
+
+import frc.robot.*;
 public class RobotMap {
 
   /* Drive Train Motor Controllers */
@@ -26,6 +29,7 @@ public class RobotMap {
 
   /* Elevator Motor Controllers */
   public static final int winch = 0;
+  public static int winchEnc = 6;
 
   /* Elevator Constants */
   public static final double kP = 1.0;
@@ -34,9 +38,9 @@ public class RobotMap {
   
   // positions are measured in encoder pulses
   public static final int startingPosition = 0;
-  public static int bottomPosition = 360;
-  public static int middlePosition = 720;
-  public static int topPosition = 1080;
+  public static int bottomPosition = 1024;
+  public static int middlePosition = 2048;
+  public static int topPosition = 3072;
 
   public static final int maxOffset = 30;
 
