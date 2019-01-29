@@ -46,6 +46,11 @@ public class RobotMap {
 
   public static final int ELEVATOR_ENC_A = 4;
   public static final int ELEVATOR_ENC_B = 5;
+  
+  // something something PNEUMATICS
+  public static final int Compressor;
+  public static final int ForwardChannel;
+  public static final int ReverseChannel;
 
 
 }
