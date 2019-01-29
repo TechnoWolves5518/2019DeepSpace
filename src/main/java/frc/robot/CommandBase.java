@@ -10,11 +10,13 @@ public abstract class CommandBase extends Command {
     public static DriveTrainSubsystem driveTrain;
     public static ElevatorSubsystem elevator;
     public static AltElevatorSub altElevator;
+    public static sarlaccSubSystem sarlaccSub;
 
     public static void init() {
         driveTrain = new DriveTrainSubsystem();
         elevator = new ElevatorSubsystem();
         // altElevator = new AltElevatorSub();
+        sarlaccSub = new sarlaccSubSystem();
     }
 
 }
