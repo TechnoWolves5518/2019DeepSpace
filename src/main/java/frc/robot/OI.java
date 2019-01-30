@@ -22,6 +22,7 @@ public class OI {
   public static JoystickButton rightMidRightButton = new JoystickButton(stick, 4);
   public static JoystickButton rightMidLeftButton = new JoystickButton(stick, 5);
   public static JoystickButton rightBottomTrigger = new JoystickButton(stick, 6);
+  public static int rightBottomTriggerInt = 6;
   public static JoystickButton leftThumb = new JoystickButton(stick, 7);
   public static JoystickButton leftEButtonright1Up = new JoystickButton(stick, 8);
   public static JoystickButton right1Up = new JoystickButton(stick, 9);

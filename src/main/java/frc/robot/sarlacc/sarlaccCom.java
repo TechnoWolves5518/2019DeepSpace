@@ -3,11 +3,15 @@ package frc.robot.sarlacc;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import frc.robot.CommandBase;
 import frc.robot.OI;
+import frc.robot.RobotMap;
 
 public class SarlaccCom extends CommandBase {
 
+    boolean active;
+
     public SarlaccCom() {
-        requires(sarlaccSub); //Tells it that it needs its specific subsystem.
+        requires(sarlaccSub); //Tells it that it needs its specific subsystem
+        active = false;
     }
 
     @Override
@@ -17,17 +21,18 @@ public class SarlaccCom extends CommandBase {
 
     @Override
     protected void execute() { //This section runs continuously during operation
-        if (OI.rightMainTrigger.get()) {
-            sarlaccSub.sarlaccToggle.set(Value.kForward); //If main trigger pressed, turn on solenoid (close claws)
+        
+        if (OI.stick.getRawButtonPressed(OI.rightBottomTriggerInt)) {
+            active = !active;
         }
-        if (OI.rightBottomTrigger.get()) {
+
+        if (active) {
+            sarlaccSub.sarlaccToggle.set(Value.kForward); //If main trigger pressed, turn on solenoid (close claws)
+        } else {
             sarlaccSub.sarlaccToggle.set(Value.kReverse); //If bottom trigger pressed, reverse solenoid (open claws)
         }
-        if (OI.rightMidLeftButton.get()) {
-            sarlaccSub.sarlaccToggle.set(Value.kOff); //If black button pressed, reset/disable/etc solenoid. (stop claw)
-        }
     }
-    
+
     @Override
     protected boolean isFinished() {
         return false;
