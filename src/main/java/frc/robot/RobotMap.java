@@ -7,9 +7,6 @@
 
 package frc.robot;
 
-import com.revrobotics.CANEncoder;
-
-import frc.robot.*;
 public class RobotMap {
 
   /* Drive Train Motor Controllers */
@@ -48,9 +45,7 @@ public class RobotMap {
   public static final int ELEVATOR_ENC_B = 5;
   
   // something something PNEUMATICS
-  public static final int Compressor;
-  public static final int ForwardChannel;
-  public static final int ReverseChannel;
-
-
+  public static final int compressor = 0;
+  public static final int forwardChannel = 1;
+  public static final int reverseChannel = 0;
 }

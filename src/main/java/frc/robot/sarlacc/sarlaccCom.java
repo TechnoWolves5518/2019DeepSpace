@@ -1,17 +1,12 @@
 package frc.robot.sarlacc;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.CommandBase;
 import frc.robot.OI;
-import frc.robot.sarlacc.sarlaccSubsystem;
 
-public class sarlaccCom extends CommandBase {
+public class SarlaccCom extends CommandBase {
 
-
-    public sarlaccCom() {
+    public SarlaccCom() {
         requires(sarlaccSub); //Tells it that it needs its specific subsystem.
     }
 
@@ -31,8 +26,8 @@ public class sarlaccCom extends CommandBase {
         if (OI.rightMidLeftButton.get()) {
             sarlaccSub.sarlaccToggle.set(Value.kOff); //If black button pressed, reset/disable/etc solenoid. (stop claw)
         }
-        
     }
+    
     @Override
     protected boolean isFinished() {
         return false;

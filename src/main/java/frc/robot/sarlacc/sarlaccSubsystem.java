@@ -5,25 +5,23 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
-public class sarlaccSubsystem extends Subsystem {
+public class SarlaccSubsystem extends Subsystem {
 
-    //Pneumatic Components\\
+    //  Pneumatic Components \\
     public Compressor sarlaccComp;
     public DoubleSolenoid sarlaccToggle;
 
-    public sarlaccSubsystem() { //constructor
+    public SarlaccSubsystem() { // constructor
+        sarlaccComp = new Compressor(RobotMap.compressor); // assigns the compressor to something
+        sarlaccToggle = new DoubleSolenoid(RobotMap.forwardChannel, RobotMap.reverseChannel); // assigns DoubleSolenoid to something
 
-        sarlaccComp = new Compressor(RobotMap.Compressor); //assigns the compressor to something
-        sarlaccToggle = new DoubleSolenoid(RobotMap.FowardChannel, RobotMap.ReverseChannel); //assigns DoubleSolenoid to something
-
-        sarlaccComp.setClosedLoopControl(true); //Refills compressor automatically
-        sarlaccComp.start(); //Starts compressor.
+        sarlaccComp.setClosedLoopControl(true); // Refills compressor automatically
+        sarlaccComp.start(); // Starts compressor.
     }
-
 
     @Override
     protected void initDefaultCommand() {
-
+        setDefaultCommand(new SarlaccCom());
     }
 
 }
