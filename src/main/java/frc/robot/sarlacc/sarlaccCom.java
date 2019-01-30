@@ -16,19 +16,24 @@ public class SarlaccCom extends CommandBase {
 
     @Override
     protected void initialize() {
-        sarlaccSub.sarlaccToggle.set(Value.kOff); //Makes sure that when the class is initialized that the solenoid is off.
+        // sarlaccSub.sarlaccToggle.set(Value.kOff); //Makes sure that when the class is initialized that the solenoid is off.
     }
 
     @Override
     protected void execute() { //This section runs continuously during operation
         
-        if (OI.stick.getRawButtonPressed(OI.rightBottomTriggerInt)) {
-            active = !active;
-        }
+        // if (OI.stick.getRawButtonPressed(OI.rightBottomTriggerInt)) {
+        //     active = !active;
+        // }
 
-        if (active) {
+        // System.out.println(OI.stick.getRawButton(OI.rightBottomTriggerInt));
+        System.out.println(sarlaccSub.sarlaccToggle.get());
+
+        if (OI.stick.getRawButton(OI.rightBottomTriggerInt)) {
+            System.out.println("pressed");
             sarlaccSub.sarlaccToggle.set(Value.kForward); //If main trigger pressed, turn on solenoid (close claws)
         } else {
+            System.out.println("not");
             sarlaccSub.sarlaccToggle.set(Value.kReverse); //If bottom trigger pressed, reverse solenoid (open claws)
         }
     }

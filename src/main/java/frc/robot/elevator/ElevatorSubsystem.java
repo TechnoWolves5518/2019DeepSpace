@@ -40,7 +40,7 @@ public class ElevatorSubsystem extends PIDSubsystem {
     @Override
     protected void usePIDOutput(double output) {
         PID.set(output);
-        System.out.println("Value: " + getElevatorEnc());
+        // System.out.println("Value: " + getElevatorEnc());
     }
 
     public int getElevatorEnc() {

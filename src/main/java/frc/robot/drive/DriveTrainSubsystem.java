@@ -35,7 +35,6 @@ public class DriveTrainSubsystem extends Subsystem {
     private double kPulsesPerRevolution = 360;
     private double kDistancePerPulse = kDistancePerRevolution / kPulsesPerRevolution;
 
-    
     public DriveTrainSubsystem() {
         // leftSlave.follow(leftMaster);
         // rightSlave.follow(rightMaster);
@@ -107,7 +106,7 @@ public class DriveTrainSubsystem extends Subsystem {
     }
 
     public void logEncoders() {
-        System.out.println("Left: " + getLeftEncoder() + "\tRight: " + getRightEncoder());
+        // System.out.println("Left: " + getLeftEncoder() + "\tRight: " + getRightEncoder());
     }
 
 }
