@@ -20,8 +20,7 @@ public abstract class CommandBase extends Command {
         elevator = new ElevatorSubsystem();
         // altElevator = new AltElevatorSub();
         sarlaccSub = new SarlaccSubsystem();
-        vPidSub = new VBasedPIDSub();
-        
+        // vPidSub = new VBasedPIDSub();
     }
 
 }

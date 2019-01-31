@@ -12,8 +12,7 @@ public class SarlaccSubsystem extends Subsystem {
     public DoubleSolenoid sarlaccToggle;
 
     public SarlaccSubsystem() { // constructor
-        sarlaccComp = new Compressor(8); // assigns the compressor to something
-        // sarlaccComp = new Compressor(RobotMap.compressor); // assigns the compressor to something
+        sarlaccComp = new Compressor(RobotMap.compressor); // assigns the compressor to something
         sarlaccToggle = new DoubleSolenoid(RobotMap.forwardChannel, RobotMap.reverseChannel); // assigns DoubleSolenoid to something
 
         sarlaccComp.setClosedLoopControl(true); // Refills compressor automatically

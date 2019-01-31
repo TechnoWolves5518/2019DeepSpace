@@ -5,7 +5,6 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -39,10 +38,10 @@ public class DriveTrainSubsystem extends Subsystem {
         // leftSlave.follow(leftMaster);
         // rightSlave.follow(rightMaster);
 
-        rightMaster.setInverted(true);
-        rightSlave.setInverted(true);
-        leftMaster.setInverted(true);
-        leftSlave.setInverted(true);
+        // rightMaster.setInverted(true);
+        // rightSlave.setInverted(true);
+        // leftMaster.setInverted(true);
+        // leftSlave.setInverted(true);
 
         leftEnc = new Encoder(RobotMap.LEFT_ENC_A, RobotMap.LEFT_ENC_B, true, EncodingType.k4X);
         leftEnc.setDistancePerPulse(kDistancePerPulse);

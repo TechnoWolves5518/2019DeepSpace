@@ -27,13 +27,24 @@ public class SarlaccCom extends CommandBase {
         // }
 
         // System.out.println(OI.stick.getRawButton(OI.rightBottomTriggerInt));
-        System.out.println(sarlaccSub.sarlaccToggle.get());
 
-        if (OI.stick.getRawButton(OI.rightBottomTriggerInt)) {
-            System.out.println("pressed");
+        // if (OI.stick.getRawButton(OI.rightBottomTriggerInt)) {
+        //     System.out.println("pressed");
+        //     sarlaccSub.sarlaccToggle.set(Value.kForward); //If main trigger pressed, turn on solenoid (close claws)
+        // } else {
+        //     System.out.println("not");
+        //     sarlaccSub.sarlaccToggle.set(Value.kReverse); //If bottom trigger pressed, reverse solenoid (open claws)
+        // }
+
+        if (OI.driver.getXButtonPressed()) {
+            active = !active;
+        }
+
+        if (active) {
+            // System.out.println("pressed");
             sarlaccSub.sarlaccToggle.set(Value.kForward); //If main trigger pressed, turn on solenoid (close claws)
         } else {
-            System.out.println("not");
+            // System.out.println("not");
             sarlaccSub.sarlaccToggle.set(Value.kReverse); //If bottom trigger pressed, reverse solenoid (open claws)
         }
     }

@@ -1,6 +1,7 @@
 package frc.robot.drive;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.CommandBase;
 import frc.robot.OI;
 import frc.robot.RobotMap;
@@ -8,6 +9,7 @@ import frc.robot.RobotMap;
 public class DriveCom extends CommandBase {
 
     private static Joystick stick = OI.stick;
+    private static XboxController controller = OI.driver;
 
     // speed values taken in from controllers
     private double h, v;
@@ -16,9 +18,11 @@ public class DriveCom extends CommandBase {
     private double deadzone = 0.05;
 
     private boolean quickturn;
+    private boolean xbox;
 
     public DriveCom() {
         requires(driveTrain);
+        xbox = true;
     }
     
     @Override
@@ -29,18 +33,23 @@ public class DriveCom extends CommandBase {
 
     @Override
     protected void execute() {
-        h = stick.getRawAxis(OI.rightJoyX);
-        v = -stick.getRawAxis(OI.rightJoyY);
+        if (xbox) {
+            h = -controller.getRawAxis(OI.XBOX_LSTICKX);
+            v = controller.getRawAxis(OI.XBOX_LSTICKY);
+            quickturn = !OI.driver.getAButton();
+        } else {
+            h = stick.getRawAxis(OI.rightJoyX);
+            v = stick.getRawAxis(OI.rightJoyY);
+            quickturn = !OI.rightMainTrigger.get();
+        }
 
-        curvy(false);
+        curvy(true);
     }
 
     public void tank(boolean config) {
     }
 
     public void curvy(boolean config) {
-        quickturn = OI.rightMainTrigger.get();
-
         if (config)
             driveTrain.curvyDrive(configSpeed(v), configSpeed(h), quickturn);
         else

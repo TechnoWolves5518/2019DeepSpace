@@ -43,6 +43,23 @@ public class OI {
   public static int leftJoySlider = 6;
 
   
+  public static int XBOX_LSTICKX = 0;
+	public static int XBOX_LSTICKY = 1; 
+	public static int XBOX_RSTICKX = 4;
+	public static int XBOX_RSTICKY = 5;
+	public static int XBOX_LTRIGGER = 2;
+	public static int XBOX_RTRIGGER = 3;
+	
+	public static int XBOX_YBTN = 4;
+	public static int XBOX_XBTN = 3;
+	public static int XBOX_ABTN = 1;
+	public static int XBOX_BBTN = 2; 
+	public static int XBOX_RBUMPER = 6;
+	public static int XBOX_LBUMPER = 5;
+	public static int XBOX_LSTICK = 9;
+	public static int XBOX_RSTICK = 10;
+	public static int XBOX_START = 8;
+	public static int XBOX_BACK = 7;
 
   public OI() {
   }

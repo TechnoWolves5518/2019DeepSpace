@@ -46,6 +46,6 @@ public class RobotMap {
   
   // something something PNEUMATICS
   public static final int compressor = 0;
-  public static final int forwardChannel = 1;
-  public static final int reverseChannel = 0;
+  public static final int forwardChannel = 0;
+  public static final int reverseChannel = 1;
 }
