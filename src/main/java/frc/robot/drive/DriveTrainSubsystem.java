@@ -29,7 +29,7 @@ public class DriveTrainSubsystem extends Subsystem {
 
     private DifferentialDrive driveTrain = new DifferentialDrive(leftSide, rightSide);
 
-    private Encoder leftEnc, rightEnc;
+    public Encoder leftEnc, rightEnc;
     private double kWheelDiameter = 8;
     private double kDistancePerRevolution = kWheelDiameter * Math.PI;
     private double kPulsesPerRevolution = 360;
