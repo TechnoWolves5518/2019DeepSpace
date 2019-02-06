@@ -12,6 +12,8 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class OI {
+  public static boolean controllerToggle = true;
+
 
   public static XboxController driver = new XboxController(0);
   public static Joystick stick = new Joystick(1);

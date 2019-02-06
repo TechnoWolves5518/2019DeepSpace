@@ -18,11 +18,9 @@ public class DriveCom extends CommandBase {
     private double deadzone = 0.05;
 
     private boolean quickturn;
-    private boolean xbox;
 
     public DriveCom() {
         requires(driveTrain);
-        xbox = true;
     }
     
     @Override
@@ -33,7 +31,7 @@ public class DriveCom extends CommandBase {
 
     @Override
     protected void execute() {
-        if (xbox) {
+        if (OI.controllerToggle) {
             h = -controller.getRawAxis(OI.XBOX_LSTICKX);
             v = controller.getRawAxis(OI.XBOX_LSTICKY);
             quickturn = !OI.driver.getAButton();

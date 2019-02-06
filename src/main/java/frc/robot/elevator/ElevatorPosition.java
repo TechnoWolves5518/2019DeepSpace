@@ -57,8 +57,11 @@ public class ElevatorPosition extends CommandBase {
 
         // elevator.setSetpoint(setpoint + offset);
         // elevator.setSetpoint(setpoint += (driver.getRawAxis(OI.XBOX_RSTICKY * 100)));
-
+            if (OI.controllerToggle) {
         newElevator.setelevator(driver.getRawAxis(OI.XBOX_RSTICKY));
+            } else {
+                newElevator.setelevator(driver.getRawAxis(OI.leftJoyX));
+            }
     }
 
     @Override

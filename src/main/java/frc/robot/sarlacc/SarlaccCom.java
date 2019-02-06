@@ -36,8 +36,15 @@ public class SarlaccCom extends CommandBase {
         //     sarlaccSub.sarlaccToggle.set(Value.kReverse); //If bottom trigger pressed, reverse solenoid (open claws)
         // }
 
-        if (OI.driver.getXButtonPressed()) {
+        if (OI.controllerToggle) { 
+            OI.driver.getXButtonPressed();
             active = !active;
+        } else {
+            if ((OI.rightMainTrigger).get() == true) {
+                active = true;
+            } else {
+                active = false;
+            }
         }
 
         if (active) {

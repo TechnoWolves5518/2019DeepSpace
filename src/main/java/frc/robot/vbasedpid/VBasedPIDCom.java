@@ -15,9 +15,13 @@ public class VBasedPIDCom extends CommandBase {
 
     @Override
     protected void execute() {
+        if (OI.controllerToggle) {
+            targetV = OI.XBOX_LSTICK;
+            vPidSub.VPIDMagic(targetV);
+        } else {
             targetV = OI.leftJoyZ;
             vPidSub.VPIDMagic(targetV);
-
+        }
             
         }
 
