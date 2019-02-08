@@ -7,33 +7,27 @@
 
 package frc.robot;
 
-import com.revrobotics.CANEncoder;
-import com.revrobotics.CANPIDController;
-import com.revrobotics.CANSparkMax;
-
-import edu.wpi.cscore.CameraServerJNI;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
 public class Robot extends TimedRobot {
-  public CANSparkMax winch;
-  public CANPIDController winchPID;
-  public CANEncoder winchENCODER;
+  
   public static UsbCamera camera;
-  public static CameraServerJNI camera1 = new CameraServerJNI();
   
   public long timeAnchor;
 
   @Override
   public void robotInit() {
-    CameraServer.getInstance().startAutomaticCapture();
     CommandBase.init();
     timeAnchor = System.currentTimeMillis() / 1000;
 
-    // camera.setResolution(320, 240);
-    // camera1.setSourceResolution(0, 320, 240);
+    camera = CameraServer.getInstance().startAutomaticCapture();
+
+    camera.setExposureManual(15);
+    camera.setBrightness(50);
+    camera.setResolution(480, 320);
   }
 
   @Override
