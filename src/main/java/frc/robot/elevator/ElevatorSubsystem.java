@@ -26,7 +26,7 @@ public class ElevatorSubsystem extends PIDSubsystem {
         super("Elevator", 0.005, 0.001, 0.005);
         setAbsoluteTolerance(0.5);
         getPIDController().setContinuous(false);
-        getPIDController().setOutputRange(-0.25, 0.25);
+        getPIDController().setOutputRange(-1, 1);
 
         elevatorEnc = new Encoder(RobotMap.ELEVATOR_ENC_A, RobotMap.ELEVATOR_ENC_B, false, EncodingType.k4X);
         elevatorEnc.setDistancePerPulse(kDistancePerPulse);

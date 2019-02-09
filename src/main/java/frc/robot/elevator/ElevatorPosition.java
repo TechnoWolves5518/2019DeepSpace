@@ -18,9 +18,9 @@ public class ElevatorPosition extends CommandBase {
     int offset = 0;
 
     public ElevatorPosition() {
-        // requires(elevator);
-        requires(newElevator);
-        // elevator.setSetpoint(RobotMap.startingPosition);
+        requires(elevator);
+        // requires(newElevator);
+        elevator.setSetpoint(RobotMap.startingPosition);
     }
 
     @Override
@@ -31,8 +31,8 @@ public class ElevatorPosition extends CommandBase {
             joystickControls();
         }
 
-        elevator.setSetpoint(setpoint + offset);
-        elevator.setSetpoint(setpoint += (driver.getRawAxis(OI.XBOX_RSTICKY * 100)));
+        // elevator.setSetpoint(setpoint + offset);
+        // elevator.setSetpoint(setpoint += (driver.getRawAxis(OI.XBOX_RSTICKY * 100)));
 
         // if (OI.controllerToggle) {
         //     newElevator.setelevator(driver.getRawAxis(OI.XBOX_RSTICKY));
@@ -42,12 +42,16 @@ public class ElevatorPosition extends CommandBase {
     }
 
     public void xboxControls() {
+        if (driver.getBButtonPressed()) {
+            elevator.resetElevatorEnc();
+        }
+
         adjust = -driver.getRawAxis(OI.XBOX_RSTICKY);
         offset = (int)(adjust * RobotMap.maxOffset);
 
-        if (driver.getRawButton(OI.XBOX_RBUMPER))
+        if (driver.getRawButtonPressed(OI.XBOX_RBUMPER))
             active++;
-        else if (driver.getRawButton(OI.XBOX_LBUMPER))
+        else if (driver.getRawButtonPressed(OI.XBOX_LBUMPER))
             active--;
         
         if (active < 0)
@@ -57,18 +61,21 @@ public class ElevatorPosition extends CommandBase {
 
         switch (active) {
             case 0:
-                setpoint = RobotMap.bottomPosition;
+                setpoint = RobotMap.startingPosition;
                 break;
             case 1:
-                setpoint = RobotMap.middlePosition;
+                setpoint = RobotMap.bottomPosition;
                 break;
             case 2:
-                setpoint = RobotMap.topPosition;
+                setpoint = RobotMap.middlePosition;
                 break;
             case 3:
                 setpoint = RobotMap.topPosition;
                 break;
         }
+        elevator.setSetpoint(setpoint);
+        elevator.logPID();
+        System.out.println(active);
     }
 
     public void joystickControls() {
