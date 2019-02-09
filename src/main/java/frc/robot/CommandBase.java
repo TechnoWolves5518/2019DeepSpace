@@ -19,8 +19,8 @@ public abstract class CommandBase extends Command {
 
     public static void init() {
         driveTrain = new DriveTrainSubsystem();
-        // elevator = new ElevatorSubsystem();
-        newElevator = new ElevatorNoPID();
+        elevator = new ElevatorSubsystem();
+        // newElevator = new ElevatorNoPID();
         // altElevator = new AltElevatorSub();
         sarlaccSub = new SarlaccSubsystem();
         // vPidSub = new VBasedPIDSub();
