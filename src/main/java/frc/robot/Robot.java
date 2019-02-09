@@ -8,7 +8,6 @@
 package frc.robot;
 
 import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
@@ -22,12 +21,6 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     CommandBase.init();
     timeAnchor = System.currentTimeMillis() / 1000;
-
-    camera = CameraServer.getInstance().startAutomaticCapture();
-
-    camera.setExposureManual(15);
-    camera.setBrightness(50);
-    camera.setResolution(480, 320);
   }
 
   @Override

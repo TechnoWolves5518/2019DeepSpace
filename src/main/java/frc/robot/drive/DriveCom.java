@@ -38,7 +38,7 @@ public class DriveCom extends CommandBase {
         } else {
             h = stick.getRawAxis(OI.rightJoyX);
             v = stick.getRawAxis(OI.rightJoyY);
-            quickturn = !OI.rightMainTrigger.get();
+            quickturn = !stick.getRawButton(OI.rightMainTrigger);
         }
 
         curvy(true);
