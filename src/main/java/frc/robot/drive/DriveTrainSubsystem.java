@@ -1,8 +1,6 @@
 package frc.robot.drive;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-// import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Encoder;
@@ -12,11 +10,6 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.RobotMap;
 
 public class DriveTrainSubsystem extends Subsystem {
-
-    // private WPI_VictorSPX leftMaster = new WPI_VictorSPX(RobotMap.leftMasterId);
-    // private VictorSP leftSlave = new VictorSP(RobotMap.leftSlaveId);
-    // private WPI_VictorSPX rightMaster = new WPI_VictorSPX(RobotMap.rightMasterId);
-    // private VictorSP rightSlave = new VictorSP(RobotMap.rightSlaveId);
 
     private WPI_TalonSRX leftMaster = new WPI_TalonSRX(RobotMap.leftMasterId);
     private WPI_TalonSRX leftSlave = new WPI_TalonSRX(RobotMap.leftSlaveId);
@@ -35,14 +28,6 @@ public class DriveTrainSubsystem extends Subsystem {
     private double kDistancePerPulse = kDistancePerRevolution / kPulsesPerRevolution;
 
     public DriveTrainSubsystem() {
-        // leftSlave.follow(leftMaster);
-        // rightSlave.follow(rightMaster);
-
-        // rightMaster.setInverted(true);
-        // rightSlave.setInverted(true);
-        // leftMaster.setInverted(true);
-        // leftSlave.setInverted(true);
-
         leftEnc = new Encoder(RobotMap.LEFT_ENC_A, RobotMap.LEFT_ENC_B, true, EncodingType.k4X);
         leftEnc.setDistancePerPulse(kDistancePerPulse);
         leftEnc.setMaxPeriod(0.1);
@@ -105,7 +90,7 @@ public class DriveTrainSubsystem extends Subsystem {
     }
 
     public void logEncoders() {
-        // System.out.println("Left: " + getLeftEncoder() + "\tRight: " + getRightEncoder());
+        System.out.println("Left: " + getLeftEncoder() + "\tRight: " + getRightEncoder());
     }
 
 }

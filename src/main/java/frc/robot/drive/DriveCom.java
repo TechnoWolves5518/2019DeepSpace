@@ -13,6 +13,7 @@ public class DriveCom extends CommandBase {
 
     // speed values taken in from controllers
     private double h, v;
+    private double lx, ly, rx, ry;
 
     // deadzone of controller joystick
     private double deadzone = 0.05;
@@ -32,19 +33,28 @@ public class DriveCom extends CommandBase {
     @Override
     protected void execute() {
         if (OI.controllerToggle) {
-            h = -controller.getRawAxis(OI.XBOX_LSTICKX);
-            v = controller.getRawAxis(OI.XBOX_LSTICKY);
+            lx = controller.getRawAxis(OI.XBOX_LSTICKX);
+            ly = controller.getRawAxis(OI.XBOX_LSTICKY);
+            rx = controller.getRawAxis(OI.XBOX_RSTICKX);
+            ry = controller.getRawAxis(OI.XBOX_RSTICKY);
             quickturn = !OI.driver.getAButton();
         } else {
             h = stick.getRawAxis(OI.rightJoyX);
             v = stick.getRawAxis(OI.rightJoyY);
-            quickturn = !OI.rightMainTrigger.get();
+            quickturn = !stick.getRawButton(OI.rightMainTrigger);
         }
 
-        curvy(true);
+        arcade(true);
     }
 
     public void tank(boolean config) {
+    }
+
+    public void arcade(boolean config) {
+        if (config)
+            driveTrain.arcadeDrive(configSpeed(ly), configSpeed(rx));
+        else
+            driveTrain.arcadeDrive(ly, rx);
     }
 
     public void curvy(boolean config) {

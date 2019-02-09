@@ -25,7 +25,8 @@ public class RobotMap {
 
 
   /* Elevator Motor Controllers */
-  public static final int winch = 0;
+  public static final int winch1 = 0;
+  public static final int winch2 = 1;
   public static int winchEnc = 6;
 
   /* Elevator Constants */

@@ -5,13 +5,15 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import frc.robot.RobotMap;
 
 public class ElevatorSubsystem extends PIDSubsystem {
 
-    private Spark winch = new Spark(RobotMap.winch);
+    private VictorSP winch1 = new VictorSP(RobotMap.winch1);
+    private VictorSP winch2 = new VictorSP(RobotMap.winch2);
 
     private Encoder elevatorEnc;
 
@@ -22,7 +24,6 @@ public class ElevatorSubsystem extends PIDSubsystem {
 
     public ElevatorSubsystem() {
         super("Elevator", 0.005, 0.001, 0.005);
-        // super("Elevator", 0.005, 0.0, 0.0);
         setAbsoluteTolerance(0.5);
         getPIDController().setContinuous(false);
         getPIDController().setOutputRange(-0.25, 0.25);
@@ -30,6 +31,8 @@ public class ElevatorSubsystem extends PIDSubsystem {
         elevatorEnc = new Encoder(RobotMap.ELEVATOR_ENC_A, RobotMap.ELEVATOR_ENC_B, false, EncodingType.k4X);
         elevatorEnc.setDistancePerPulse(kDistancePerPulse);
         elevatorEnc.setMaxPeriod(0.1);
+
+        winch1.setInverted(true);
 
         setSetpoint(RobotMap.startingPosition);
         enable();
@@ -42,8 +45,9 @@ public class ElevatorSubsystem extends PIDSubsystem {
 
     @Override
     protected void usePIDOutput(double output) {
-        winch.set(output);
-        System.out.println("Value: " + getElevatorEnc() + "  Setpoint: " + getSetpoint() + "  Output: " + winch.get());
+        winch1.set(output);
+        winch2.set(output);
+        logPID();
     }
 
     public int getElevatorEnc() {
@@ -56,6 +60,10 @@ public class ElevatorSubsystem extends PIDSubsystem {
 
     public void resetElevatorEnc() {
         elevatorEnc.reset();
+    }
+
+    public void logPID() {
+        System.out.println("Value: " + getElevatorEnc() + "  Setpoint: " + getSetpoint());
     }
 
     @Override

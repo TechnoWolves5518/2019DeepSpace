@@ -9,7 +9,6 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class OI {
   public static boolean controllerToggle = true;
@@ -18,23 +17,22 @@ public class OI {
   public static XboxController driver = new XboxController(0);
   public static Joystick stick = new Joystick(1);
 
-  public static JoystickButton rightMainTrigger = new JoystickButton(stick, 1);
-  public static JoystickButton rightFunButton = new JoystickButton(stick, 2);
-  public static JoystickButton rightTopRightButton = new JoystickButton(stick, 3);
-  public static JoystickButton rightMidRightButton = new JoystickButton(stick, 4);
-  public static JoystickButton rightMidLeftButton = new JoystickButton(stick, 5);
-  public static JoystickButton rightBottomTrigger = new JoystickButton(stick, 6);
-  public static int rightBottomTriggerInt = 6;
-  public static JoystickButton leftThumb = new JoystickButton(stick, 7);
-  public static JoystickButton leftEButtonright1Up = new JoystickButton(stick, 8);
-  public static JoystickButton right1Up = new JoystickButton(stick, 9);
-  public static JoystickButton right1Down = new JoystickButton(stick, 10);
-  public static JoystickButton right2Up = new JoystickButton(stick, 11);
-  public static JoystickButton right2Down = new JoystickButton(stick, 12);
-  public static JoystickButton right3Up = new JoystickButton(stick, 13);
-  public static JoystickButton right3Down = new JoystickButton(stick, 14);
-  public static JoystickButton rightMainTriggerHard = new JoystickButton(stick, 15);
-  public static JoystickButton rightTopLeftUp = new JoystickButton(stick, 16);
+  public static int rightMainTrigger = 1;
+  public static int rightFunButton = 2;
+  public static int rightTopRightButton = 3;
+  public static int rightMidRightButton = 4;
+  public static int rightMidLeftButton = 5;
+  public static int rightBottomTrigger = 6;
+  public static int leftThumb = 7;
+  public static int leftEButtonright1Up = 8;
+  public static int right1Up = 9;
+  public static int right1Down = 10;
+  public static int right2Up = 11;
+  public static int right2Down = 12;
+  public static int right3Up = 13;
+  public static int right3Down = 14;
+  public static int rightMainTriggerHard = 15;
+  public static int rightTopLeftUp = 16;
 
   public static int rightJoyX = 0;
   public static int rightJoyY = 1;
