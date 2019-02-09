@@ -18,9 +18,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
 public class Robot extends TimedRobot {
-  public CANSparkMax winch;
-  public CANPIDController winchPID;
-  public CANEncoder winchENCODER;
+  
   public static UsbCamera camera;
   public static CameraServerJNI camera1 = new CameraServerJNI();
   
