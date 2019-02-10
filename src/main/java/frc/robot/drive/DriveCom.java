@@ -38,13 +38,13 @@ public class DriveCom extends CommandBase {
             rx = controller.getRawAxis(OI.XBOX_RSTICKX);
             ry = controller.getRawAxis(OI.XBOX_RSTICKY);
             quickturn = !OI.driver.getAButton();
+            arcade(true);
         } else {
             h = stick.getRawAxis(OI.rightJoyX);
             v = stick.getRawAxis(OI.rightJoyY);
             quickturn = !stick.getRawButton(OI.rightMainTrigger);
+            curvy(true);
         }
-
-        arcade(true);
     }
 
     public void tank(boolean config) {
@@ -52,14 +52,14 @@ public class DriveCom extends CommandBase {
 
     public void arcade(boolean config) {
         if (config)
-            driveTrain.arcadeDrive(configSpeed(ly), configSpeed(rx));
+            driveTrain.arcadeDrive(configSpeed(ly), configSpeed(lx));
         else
-            driveTrain.arcadeDrive(ly, rx);
+            driveTrain.arcadeDrive(ly, lx);
     }
 
     public void curvy(boolean config) {
         if (config)
-            driveTrain.curvyDrive(configSpeed(v), configSpeed(h), quickturn);
+            driveTrain.curvyDrive(configSpeed(v), h, quickturn);
         else
             driveTrain.curvyDrive(v, h, quickturn);
     }
