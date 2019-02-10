@@ -45,7 +45,7 @@ public class DriveTrainSubsystem extends Subsystem {
     }
 
     public void arcadeDrive(double speed, double rotation) {
-        driveTrain.arcadeDrive(speed, rotation);
+        driveTrain.arcadeDrive(speed, -rotation);
     }
 
     public void tankDrive(double left, double right) {
