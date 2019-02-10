@@ -1,4 +1,4 @@
-// package frc.robot.vbasedpid;
+// package frc.robot.custompid;
 
 // import com.revrobotics.CANEncoder;
 // import com.revrobotics.CANSparkMax;
@@ -9,26 +9,25 @@
 // import edu.wpi.first.wpilibj.command.Subsystem;
 // import frc.robot.OI;
 // import frc.robot.RobotMap;
-// import frc.robot.drive.DriveTrainSubsystem;
 
-// public class VBasedPIDSub extends Subsystem {
+// public class AltElevatorSub extends Subsystem {
 
-//    private Encoder leftSideEnc;
-//    private Encoder rightSideEnc;
-//    private double kDistancePerPulse;
+//     private CANSparkMax altPIDElevator = new CANSparkMax(RobotMap.winchEnc, MotorType.kBrushless);
+//     private CANEncoder winchEnc = new CANEncoder(altPIDElevator);
 
-//     public VBasedPIDSub() {
-//         leftSideEnc  = new Encoder(RobotMap.LEFT_ENC_A, RobotMap.LEFT_ENC_B);
-//         rightSideEnc = new Encoder(RobotMap.RIGHT_ENC_A, RobotMap.RIGHT_ENC_B);
-//         rightSideEnc.setDistancePerPulse(kDistancePerPulse);
-//         leftSideEnc.setDistancePerPulse(kDistancePerPulse);
-//         rightSideEnc.setMaxPeriod(0.1);
-//         leftSideEnc.setMaxPeriod(0.1);
+//     private Encoder altElevatorEnc;
+
+//     private double kGearDiameter = 0;
+//     private double kGearDistancePerRev = kGearDiameter * Math.PI;
+//     private double kPulsesPerRev = 1024;
+//     private double kDistancePerPulse = kGearDistancePerRev / kPulsesPerRev;
+
+//     public AltElevatorSub() {
+//         altElevatorEnc = new Encoder(RobotMap.ELEVATOR_ENC_A, RobotMap.ELEVATOR_ENC_B, true, EncodingType.k4X);
+//         altElevatorEnc.setDistancePerPulse(kDistancePerPulse);
+//         altElevatorEnc.setMaxPeriod(0.1);
 //     }
 
-//     public double getAverage() {
-//         return ((leftSideEnc.getRate() + rightSideEnc.getRate()) / 2);
-//     }
 //     // DERIV VARIABLES
 //     public long timeNow;
 //     public boolean InitialRun = true;
@@ -38,10 +37,10 @@
 //     public double DerivitiveFinal;
 
 //     // DERIV CALCULATION
-//     public double calcDeriv(Double targetV) {
+//     public double calcDeriv(int targetPos) {
 //         if (InitialRun == false) {
 //             timeNow = System.currentTimeMillis();
-//             errorNow = (targetV - getAverage());
+//             errorNow = (targetPos - getAltElevatorEnc());
 //             DerivitiveFinal = ((errorNow - errorLast) / (timeNow - timeLast));
 //             errorLast = errorNow;
 //             timeLast = timeNow;
@@ -49,7 +48,7 @@
 //             timeLast = System.currentTimeMillis();
 //             timeNow = System.currentTimeMillis();
 //             errorLast = 0;
-//             errorNow = (targetV - getAverage());
+//             errorNow = (targetPos - getAltElevatorEnc());
 //             InitialRun = false;
 //             DerivitiveFinal = 0;
 //         }
@@ -64,26 +63,26 @@
 //     public long dTime;
 
 //     // INT CALCULATION
-//     public double calcInt(Double targetV) {
+//     public double calcInt(int targetPos) {
 //         if (InitialRun2 == false) {
 //             IntTimeNow = System.currentTimeMillis();
 //             dTime = (IntTimeNow - IntTimeLast);
-//             IntegralFinal = ((targetV - getAverage()) * dTime);
+//             IntegralFinal = ((targetPos - getAltElevatorEnc()) * dTime);
 //             IntTimeLast = IntTimeNow;
 //         }
 //         if (InitialRun2 == true) {
 //             IntTimeNow = System.currentTimeMillis();
 //             IntTimeLast = System.currentTimeMillis();
 //             dTime = (IntTimeNow - IntTimeLast);
-//             IntegralFinal = ((targetV - getAverage()) * dTime);
+//             IntegralFinal = ((targetPos - getAltElevatorEnc()) * dTime);
 //             InitialRun2 = false;
 //         }
 //         return IntegralFinal;
 //     }
 
-//     public double VPIDMagic(Double targetV) { // This creates our PID function.
-//         DerivitiveFinal = calcDeriv(targetV); // Generates current Derivitive Value
-//         IntegralFinal = calcInt(targetV); // Generates current Integral Value
+//     public double PIDMagic(int targetPos) { // This creates our PID function.
+//         DerivitiveFinal = calcDeriv(targetPos); // Generates current Derivitive Value
+//         IntegralFinal = calcInt(targetPos); // Generates current Integral Value
 
 //         // double P = 0.003; // see above
 //         // double I = 0.0005; // see above
@@ -91,31 +90,32 @@
 
 //         double P = (OI.stick.getRawAxis(OI.leftJoyY) + 1.000001) * 0.0045;
 //         double I = (OI.stick.getRawAxis(OI.leftJoyX) + 1.000001) * 0.0002;
-//         double D = (-OI.stick.getRawAxis(OI.leftJoySlider) + 1.000001) * 0.1;
+//         double D = (-OI.stick.getRawAxis(OI.leftJoyZ) + 1.000001) * 0.1;
 
-//         double OutV;
+//         double PIDSpeed;
 
-//         OutV = ((P * errorNow) + (I * IntegralFinal) + (D * DerivitiveFinal)); // Finds our modified speed value.
-//         System.out.println("  P: " + P + "  I: " + I + "  D: "+ D + "     AvgVel: " + getAverage()  +  "  Deriv : " + DerivitiveFinal + "  Int  : " + IntegralFinal);
-//         return OutV; // This gives us our 'Output' speed.
+//         PIDSpeed = ((P * errorNow) + (I * IntegralFinal) + (D * DerivitiveFinal)); // Finds our modified speed value.
+
+//         altPIDElevator.set(PIDSpeed);
+//         System.out.println("  P: " + P + "  I: " + I + "  D: "+ D + "     Enc: " + getAltElevatorEnc()  +  "  Deriv : " + DerivitiveFinal + "  Int  : " + IntegralFinal);
+//         return PIDSpeed; // This gives us our 'Output' speed.
 //     }
 
-//     public int getLeftSideEnc() {
-//         return leftSideEnc.get();
+//     public int getAltElevatorEnc() {
+//         return altElevatorEnc.get();
 //     }
 
-//     public double getRightSideEnc() {
-//         return rightSideEnc.getDistance();
+//     public double getAltElevatorPos() {
+//         return altElevatorEnc.getDistance();
 //     }
 
-//     public void resetAllEncs() {
-//         rightSideEnc.reset();
-//         leftSideEnc.reset();
+//     public void resetAltElevatorEnc() {
+//         altElevatorEnc.reset();
 //     }
 
 //     @Override
 //     protected void initDefaultCommand() {
-//         setDefaultCommand(new VBasedPIDCom());
+//         setDefaultCommand(new altPID());
 //     }
 
 // }
