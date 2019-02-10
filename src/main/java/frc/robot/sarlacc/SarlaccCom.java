@@ -1,6 +1,5 @@
 package frc.robot.sarlacc;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import frc.robot.CommandBase;
 import frc.robot.OI;
 

@@ -44,7 +44,6 @@ public class ElevatorSubsystem extends PIDSubsystem {
     protected void usePIDOutput(double output) {
         winch1.set(output);
         winch2.set(output);
-        logPID();
     }
 
     public int getElevatorEnc() {

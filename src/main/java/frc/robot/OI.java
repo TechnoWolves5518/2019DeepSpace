@@ -13,9 +13,10 @@ import edu.wpi.first.wpilibj.XboxController;
 public class OI {
   public static boolean controllerToggle = true;
 
-
+  
   public static XboxController driver = new XboxController(0);
   public static Joystick stick = new Joystick(1);
+
 
   public static int rightMainTrigger = 1;
   public static int rightFunButton = 2;

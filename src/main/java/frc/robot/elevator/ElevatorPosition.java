@@ -19,7 +19,6 @@ public class ElevatorPosition extends CommandBase {
 
     public ElevatorPosition() {
         requires(elevator);
-        // requires(newElevator);
         elevator.setSetpoint(RobotMap.startingPosition);
     }
 
@@ -39,6 +38,8 @@ public class ElevatorPosition extends CommandBase {
         // } else {
         //     newElevator.setelevator(driver.getRawAxis(OI.leftJoyX));
         // }
+
+        elevator.logPID();
     }
 
     public void xboxControls() {
@@ -73,9 +74,10 @@ public class ElevatorPosition extends CommandBase {
                 setpoint = RobotMap.topPosition;
                 break;
         }
+
+        setpoint += offset;
         elevator.setSetpoint(setpoint);
         elevator.logPID();
-        System.out.println(active);
     }
 
     public void joystickControls() {
