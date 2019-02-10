@@ -38,11 +38,11 @@ public class RobotMap {
   
     // measured in encoder pulses
   public static final int startingPosition = 0;
-  public static int bottomPosition = 600;
-  public static int middlePosition = 1200;
-  public static int topPosition = 1800;
+  public static int bottomPosition = 715;
+  public static int middlePosition = 1500;
+  public static int topPosition = 3000;
 
-  public static final int maxOffset = 200;
+  public static final int maxOffset = 500;
 
   public static final int ELEVATOR_ENC_A = 4;
   public static final int ELEVATOR_ENC_B = 5;

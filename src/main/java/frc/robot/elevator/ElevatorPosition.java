@@ -45,6 +45,7 @@ public class ElevatorPosition extends CommandBase {
     public void xboxControls() {
         if (driver.getBButtonPressed()) {
             elevator.resetElevatorEnc();
+            elevator.setSetpoint(RobotMap.startingPosition);
         }
 
         adjust = -driver.getRawAxis(OI.XBOX_RSTICKY);

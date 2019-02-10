@@ -52,9 +52,9 @@ public class DriveCom extends CommandBase {
 
     public void arcade(boolean config) {
         if (config)
-            driveTrain.arcadeDrive(configSpeed(ly), configSpeed(rx));
+            driveTrain.arcadeDrive(configSpeed(ly), configSpeed(lx));
         else
-            driveTrain.arcadeDrive(ly, rx);
+            driveTrain.arcadeDrive(ly, lx);
     }
 
     public void curvy(boolean config) {
