@@ -49,7 +49,7 @@ public class ElevatorPosition extends CommandBase {
         }
 
         adjust = -driver.getRawAxis(OI.XBOX_RSTICKY);
-        offset = (int)(adjust * RobotMap.maxOffset);
+        offset += (int)(adjust * RobotMap.maxOffset);
 
         if (driver.getRawButtonPressed(OI.XBOX_RBUMPER))
             active++;
@@ -76,8 +76,7 @@ public class ElevatorPosition extends CommandBase {
                 break;
         }
 
-        setpoint += offset;
-        elevator.setSetpoint(setpoint);
+        elevator.setSetpoint(setpoint + offset);
         elevator.logPID();
     }
 
