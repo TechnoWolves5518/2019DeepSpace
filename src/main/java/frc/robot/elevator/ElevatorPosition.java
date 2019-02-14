@@ -29,27 +29,17 @@ public class ElevatorPosition extends CommandBase {
         } else {
             joystickControls();
         }
-
-        // elevator.setSetpoint(setpoint + offset);
-        // elevator.setSetpoint(setpoint += (driver.getRawAxis(OI.XBOX_RSTICKY * 100)));
-
-        // if (OI.controllerToggle) {
-        //     newElevator.setelevator(driver.getRawAxis(OI.XBOX_RSTICKY));
-        // } else {
-        //     newElevator.setelevator(driver.getRawAxis(OI.leftJoyX));
-        // }
-
-        elevator.logPID();
     }
 
     public void xboxControls() {
         if (driver.getBButtonPressed()) {
             elevator.resetElevatorEnc();
+            offset = 0;
             elevator.setSetpoint(RobotMap.startingPosition);
         }
 
-        adjust = -driver.getRawAxis(OI.XBOX_RSTICKY);
-        offset += (int)(adjust * RobotMap.maxOffset);
+        adjust = driver.getRawAxis(OI.XBOX_RTRIGGER) - driver.getRawAxis(OI.XBOX_LTRIGGER);
+        offset += (int)(adjust * RobotMap.maxOffsetController);
 
         if (driver.getRawButtonPressed(OI.XBOX_RBUMPER))
             active++;
@@ -81,19 +71,25 @@ public class ElevatorPosition extends CommandBase {
     }
 
     public void joystickControls() {
+        if (stick.getRawButtonPressed(OI.rightFunButton)) {
+            elevator.resetElevatorEnc();
+            offset = 0;
+            elevator.setSetpoint(RobotMap.startingPosition);
+        }
+        
         adjust = stick.getRawAxis(OI.leftJoyY);
-        offset = (int)(adjust * RobotMap.maxOffset);
+        offset = (int)(adjust * RobotMap.maxOffsetStick);
 
         if (stick.getRawButton(OI.right1Down)) {
             setpoint = RobotMap.bottomPosition;
-            active = 0;
         } else if (stick.getRawButton(OI.right2Down)) {
             setpoint = RobotMap.middlePosition;
-            active = 1;
         } else if (stick.getRawButton(OI.right3Down)) {
             setpoint = RobotMap.topPosition;
-            active = 2;
         }
+
+        elevator.setSetpoint(setpoint + offset);
+        elevator.logPID();
     }
 
     @Override

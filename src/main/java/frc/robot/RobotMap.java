@@ -17,7 +17,8 @@ public class RobotMap {
   public static final int rightSlaveId = 0; // 4
 
     // Constants
-  public static final double topSpeed = 0.5;
+  public static final double maxSpeed = 0.7;
+  public static final double maxTurn = 0.7;
 
   public static final int LEFT_ENC_A = 2;
   public static final int LEFT_ENC_B = 3;
@@ -29,7 +30,7 @@ public class RobotMap {
     // Motor Controllers
   public static final int winch1 = 0;
   public static final int winch2 = 1;
-  public static int winchEnc = 6;
+  public static final int winchEnc = 6;
 
     // Constants
   public static final double kP = 1.0;
@@ -38,11 +39,12 @@ public class RobotMap {
   
     // measured in encoder pulses
   public static final int startingPosition = 0;
-  public static int bottomPosition = 715;
-  public static int middlePosition = 1500;
-  public static int topPosition = 3000;
+  public static final int bottomPosition = 730;
+  public static final int middlePosition = 2550;
+  public static final int topPosition = 4430;
 
-  public static final int maxOffset = 500;
+  public static final int maxOffsetController = 20;
+  public static final int maxOffsetStick = 500;
 
   public static final int ELEVATOR_ENC_A = 4;
   public static final int ELEVATOR_ENC_B = 5;

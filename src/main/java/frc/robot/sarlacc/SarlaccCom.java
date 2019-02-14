@@ -23,7 +23,7 @@ public class SarlaccCom extends CommandBase {
             if (OI.driver.getRawButtonPressed(OI.XBOX_XBTN))
                 active = !active;
         } else {
-            if (OI.stick.getRawButtonPressed(OI.rightBottomTrigger)) 
+            if (OI.stick.getRawButtonPressed(OI.leftThumb)) 
                 active = !active;
         }
 

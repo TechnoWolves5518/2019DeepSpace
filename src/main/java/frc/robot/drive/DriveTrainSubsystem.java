@@ -36,6 +36,8 @@ public class DriveTrainSubsystem extends Subsystem {
         rightEnc.setDistancePerPulse(kDistancePerPulse);
         rightEnc.setMaxPeriod(0.1);
 
+        
+
         driveTrain.setSafetyEnabled(false);
     }
 
@@ -45,6 +47,10 @@ public class DriveTrainSubsystem extends Subsystem {
     }
 
     public void arcadeDrive(double speed, double rotation) {
+        // if (Math.abs(speed) > RobotMap.maxSpeed)
+        //     speed = RobotMap.maxSpeed * (speed / Math.abs(speed));
+        // if (Math.abs(rotation) > RobotMap.maxTurn)
+        //     rotation = RobotMap.maxTurn * (rotation / Math.abs(rotation));
         driveTrain.arcadeDrive(speed, -rotation);
     }
 
@@ -56,11 +62,11 @@ public class DriveTrainSubsystem extends Subsystem {
         driveTrain.curvatureDrive(speed, rotation, quickTurn);
     }
 
-    public void reverseMotors(boolean state) {
-        leftMaster.setInverted(state);
-        leftSlave.setInverted(state);
-        rightMaster.setInverted(state);
-        rightSlave.setInverted(state);
+    public void reverseMotors() {
+        leftMaster.setInverted(!leftMaster.getInverted());
+        leftSlave.setInverted(!leftSlave.getInverted());
+        rightMaster.setInverted(!rightMaster.getInverted());
+        rightSlave.setInverted(!rightSlave.getInverted());
 	}
 
     public int getLeftEncoder() {

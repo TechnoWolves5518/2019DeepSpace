@@ -19,6 +19,7 @@ public class DriveCom extends CommandBase {
     private double deadzone = 0.05;
 
     private boolean quickturn;
+    private boolean reverse;
 
     public DriveCom() {
         requires(driveTrain);
@@ -38,12 +39,13 @@ public class DriveCom extends CommandBase {
             rx = controller.getRawAxis(OI.XBOX_RSTICKX);
             ry = controller.getRawAxis(OI.XBOX_RSTICKY);
             quickturn = !OI.driver.getAButton();
-            arcade(true);
+            reverse = OI.driver.getYButton();
+            arcade(false);
         } else {
             h = stick.getRawAxis(OI.rightJoyX);
             v = stick.getRawAxis(OI.rightJoyY);
             quickturn = !stick.getRawButton(OI.rightMainTrigger);
-            curvy(true);
+            curvy(false);
         }
     }
 
@@ -52,16 +54,19 @@ public class DriveCom extends CommandBase {
 
     public void arcade(boolean config) {
         if (config)
-            driveTrain.arcadeDrive(configSpeed(ly), configSpeed(lx));
+            driveTrain.arcadeDrive(configSpeed(ly), configSpeed(rx));
         else
-            driveTrain.arcadeDrive(ly, lx);
+            driveTrain.arcadeDrive(ly, rx);
+
+        // if (ly < 0.05 && lx < 0.05 && reverse)
+        //     driveTrain.reverseMotors();
     }
 
     public void curvy(boolean config) {
         if (config)
             driveTrain.curvyDrive(configSpeed(v), h, quickturn);
         else
-            driveTrain.curvyDrive(v, h, quickturn);
+            driveTrain.curvyDrive(v*RobotMap.maxSpeed, h*RobotMap.maxTurn, quickturn);
     }
 
     public double configSpeed(double s) {
@@ -70,7 +75,7 @@ public class DriveCom extends CommandBase {
             s = 0;
         // cubes the speeds for sensitivity control
         s = Math.pow(s, 3);
-        s *= RobotMap.topSpeed;
+        s *= RobotMap.maxSpeed;
         return s;
     }
 

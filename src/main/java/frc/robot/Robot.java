@@ -16,18 +16,15 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 public class Robot extends TimedRobot {
   
   public static UsbCamera camera;
-  public static CameraServerJNI camera1 = new CameraServerJNI();
   
   public long timeAnchor;
 
   @Override
   public void robotInit() {
-    CameraServer.getInstance().startAutomaticCapture();
+    camera = CameraServer.getInstance().startAutomaticCapture();
     CommandBase.init();
-    timeAnchor = System.currentTimeMillis() / 1000;
 
-    // camera.setResolution(320, 240);
-    // camera1.setSourceResolution(0, 320, 240);
+    camera.setResolution(1280, 720);
   }
 
   @Override
