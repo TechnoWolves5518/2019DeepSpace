@@ -36,8 +36,6 @@ public class DriveTrainSubsystem extends Subsystem {
         rightEnc.setDistancePerPulse(kDistancePerPulse);
         rightEnc.setMaxPeriod(0.1);
 
-        
-
         driveTrain.setSafetyEnabled(false);
     }
 
@@ -47,10 +45,6 @@ public class DriveTrainSubsystem extends Subsystem {
     }
 
     public void arcadeDrive(double speed, double rotation) {
-        // if (Math.abs(speed) > RobotMap.maxSpeed)
-        //     speed = RobotMap.maxSpeed * (speed / Math.abs(speed));
-        // if (Math.abs(rotation) > RobotMap.maxTurn)
-        //     rotation = RobotMap.maxTurn * (rotation / Math.abs(rotation));
         driveTrain.arcadeDrive(speed, -rotation);
     }
 

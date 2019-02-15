@@ -56,17 +56,14 @@ public class DriveCom extends CommandBase {
         if (config)
             driveTrain.arcadeDrive(configSpeed(ly), configSpeed(rx));
         else
-            driveTrain.arcadeDrive(ly, rx);
-
-        // if (ly < 0.05 && lx < 0.05 && reverse)
-        //     driveTrain.reverseMotors();
+            driveTrain.arcadeDrive(ly * RobotMap.maxSpeed, rx * RobotMap.maxTurn);
     }
 
     public void curvy(boolean config) {
         if (config)
             driveTrain.curvyDrive(configSpeed(v), h, quickturn);
         else
-            driveTrain.curvyDrive(v*RobotMap.maxSpeed, h*RobotMap.maxTurn, quickturn);
+            driveTrain.curvyDrive(v * RobotMap.maxSpeed, h * RobotMap.maxTurn, quickturn);
     }
 
     public double configSpeed(double s) {

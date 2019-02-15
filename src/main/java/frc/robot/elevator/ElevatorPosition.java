@@ -2,11 +2,14 @@ package frc.robot.elevator;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.CommandBase;
 import frc.robot.OI;
 import frc.robot.RobotMap;
 
 public class ElevatorPosition extends CommandBase {
+
+    public String[] locations = { "floor", "bottom", "middle", "top" };
 
     int active = -1;
 
@@ -39,12 +42,18 @@ public class ElevatorPosition extends CommandBase {
         }
 
         adjust = driver.getRawAxis(OI.XBOX_RTRIGGER) - driver.getRawAxis(OI.XBOX_LTRIGGER);
-        offset += (int)(adjust * RobotMap.maxOffsetController);
+        offset += (int)(adjust * RobotMap.maxOffsetRateController);
 
-        if (driver.getRawButtonPressed(OI.XBOX_RBUMPER))
-            active++;
-        else if (driver.getRawButtonPressed(OI.XBOX_LBUMPER))
-            active--;
+        if (offset > RobotMap.maxOffsetController)
+            offset = RobotMap.maxOffsetController;
+        else if (offset < -RobotMap.maxOffsetController)
+            offset = -RobotMap.maxOffsetController;
+
+        if (driver.getRawButtonPressed(OI.XBOX_RBUMPER)) {
+            active++; offset = 0;
+        } else if (driver.getRawButtonPressed(OI.XBOX_LBUMPER)) {
+            active--; offset = 0;
+        }
         
         if (active < 0)
             active = 0;
@@ -54,19 +63,28 @@ public class ElevatorPosition extends CommandBase {
         switch (active) {
             case 0:
                 setpoint = RobotMap.startingPosition;
+                setDisplayLocation("floor");
                 break;
             case 1:
                 setpoint = RobotMap.bottomPosition;
+                setDisplayLocation("bottom");
                 break;
             case 2:
                 setpoint = RobotMap.middlePosition;
+                setDisplayLocation("middle");
                 break;
             case 3:
                 setpoint = RobotMap.topPosition;
+                setDisplayLocation("top");
                 break;
         }
 
-        elevator.setSetpoint(setpoint + offset);
+        setpoint += offset;
+
+        if (setpoint > RobotMap.topPosition)
+            setpoint = RobotMap.topPosition;
+
+        elevator.setSetpoint(setpoint);
         elevator.logPID();
     }
 
@@ -90,6 +108,16 @@ public class ElevatorPosition extends CommandBase {
 
         elevator.setSetpoint(setpoint + offset);
         elevator.logPID();
+    }
+
+    public void setDisplayLocation(String loc) {
+        for (String location : locations) {
+            if (loc.equals(location)) {
+                SmartDashboard.putBoolean(loc, true);
+            } else {
+                SmartDashboard.putBoolean(loc, false);
+            }
+        }
     }
 
     @Override

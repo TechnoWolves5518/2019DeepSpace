@@ -43,7 +43,8 @@ public class RobotMap {
   public static final int middlePosition = 2550;
   public static final int topPosition = 4430;
 
-  public static final int maxOffsetController = 20;
+  public static final int maxOffsetRateController = 20;
+  public static final int maxOffsetController = 300;
   public static final int maxOffsetStick = 500;
 
   public static final int ELEVATOR_ENC_A = 4;
