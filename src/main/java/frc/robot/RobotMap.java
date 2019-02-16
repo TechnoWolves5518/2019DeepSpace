@@ -31,20 +31,21 @@ public class RobotMap {
   public static final int winch1 = 0;
   public static final int winch2 = 1;
   public static final int winchEnc = 6;
+  public static final int limitSwitch = 6;
 
     // Constants
-  public static final double kP = 1.0;
-  public static final double kI = 0.0;
-  public static final double kD = 0.0;
+  public static final double kP = 0.01;
+  public static final double kI = 0.003;
+  public static final double kD = 0.005;
   
     // measured in encoder pulses
   public static final int startingPosition = 0;
-  public static final int bottomPosition = 730;
-  public static final int middlePosition = 2550;
-  public static final int topPosition = 4430;
+  public static final int bottomPosition = 860;
+  public static final int middlePosition = 2800;
+  public static final int topPosition = 4630;
 
   public static final int maxOffsetRateController = 20;
-  public static final int maxOffsetController = 300;
+  public static final int maxOffsetController = 500;
   public static final int maxOffsetStick = 500;
 
   public static final int ELEVATOR_ENC_A = 4;

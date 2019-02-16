@@ -24,7 +24,7 @@ public class Robot extends TimedRobot {
     camera = CameraServer.getInstance().startAutomaticCapture();
     CommandBase.init();
 
-    camera.setResolution(1280, 720);
+    camera.setResolution(480, 320);
   }
 
   @Override

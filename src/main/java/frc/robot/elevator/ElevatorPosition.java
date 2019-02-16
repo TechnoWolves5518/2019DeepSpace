@@ -1,5 +1,6 @@
 package frc.robot.elevator;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -9,16 +10,18 @@ import frc.robot.RobotMap;
 
 public class ElevatorPosition extends CommandBase {
 
-    public String[] locations = { "floor", "bottom", "middle", "top" };
+    private String[] locations = { "floor", "bottom", "middle", "top" };
 
     int active = -1;
-
     int setpoint = 0;
+    double adjust = 0;
+    int offset = 0;
 
     private static Joystick stick = OI.stick;
     private static XboxController driver = OI.driver;
-    double adjust = 0;
-    int offset = 0;
+
+    private DigitalInput limit = new DigitalInput(RobotMap.limitSwitch);
+    private boolean lastLimit = false;
 
     public ElevatorPosition() {
         requires(elevator);
@@ -36,13 +39,17 @@ public class ElevatorPosition extends CommandBase {
 
     public void xboxControls() {
         if (driver.getBButtonPressed()) {
+        // if (limit.get() && !lastLimit) {
             elevator.resetElevatorEnc();
             offset = 0;
             elevator.setSetpoint(RobotMap.startingPosition);
         }
+        lastLimit = limit.get();
 
         adjust = driver.getRawAxis(OI.XBOX_RTRIGGER) - driver.getRawAxis(OI.XBOX_LTRIGGER);
         offset += (int)(adjust * RobotMap.maxOffsetRateController);
+
+        System.out.println(offset);
 
         if (offset > RobotMap.maxOffsetController)
             offset = RobotMap.maxOffsetController;
