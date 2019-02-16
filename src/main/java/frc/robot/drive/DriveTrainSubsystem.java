@@ -36,7 +36,8 @@ public class DriveTrainSubsystem extends Subsystem {
         rightEnc.setDistancePerPulse(kDistancePerPulse);
         rightEnc.setMaxPeriod(0.1);
 
-        driveTrain.setSafetyEnabled(false);
+        driveTrain.setSafetyEnabled(true);
+        driveTrain.setExpiration(0.08);
     }
 
     @Override

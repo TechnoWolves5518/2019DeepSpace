@@ -31,7 +31,7 @@ public class RobotMap {
   public static final int winch1 = 0;
   public static final int winch2 = 1;
   public static final int winchEnc = 6;
-  public static final int limitSwitch = 6;
+  public static final int limitSwitch = 9;
 
     // Constants
   public static final double kP = 0.01;

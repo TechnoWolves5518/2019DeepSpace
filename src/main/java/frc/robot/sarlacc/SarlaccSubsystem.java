@@ -26,11 +26,11 @@ public class SarlaccSubsystem extends Subsystem {
     }
 
     public void openArms() {
-        solenoid.set(Value.kForward);
+        solenoid.set(Value.kReverse);
     }
 
     public void closeArms() {
-        solenoid.set(Value.kReverse);
+        solenoid.set(Value.kForward);
     }
 
     public void armsOff() {

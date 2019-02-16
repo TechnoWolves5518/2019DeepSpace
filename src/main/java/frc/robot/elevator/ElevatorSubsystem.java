@@ -20,7 +20,7 @@ public class ElevatorSubsystem extends PIDSubsystem {
     private double kDistancePerPulse = kGearDistancePerRev / kPulsesPerRev;
 
     public ElevatorSubsystem() {
-        super("Elevator", 0.005, 0.001, 0.005);
+        super("Elevator", RobotMap.kP, RobotMap.kI, RobotMap.kD);
         setAbsoluteTolerance(0.5);
         getPIDController().setContinuous(false);
         getPIDController().setOutputRange(-1, 1);

@@ -33,6 +33,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
+    CommandBase.driveTrain.resetEncoders();
   }
 
   @Override
@@ -43,8 +44,8 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopInit() {
     CommandBase.driveTrain.resetEncoders();
-    // CommandBase.elevator.resetElevatorEnc();
-    CommandBase.elevator.setSetpoint(0);
+    CommandBase.elevator.setSetpoint(RobotMap.startingPosition);
+    CommandBase.sarlaccSub.closeArms();
   }
 
   @Override

@@ -20,7 +20,8 @@ public class ElevatorPosition extends CommandBase {
     private static Joystick stick = OI.stick;
     private static XboxController driver = OI.driver;
 
-    private DigitalInput limit = new DigitalInput(RobotMap.limitSwitch);
+    private DigitalInput limitSwitch = new DigitalInput(RobotMap.limitSwitch);
+    private boolean limit = false;
     private boolean lastLimit = false;
 
     public ElevatorPosition() {
@@ -38,31 +39,34 @@ public class ElevatorPosition extends CommandBase {
     }
 
     public void xboxControls() {
-        if (driver.getBButtonPressed()) {
-        // if (limit.get() && !lastLimit) {
+        limit = !limitSwitch.get();
+        if (limit && !lastLimit) {
             elevator.resetElevatorEnc();
             offset = 0;
             elevator.setSetpoint(RobotMap.startingPosition);
+            active = 0;
         }
-        lastLimit = limit.get();
+        lastLimit = limit;
 
         adjust = driver.getRawAxis(OI.XBOX_RTRIGGER) - driver.getRawAxis(OI.XBOX_LTRIGGER);
         offset += (int)(adjust * RobotMap.maxOffsetRateController);
 
-        System.out.println(offset);
-
-        if (offset > RobotMap.maxOffsetController)
-            offset = RobotMap.maxOffsetController;
-        else if (offset < -RobotMap.maxOffsetController)
-            offset = -RobotMap.maxOffsetController;
+        // if (offset > RobotMap.maxOffsetController)
+        //     offset = RobotMap.maxOffsetController;
+        // else if (offset < -RobotMap.maxOffsetController)
+        //     offset = -RobotMap.maxOffsetController;
 
         if (driver.getRawButtonPressed(OI.XBOX_RBUMPER)) {
             active++; offset = 0;
         } else if (driver.getRawButtonPressed(OI.XBOX_LBUMPER)) {
             active--; offset = 0;
+        } else if (driver.getBButtonPressed()) {
+            active = -2; offset = 0;
         }
         
-        if (active < 0)
+        if (active == -2) {
+            // nothing
+        } else if (active < 0)
             active = 0;
         else if (active > 3)
             active = 3;
@@ -70,19 +74,22 @@ public class ElevatorPosition extends CommandBase {
         switch (active) {
             case 0:
                 setpoint = RobotMap.startingPosition;
-                setDisplayLocation("floor");
+                setDisplayLocation(locations[0]);
                 break;
             case 1:
                 setpoint = RobotMap.bottomPosition;
-                setDisplayLocation("bottom");
+                setDisplayLocation(locations[1]);
                 break;
             case 2:
                 setpoint = RobotMap.middlePosition;
-                setDisplayLocation("middle");
+                setDisplayLocation(locations[2]);
                 break;
             case 3:
                 setpoint = RobotMap.topPosition;
-                setDisplayLocation("top");
+                setDisplayLocation(locations[3]);
+                break;
+            case -2:
+                setpoint = -10000;
                 break;
         }
 
@@ -92,7 +99,7 @@ public class ElevatorPosition extends CommandBase {
             setpoint = RobotMap.topPosition;
 
         elevator.setSetpoint(setpoint);
-        elevator.logPID();
+        // elevator.logPID();
     }
 
     public void joystickControls() {
