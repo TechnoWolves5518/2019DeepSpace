@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -27,14 +28,29 @@ public class DriveTrainSubsystem extends Subsystem {
     private double kPulsesPerRevolution = 360;
     private double kDistancePerPulse = kDistancePerRevolution / kPulsesPerRevolution;
 
+    private PIDController leftDrivePID = null;
+    private PIDController rightDrivePID = null;
+
     public DriveTrainSubsystem() {
-        leftEnc = new Encoder(RobotMap.LEFT_ENC_A, RobotMap.LEFT_ENC_B, true, EncodingType.k4X);
+        leftEnc = new Encoder(RobotMap.LEFT_ENC_A, RobotMap.LEFT_ENC_B, false, EncodingType.k4X);
         leftEnc.setDistancePerPulse(kDistancePerPulse);
         leftEnc.setMaxPeriod(0.1);
 
-        rightEnc = new Encoder(RobotMap.RIGHT_ENC_A, RobotMap.RIGHT_ENC_B, false, EncodingType.k4X);
+        rightEnc = new Encoder(RobotMap.RIGHT_ENC_A, RobotMap.RIGHT_ENC_B, true, EncodingType.k4X);
         rightEnc.setDistancePerPulse(kDistancePerPulse);
         rightEnc.setMaxPeriod(0.1);
+
+        leftDrivePID = new PIDController(0.05, 0.0, 0.0, leftEnc, leftSide);
+        leftDrivePID.setAbsoluteTolerance(5);
+        leftDrivePID.setContinuous(false);
+        leftDrivePID.setOutputRange(-0.5, 0.5);
+        leftDrivePID.disable();
+
+        rightDrivePID = new PIDController(0.05, 0.0, 0.0, rightEnc, rightSide);
+        rightDrivePID.setAbsoluteTolerance(5);
+        rightDrivePID.setContinuous(false);
+        rightDrivePID.setOutputRange(-0.5, 0.5);
+        rightDrivePID.disable();
 
         driveTrain.setSafetyEnabled(true);
         driveTrain.setExpiration(0.08);
@@ -47,6 +63,7 @@ public class DriveTrainSubsystem extends Subsystem {
 
     public void arcadeDrive(double speed, double rotation) {
         driveTrain.arcadeDrive(speed, -rotation);
+        System.out.println("Left: " + getLeftEncoder() + "  Right: " + getRightEncoder());
     }
 
     public void tankDrive(double left, double right) {
@@ -55,6 +72,11 @@ public class DriveTrainSubsystem extends Subsystem {
 
     public void curvyDrive(double speed, double rotation, boolean quickTurn) {
         driveTrain.curvatureDrive(speed, rotation, quickTurn);
+    }
+
+    public void driveToSetpoint(int setpoint) {
+        leftDrivePID.setSetpoint(-setpoint);
+        rightDrivePID.setSetpoint(setpoint);
     }
 
     public void reverseMotors() {
@@ -92,6 +114,16 @@ public class DriveTrainSubsystem extends Subsystem {
 
     public void logEncoders() {
         System.out.println("Left: " + getLeftEncoder() + "\tRight: " + getRightEncoder());
+    }
+
+    public void setPIDenabled(boolean enabled) {
+        if (enabled) {
+            leftDrivePID.enable();
+            rightDrivePID.enable();
+        } else {
+            leftDrivePID.disable();
+            rightDrivePID.disable();
+        }
     }
 
 }

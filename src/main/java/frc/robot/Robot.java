@@ -11,13 +11,17 @@ import edu.wpi.cscore.CameraServerJNI;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import frc.robot.auto.HabDrop;
 
 public class Robot extends TimedRobot {
   
   public static UsbCamera camera;
   
   public long timeAnchor;
+
+  Command autoCom = null;
 
   @Override
   public void robotInit() {
@@ -34,6 +38,8 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     CommandBase.driveTrain.resetEncoders();
+    autoCom = new HabDrop();
+    autoCom.start();
   }
 
   @Override
@@ -43,6 +49,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    if (autoCom != null)
+      autoCom.cancel();
     CommandBase.driveTrain.resetEncoders();
     CommandBase.elevator.setSetpoint(RobotMap.startingPosition);
     CommandBase.sarlaccSub.closeArms();
