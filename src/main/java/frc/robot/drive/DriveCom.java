@@ -39,7 +39,7 @@ public class DriveCom extends CommandBase {
             rx = controller.getRawAxis(OI.XBOX_RSTICKX);
             ry = controller.getRawAxis(OI.XBOX_RSTICKY);
             quickturn = !OI.driver.getAButton();
-            reverse = OI.driver.getYButton();
+            reverse = OI.driver.getYButtonPressed();
             arcade(false);
         } else {
             h = stick.getRawAxis(OI.rightJoyX);
@@ -57,6 +57,8 @@ public class DriveCom extends CommandBase {
             driveTrain.arcadeDrive(configSpeed(ly), configSpeed(rx));
         else
             driveTrain.arcadeDrive(ly * RobotMap.maxSpeed, rx * RobotMap.maxTurn);
+        if (reverse)
+            driveTrain.reverseMotors();
     }
 
     public void curvy(boolean config) {

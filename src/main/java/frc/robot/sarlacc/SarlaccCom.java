@@ -8,17 +8,17 @@ public class SarlaccCom extends CommandBase {
     boolean active;
 
     public SarlaccCom() {
-        requires(sarlaccSub); //Tells it that it needs its specific subsystem
+        requires(sarlaccSub);
         active = false;
     }
 
     @Override
     protected void initialize() {
-        sarlaccSub.armsOff(); // Makes sure that when the class is initialized that the solenoid is off.
+        sarlaccSub.armsOff();
     }
 
     @Override
-    protected void execute() { //This section runs continuously during operation
+    protected void execute() { 
         if (OI.controllerToggle) { 
             if (OI.driver.getRawButtonPressed(OI.XBOX_XBTN))
                 active = !active;

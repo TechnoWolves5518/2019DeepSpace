@@ -17,7 +17,7 @@ public class SarlaccSubsystem extends Subsystem {
         solenoid = new DoubleSolenoid(RobotMap.forwardChannel, RobotMap.reverseChannel);
 
         compressor.setClosedLoopControl(true); // Refills compressor automatically
-        compressor.start(); // Starts compressor.
+        compressor.start();
     }
 
     @Override
