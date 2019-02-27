@@ -20,6 +20,8 @@ public class RobotMap {
   public static final double maxSpeed = 0.7;
   public static final double maxTurn = 0.7;
 
+  public static final int backUpDistance = 100;
+
   public static final int LEFT_ENC_A = 2;
   public static final int LEFT_ENC_B = 3;
   public static final int RIGHT_ENC_A = 0;
@@ -44,6 +46,8 @@ public class RobotMap {
   public static final int middlePosition = 2800;
   public static final int topPosition = 4630;
 
+  public static final int dropDistance = 30;
+
   public static final int maxOffsetRateController = 20;
   public static final int maxOffsetController = 500;
   public static final int maxOffsetStick = 500;
@@ -56,4 +60,8 @@ public class RobotMap {
   public static final int compressor = 0;
   public static final int forwardChannel = 0;
   public static final int reverseChannel = 1;
+  public static final int frontSolenoidF = 2;
+  public static final int frontSolenoidR = 3;
+  public static final int backSolenoidF = 4;
+  public static final int backSolenoidR = 5;
 }

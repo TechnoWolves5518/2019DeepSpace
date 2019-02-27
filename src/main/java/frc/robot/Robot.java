@@ -38,8 +38,8 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     CommandBase.driveTrain.resetEncoders();
-    autoCom = new HabDrop();
-    autoCom.start();
+    // autoCom = new HabDrop();
+    // autoCom.start();
   }
 
   @Override

@@ -28,8 +28,8 @@ public class DriveTrainSubsystem extends Subsystem {
     private double kPulsesPerRevolution = 360;
     private double kDistancePerPulse = kDistancePerRevolution / kPulsesPerRevolution;
 
-    private PIDController leftDrivePID = null;
-    private PIDController rightDrivePID = null;
+    public PIDController leftDrivePID = null;
+    public PIDController rightDrivePID = null;
 
     public DriveTrainSubsystem() {
         leftEnc = new Encoder(RobotMap.LEFT_ENC_A, RobotMap.LEFT_ENC_B, false, EncodingType.k4X);
@@ -75,6 +75,7 @@ public class DriveTrainSubsystem extends Subsystem {
     }
 
     public void driveToSetpoint(int setpoint) {
+        resetEncoders();
         leftDrivePID.setSetpoint(-setpoint);
         rightDrivePID.setSetpoint(setpoint);
     }

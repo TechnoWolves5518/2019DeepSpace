@@ -2,6 +2,7 @@ package frc.robot.sarlacc;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
@@ -11,6 +12,7 @@ public class SarlaccSubsystem extends Subsystem {
     //  Pneumatic Components \\
     public Compressor compressor;
     public DoubleSolenoid solenoid;
+    public DoubleSolenoid front, back;
 
     public SarlaccSubsystem() {
         compressor = new Compressor(RobotMap.compressor);
@@ -18,11 +20,27 @@ public class SarlaccSubsystem extends Subsystem {
 
         compressor.setClosedLoopControl(true); // Refills compressor automatically
         compressor.start(); // Starts compressor.
+        back = new DoubleSolenoid(RobotMap.backSolenoidR, RobotMap.backSolenoidF);
+        front = new DoubleSolenoid(RobotMap.frontSolenoidF, RobotMap.frontSolenoidR);
     }
 
     @Override
     protected void initDefaultCommand() {
         setDefaultCommand(new SarlaccCom());
+    }
+
+    public void liftFront(boolean active) {
+        if (active)
+            front.set(Value.kForward);
+        else
+            front.set(Value.kReverse);
+    }
+
+    public void liftBack(boolean active) {
+        if (active)
+            back.set(Value.kForward);
+        else
+            back.set(Value.kReverse);
     }
 
     public void openArms() {
