@@ -7,7 +7,6 @@
 
 package frc.robot;
 
-import edu.wpi.cscore.CameraServerJNI;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -72,10 +71,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void testPeriodic() {
-  }
-
-  public long timeStamp() {
-    return (timeAnchor - (System.currentTimeMillis() / 1000));
   }
 
 }

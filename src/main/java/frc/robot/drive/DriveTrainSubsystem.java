@@ -28,8 +28,8 @@ public class DriveTrainSubsystem extends Subsystem {
     private double kPulsesPerRevolution = 360;
     private double kDistancePerPulse = kDistancePerRevolution / kPulsesPerRevolution;
 
-    public PIDController leftDrivePID = null;
-    public PIDController rightDrivePID = null;
+    // public PIDController leftDrivePID = null;
+    // public PIDController rightDrivePID = null;
 
     public DriveTrainSubsystem() {
         leftEnc = new Encoder(RobotMap.LEFT_ENC_A, RobotMap.LEFT_ENC_B, false, EncodingType.k4X);
@@ -40,17 +40,17 @@ public class DriveTrainSubsystem extends Subsystem {
         rightEnc.setDistancePerPulse(kDistancePerPulse);
         rightEnc.setMaxPeriod(0.1);
 
-        leftDrivePID = new PIDController(0.05, 0.0, 0.0, leftEnc, leftSide);
-        leftDrivePID.setAbsoluteTolerance(5);
-        leftDrivePID.setContinuous(false);
-        leftDrivePID.setOutputRange(-0.5, 0.5);
-        leftDrivePID.disable();
+        // leftDrivePID = new PIDController(0.05, 0.0, 0.0, leftEnc, leftSide);
+        // leftDrivePID.setAbsoluteTolerance(5);
+        // leftDrivePID.setContinuous(false);
+        // leftDrivePID.setOutputRange(-0.5, 0.5);
+        // leftDrivePID.disable();
 
-        rightDrivePID = new PIDController(0.05, 0.0, 0.0, rightEnc, rightSide);
-        rightDrivePID.setAbsoluteTolerance(5);
-        rightDrivePID.setContinuous(false);
-        rightDrivePID.setOutputRange(-0.5, 0.5);
-        rightDrivePID.disable();
+        // rightDrivePID = new PIDController(0.05, 0.0, 0.0, rightEnc, rightSide);
+        // rightDrivePID.setAbsoluteTolerance(5);
+        // rightDrivePID.setContinuous(false);
+        // rightDrivePID.setOutputRange(-0.5, 0.5);
+        // rightDrivePID.disable();
 
         driveTrain.setSafetyEnabled(true);
         driveTrain.setExpiration(0.08);
@@ -76,8 +76,8 @@ public class DriveTrainSubsystem extends Subsystem {
 
     public void driveToSetpoint(int setpoint) {
         resetEncoders();
-        leftDrivePID.setSetpoint(-setpoint);
-        rightDrivePID.setSetpoint(setpoint);
+        // leftDrivePID.setSetpoint(-setpoint);
+        // rightDrivePID.setSetpoint(setpoint);
     }
 
     public void reverseMotors() {
@@ -117,14 +117,14 @@ public class DriveTrainSubsystem extends Subsystem {
         System.out.println("Left: " + getLeftEncoder() + "\tRight: " + getRightEncoder());
     }
 
-    public void setPIDenabled(boolean enabled) {
-        if (enabled) {
-            leftDrivePID.enable();
-            rightDrivePID.enable();
-        } else {
-            leftDrivePID.disable();
-            rightDrivePID.disable();
-        }
-    }
+    // public void setPIDenabled(boolean enabled) {
+    //     if (enabled) {
+    //         leftDrivePID.enable();
+    //         rightDrivePID.enable();
+    //     } else {
+    //         leftDrivePID.disable();
+    //         rightDrivePID.disable();
+    //     }
+    // }
 
 }
