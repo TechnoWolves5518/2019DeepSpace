@@ -7,14 +7,18 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+// import frc.robot.auto.HabDrop;
 
 public class OI {
   public static boolean controllerToggle = true;
 
   
   public static XboxController driver = new XboxController(0);
+  public static XboxController sf = new XboxController(1);
   public static Joystick stick = new Joystick(1);
 
 
@@ -43,7 +47,6 @@ public class OI {
   public static int rightJoyZ = 5;
   public static int leftJoySlider = 6;
 
-  
   public static int XBOX_LSTICKX = 0;
 	public static int XBOX_LSTICKY = 1; 
 	public static int XBOX_RSTICKX = 4;
@@ -63,6 +66,8 @@ public class OI {
 	public static int XBOX_BACK = 7;
 
   public OI() {
+    JoystickButton rightStick = new JoystickButton(driver, XBOX_RSTICK);
+    // rightStick.whenPressed(new HabDrop());
   }
 
 }

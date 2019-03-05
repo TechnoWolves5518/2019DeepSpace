@@ -13,6 +13,8 @@ public class SarlaccSubsystem extends Subsystem {
     public Compressor compressor;
     public DoubleSolenoid solenoid;
     public DoubleSolenoid front, back;
+    public boolean frontActive;
+    public boolean backActive;
 
     public SarlaccSubsystem() {
         compressor = new Compressor(RobotMap.compressor);
@@ -30,7 +32,7 @@ public class SarlaccSubsystem extends Subsystem {
     }
 
     public void liftFront(boolean active) {
-        if (active)
+        if (!active)
             front.set(Value.kForward);
         else
             front.set(Value.kReverse);

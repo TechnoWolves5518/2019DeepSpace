@@ -17,8 +17,8 @@ public class RobotMap {
   public static final int rightSlaveId = 0; // 4
 
     // Constants
-  public static final double maxSpeed = 0.7;
-  public static final double maxTurn = 0.7;
+  public static double maxSpeed = 1.0;
+  public static double maxTurn = 1.0;
 
   public static final int backUpDistance = 100;
 
@@ -60,8 +60,8 @@ public class RobotMap {
   public static final int compressor = 0;
   public static final int forwardChannel = 0;
   public static final int reverseChannel = 1;
-  public static final int frontSolenoidF = 2;
-  public static final int frontSolenoidR = 3;
+  public static final int frontSolenoidF = 3;
+  public static final int frontSolenoidR = 2;
   public static final int backSolenoidF = 4;
   public static final int backSolenoidR = 5;
 }

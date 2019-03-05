@@ -12,7 +12,7 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import frc.robot.auto.HabDrop;
+import frc.robot.drive.DriveTrainSubsystem;
 
 public class Robot extends TimedRobot {
   
@@ -21,6 +21,8 @@ public class Robot extends TimedRobot {
   public long timeAnchor;
 
   Command autoCom = null;
+
+  // DriveTrainSubsystem driveTrainSub = new DriveTrainSubsystem();
 
   @Override
   public void robotInit() {

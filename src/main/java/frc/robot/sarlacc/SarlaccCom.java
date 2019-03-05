@@ -7,16 +7,14 @@ import frc.robot.OI;
 
 public class SarlaccCom extends CommandBase {
 
-    boolean active;
-    boolean frontActive;
-    boolean backActive;
-    
+    public boolean active;
+
 
     public SarlaccCom() {
         requires(sarlaccSub);
         active = false;
-        frontActive = false;
-        backActive = false;
+        sarlaccSub.frontActive = false;
+        sarlaccSub.backActive = false;
     }
 
     @Override
@@ -30,9 +28,9 @@ public class SarlaccCom extends CommandBase {
             if (OI.driver.getRawButtonPressed(OI.XBOX_XBTN))
                 active = !active;
             if (OI.driver.getRawButtonPressed(OI.XBOX_YBTN))
-                frontActive = !frontActive;
+                sarlaccSub.frontActive = !sarlaccSub.frontActive;
             if (OI.driver.getRawButtonPressed(OI.XBOX_ABTN))
-                backActive = !backActive;
+                sarlaccSub.backActive = !sarlaccSub.backActive;
         } else {
             if (OI.stick.getRawButtonPressed(OI.leftThumb)) 
                 active = !active;
@@ -43,8 +41,9 @@ public class SarlaccCom extends CommandBase {
         else
             sarlaccSub.closeArms(); // If bottom trigger pressed, reverse solenoid (close claws)
 
-        sarlaccSub.liftFront(frontActive);
-        sarlaccSub.liftBack(backActive);
+        sarlaccSub.liftFront(sarlaccSub.frontActive);
+        sarlaccSub.liftBack(!sarlaccSub.backActive);
+        System.out.println("Front: "  + sarlaccSub.frontActive + "  Back: " + sarlaccSub.backActive);
     }
 
 

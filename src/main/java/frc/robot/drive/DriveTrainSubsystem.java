@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.RobotMap;
+// import frc.robot.auto.HabDrop;
+import frc.robot.CommandBase;
 
 public class DriveTrainSubsystem extends Subsystem {
 
@@ -63,7 +65,7 @@ public class DriveTrainSubsystem extends Subsystem {
 
     public void arcadeDrive(double speed, double rotation) {
         driveTrain.arcadeDrive(speed, -rotation);
-        System.out.println("Left: " + getLeftEncoder() + "  Right: " + getRightEncoder());
+        // System.out.println("Left: " + getLeftEncoder() + "  Right: " + getRightEncoder());
     }
 
     public void tankDrive(double left, double right) {
@@ -74,11 +76,14 @@ public class DriveTrainSubsystem extends Subsystem {
         driveTrain.curvatureDrive(speed, rotation, quickTurn);
     }
 
-    public void driveToSetpoint(int setpoint) {
-        resetEncoders();
+    // public void driveToSetpoint(double left, double right) {
+    //     resetEncoders();
+    //     leftSide.set(left);
+    //     rightSide.set(CommandBase.habDrop.speedRight);
+
         // leftDrivePID.setSetpoint(-setpoint);
         // rightDrivePID.setSetpoint(setpoint);
-    }
+    // }
 
     public void reverseMotors() {
         leftMaster.setInverted(!leftMaster.getInverted());
