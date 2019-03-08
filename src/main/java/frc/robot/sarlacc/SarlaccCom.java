@@ -25,12 +25,17 @@ public class SarlaccCom extends CommandBase {
     @Override
     protected void execute() { 
         if (OI.controllerToggle) { 
+
             if (OI.driver.getRawButtonPressed(OI.XBOX_XBTN))
                 active = !active;
-            if (OI.driver.getRawButtonPressed(OI.XBOX_YBTN))
-                sarlaccSub.frontActive = !sarlaccSub.frontActive;
-            if (OI.driver.getRawButtonPressed(OI.XBOX_ABTN))
+            if (OI.driver.getRawButtonPressed(OI.XBOX_ABTN)) {
+                // sarlaccSub.frontActive = !sarlaccSub.frontActive;
+                System.out.println("---------------FRONT PRESSED------------");
+            }
+            if (OI.driver.getRawButtonPressed(OI.XBOX_YBTN)) {
                 sarlaccSub.backActive = !sarlaccSub.backActive;
+                System.out.println("---------------BACK PRESSED------------");
+            }
         } else {
             if (OI.stick.getRawButtonPressed(OI.leftThumb)) 
                 active = !active;
@@ -42,8 +47,8 @@ public class SarlaccCom extends CommandBase {
             sarlaccSub.closeArms(); // If bottom trigger pressed, reverse solenoid (close claws)
 
         sarlaccSub.liftFront(sarlaccSub.frontActive);
-        sarlaccSub.liftBack(!sarlaccSub.backActive);
-        System.out.println("Front: "  + sarlaccSub.frontActive + "  Back: " + sarlaccSub.backActive);
+        sarlaccSub.liftBack(sarlaccSub.backActive);
+        // System.out.println("Front: "  + sarlaccSub.frontActive + "  Back: " + sarlaccSub.backActive);
     }
 
 

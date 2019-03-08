@@ -22,7 +22,7 @@ public class SarlaccSubsystem extends Subsystem {
 
         compressor.setClosedLoopControl(true); // Refills compressor automatically
         compressor.start(); // Starts compressor.
-        back = new DoubleSolenoid(RobotMap.backSolenoidR, RobotMap.backSolenoidF);
+        back = new DoubleSolenoid(RobotMap.backSolenoidF, RobotMap.backSolenoidR);
         front = new DoubleSolenoid(RobotMap.frontSolenoidF, RobotMap.frontSolenoidR);
     }
 
@@ -32,7 +32,7 @@ public class SarlaccSubsystem extends Subsystem {
     }
 
     public void liftFront(boolean active) {
-        if (!active)
+        if (active)
             front.set(Value.kForward);
         else
             front.set(Value.kReverse);

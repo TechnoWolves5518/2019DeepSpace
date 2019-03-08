@@ -62,6 +62,6 @@ public class RobotMap {
   public static final int reverseChannel = 1;
   public static final int frontSolenoidF = 3;
   public static final int frontSolenoidR = 2;
-  public static final int backSolenoidF = 4;
-  public static final int backSolenoidR = 5;
+  public static final int backSolenoidF = 5;
+  public static final int backSolenoidR = 4;
 }
