@@ -17,6 +17,7 @@ public class ElevatorPosition extends CommandBase {
     int setpoint = 0;
     double adjust = 0;
     int offset = 0;
+    public long startTime;
 
     private static Joystick stick = OI.stick;
     private static XboxController driver = OI.driver;
@@ -59,16 +60,28 @@ public class ElevatorPosition extends CommandBase {
         //     offset = -RobotMap.maxOffsetController;
 
         if (OI.sf.getRawButtonPressed(OI.XBOX_RBUMPER)) {
+            startTime = System.currentTimeMillis();
             active++; offset = 0;
             if (RobotMap.debugElevator) {
                 System.out.println("Elevator Position = " + active);
             }
+            
+            //The following kills the motors under certain conditions.
+            if ((elevator.getElevatorEnc() != setpoint) && ((startTime - elevator.getTime()) < -2500)) {
+                setpoint = elevator.getElevatorEnc();
+            }
 
         } else if (OI.sf.getRawButtonPressed(OI.XBOX_LBUMPER)) {
+            startTime = System.currentTimeMillis();
             active--; offset = 0;
             if (active == 0) {
                 sarlaccSub.closeArms();
             }
+            //The following kills the motors under certain conditions.
+            if ((elevator.getElevatorEnc() != setpoint) && ((startTime - elevator.getTime()) < -2500)) {
+                setpoint = elevator.getElevatorEnc();
+            }
+
             if (RobotMap.debugElevator) {
                 System.out.println("Elevator Position = " + active);
             }
@@ -80,6 +93,11 @@ public class ElevatorPosition extends CommandBase {
                 System.out.println("Elevator is resetting...");
             }
         }
+        
+            //The following kills the motors under certain conditions.
+            if ((elevator.getElevatorEnc() != setpoint) && ((startTime - elevator.getTime()) < -2500)) {
+                setpoint = elevator.getElevatorEnc();
+            }
         
         if (active == -2) {
             // nothing
@@ -111,6 +129,7 @@ public class ElevatorPosition extends CommandBase {
                 setpoint = -10000;
                 // sarlaccSub.active = false;
                 break;
+                
         }
 
         setpoint += offset;

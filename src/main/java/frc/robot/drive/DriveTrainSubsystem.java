@@ -42,13 +42,13 @@ public class DriveTrainSubsystem extends Subsystem {
         rightEnc.setDistancePerPulse(kDistancePerPulse);
         rightEnc.setMaxPeriod(0.1);
 
-        // leftDrivePID = new PIDController(0.05, 0.0, 0.0, leftEnc, leftSide);
+        // PIDController leftDrivePID = new PIDController(0.05, 0.0, 0.0, leftEnc, leftSide);
         // leftDrivePID.setAbsoluteTolerance(5);
         // leftDrivePID.setContinuous(false);
         // leftDrivePID.setOutputRange(-0.5, 0.5);
         // leftDrivePID.disable();
 
-        // rightDrivePID = new PIDController(0.05, 0.0, 0.0, rightEnc, rightSide);
+        // PIDController rightDrivePID = new PIDController(0.05, 0.0, 0.0, rightEnc, rightSide);
         // rightDrivePID.setAbsoluteTolerance(5);
         // rightDrivePID.setContinuous(false);
         // rightDrivePID.setOutputRange(-0.5, 0.5);
@@ -84,7 +84,9 @@ public class DriveTrainSubsystem extends Subsystem {
     // public void driveToSetpoint(double left, double right) {
     //     resetEncoders();
     //     leftSide.set(left);
-    //     rightSide.set(CommandBase.habDrop.speedRight);
+    //     rightSide.set(right);
+
+        
 
         // leftDrivePID.setSetpoint(-setpoint);
         // rightDrivePID.setSetpoint(setpoint);

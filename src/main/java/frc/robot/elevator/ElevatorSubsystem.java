@@ -11,7 +11,6 @@ public class ElevatorSubsystem extends PIDSubsystem {
 
     private VictorSP winch1 = new VictorSP(RobotMap.winch1);
     private VictorSP winch2 = new VictorSP(RobotMap.winch2);
-
     private Encoder elevatorEnc;
 
     private double kGearDiameter = 0;
@@ -44,6 +43,10 @@ public class ElevatorSubsystem extends PIDSubsystem {
     protected void usePIDOutput(double output) {
         winch1.set(output);
         winch2.set(output);
+    }
+
+    public long getTime() {
+        return System.currentTimeMillis();
     }
 
     public int getElevatorEnc() {

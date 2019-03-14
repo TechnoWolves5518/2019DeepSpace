@@ -15,6 +15,9 @@ public class SarlaccSubsystem extends Subsystem {
     public DoubleSolenoid front, back;
     public boolean frontActive;
     public boolean backActive;
+    public boolean frontActiveAuto;
+    public boolean backActiveAuto;
+
     // public boolean active;
 
     public SarlaccSubsystem() {
@@ -55,6 +58,25 @@ public class SarlaccSubsystem extends Subsystem {
             }
         }
     }
+
+    public void backPistonToggle() {
+        backActiveAuto = !backActiveAuto;
+        if (backActiveAuto) {
+            back.set(Value.kForward);
+        } else {
+            back.set(Value.kReverse);
+        }
+    }
+
+    public void frontPistonToggle() {
+        frontActiveAuto = !frontActiveAuto;
+        if (frontActiveAuto) {
+            back.set(Value.kForward);
+        } else {
+            back.set(Value.kReverse);
+        }
+    }
+
     public void openArms() {
         solenoid.set(Value.kReverse);
         if (RobotMap.debugSarlacc) {
