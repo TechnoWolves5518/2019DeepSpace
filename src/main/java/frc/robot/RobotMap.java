@@ -9,6 +9,11 @@ package frc.robot;
 
 public class RobotMap {
 
+  //Debugging Control
+  public static final boolean debugSarlacc = false;
+  public static final boolean debugDriveSpeed = false;
+  public static final boolean debugDrivePosition = false;
+  public static final boolean debugElevator = false;
   /* Drive Train */
     // Motor Controllers
   public static final int leftMasterId = 1;
@@ -17,8 +22,12 @@ public class RobotMap {
   public static final int rightSlaveId = 0; // 4
 
     // Constants
-  public static double maxSpeed = 1.0;
-  public static double maxTurn = 1.0;
+  public static double defaultSpeed = 0.75;
+  public static double limitedSpeed = 0.3;
+  public static double defaultTurn = 1.0;
+  public static double limitedTurn = 0.2;
+  public static double maxSpeed = defaultSpeed;
+  public static double maxTurn = defaultTurn;
 
   public static final int backUpDistance = 100;
 

@@ -4,15 +4,19 @@ import javax.lang.model.util.ElementScanner6;
 
 import frc.robot.CommandBase;
 import frc.robot.OI;
+import frc.robot.RobotMap;
 
 public class SarlaccCom extends CommandBase {
 
-    public boolean active;
+    boolean active = false;
+    boolean climbA = false;
+    boolean climbB = false;
 
+    int counter = 0;
 
     public SarlaccCom() {
         requires(sarlaccSub);
-        active = false;
+        // sarlaccSub.active = false;
         sarlaccSub.frontActive = false;
         sarlaccSub.backActive = false;
     }
@@ -26,29 +30,57 @@ public class SarlaccCom extends CommandBase {
     protected void execute() { 
         if (OI.controllerToggle) { 
 
-            if (OI.driver.getRawButtonPressed(OI.XBOX_XBTN))
+            if (OI.sf.getRawButtonPressed(OI.XBOX_XBTN)) {
                 active = !active;
-            if (OI.driver.getRawButtonPressed(OI.XBOX_ABTN)) {
-                // sarlaccSub.frontActive = !sarlaccSub.frontActive;
-                System.out.println("---------------FRONT PRESSED------------");
+                if (active)
+                    sarlaccSub.openArms(); // If main trigger pressed, turn on solenoid (open claws)
+                else
+                    sarlaccSub.closeArms(); // If bottom trigger pressed, reverse solenoid (close claws)
             }
-            if (OI.driver.getRawButtonPressed(OI.XBOX_YBTN)) {
+            if (OI.driver.getRawButtonPressed(OI.XBOX_ABTN)) {
+                sarlaccSub.frontActive = !sarlaccSub.frontActive;
+                System.out.println("---------------FRONT PRESSED, SLOW MODE ACTIVE------------");
+                sarlaccSub.liftFront(sarlaccSub.frontActive);
+            }
+            if (OI.driver.getRawButtonPressed(OI.XBOX_BBTN)) {
                 sarlaccSub.backActive = !sarlaccSub.backActive;
-                System.out.println("---------------BACK PRESSED------------");
+                System.out.println("---------------BACK PRESSED, SLOW MODE ACTIVE------------");
+                sarlaccSub.liftBack(sarlaccSub.backActive);
             }
         } else {
             if (OI.stick.getRawButtonPressed(OI.leftThumb)) 
                 active = !active;
         }
 
-        if (active)
-            sarlaccSub.openArms(); // If main trigger pressed, turn on solenoid (open claws)
-        else
-            sarlaccSub.closeArms(); // If bottom trigger pressed, reverse solenoid (close claws)
+        if (sarlaccSub.frontActive || sarlaccSub.backActive) {
+            RobotMap.maxSpeed = RobotMap.limitedSpeed;
+            RobotMap.maxTurn = RobotMap.limitedTurn;
+        }
+        if (!sarlaccSub.frontActive && !sarlaccSub.backActive) {
+            RobotMap.maxSpeed = RobotMap.defaultSpeed;
+            RobotMap.maxTurn = RobotMap.defaultTurn;
+        }
 
-        sarlaccSub.liftFront(sarlaccSub.frontActive);
-        sarlaccSub.liftBack(sarlaccSub.backActive);
-        // System.out.println("Front: "  + sarlaccSub.frontActive + "  Back: " + sarlaccSub.backActive);
+        if (OI.driver.getRawButtonPressed(OI.XBOX_XBTN)) {
+            if (counter == 0) {
+                sarlaccSub.liftFront(true);
+                counter++;        
+            }
+            if (counter == 1) {
+                sarlaccSub.liftFront(false);
+                sarlaccSub.liftBack(true);
+                counter++;
+            }
+            if (counter == 2) {
+                sarlaccSub.liftBack(false);
+                counter++;
+            }
+            if (counter == 3) {
+                sarlaccSub.liftFront(false);
+                sarlaccSub.liftBack(false);
+                counter = 0;
+            }
+        }
     }
 
 

@@ -20,6 +20,7 @@ public class DriveCom extends CommandBase {
 
     private boolean quickturn;
     private boolean reverse;
+    private boolean slow;
 
     public DriveCom() {
         requires(driveTrain);
@@ -40,6 +41,8 @@ public class DriveCom extends CommandBase {
             ry = controller.getRawAxis(OI.XBOX_RSTICKY);
             quickturn = !OI.driver.getAButton();
             reverse = OI.driver.getYButtonPressed();
+        
+            slow = OI.driver.getRawButton(OI.XBOX_RBUMPER);
             arcade(false);
         } else {
             h = stick.getRawAxis(OI.rightJoyX);
@@ -64,8 +67,12 @@ public class DriveCom extends CommandBase {
     public void curvy(boolean config) {
         if (config)
             driveTrain.curvyDrive(configSpeed(v), h, quickturn);
-        else
-            driveTrain.curvyDrive(v * RobotMap.maxSpeed, h * RobotMap.maxTurn, quickturn);
+        else {
+            if (slow)
+                driveTrain.curvyDrive(v * RobotMap.limitedSpeed, h * RobotMap.limitedTurn, quickturn);
+            else
+                driveTrain.curvyDrive(v * RobotMap.maxSpeed, h * RobotMap.maxTurn, quickturn);
+        }
     }
 
     public double configSpeed(double s) {

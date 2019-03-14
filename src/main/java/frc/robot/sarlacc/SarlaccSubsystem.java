@@ -15,6 +15,7 @@ public class SarlaccSubsystem extends Subsystem {
     public DoubleSolenoid front, back;
     public boolean frontActive;
     public boolean backActive;
+    // public boolean active;
 
     public SarlaccSubsystem() {
         compressor = new Compressor(RobotMap.compressor);
@@ -32,29 +33,48 @@ public class SarlaccSubsystem extends Subsystem {
     }
 
     public void liftFront(boolean active) {
-        if (active)
+        if (active) {
             front.set(Value.kForward);
-        else
+            System.out.println("FRONT PISTON ACTIVE");
+        } else {
             front.set(Value.kReverse);
+            System.out.println("FRONT PISTON INACTIVE");
+        }
     }
 
     public void liftBack(boolean active) {
-        if (active)
+        if (active) {
             back.set(Value.kForward);
-        else
+            if (RobotMap.debugSarlacc) {
+                System.out.println("BACK PISTON ACTIVE");
+            }
+        } else {
             back.set(Value.kReverse);
+            if (RobotMap.debugSarlacc) {
+                System.out.println("BACK PISTON INACTIVE");
+            }
+        }
     }
-
     public void openArms() {
         solenoid.set(Value.kReverse);
+        if (RobotMap.debugSarlacc) {
+            System.out.println("ARMS OPEN");
+        }
     }
+
 
     public void closeArms() {
         solenoid.set(Value.kForward);
+        if (RobotMap.debugSarlacc) {
+            System.out.println("ARMS CLOSED");
+        }
     }
 
     public void armsOff() {
         solenoid.set(Value.kOff);
+        if (RobotMap.debugSarlacc) {
+            System.out.println("ARMS OFF");
+        }
     }
 
 }

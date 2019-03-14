@@ -13,12 +13,14 @@ public abstract class CommandBase extends Command {
     public static ElevatorSubsystem elevator;
     public static SarlaccSubsystem sarlaccSub;
     // public static HabDrop habDrop;
+    // public static HabClimb habClimb;
 
     public static void init() {
         // habDrop = new HabDrop();
         driveTrain = new DriveTrainSubsystem();
         elevator = new ElevatorSubsystem();
         sarlaccSub = new SarlaccSubsystem();
+        // habClimb = new HabClimb();
     }
 
 }

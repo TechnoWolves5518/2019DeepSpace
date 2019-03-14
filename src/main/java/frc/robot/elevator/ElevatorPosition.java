@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.CommandBase;
 import frc.robot.OI;
 import frc.robot.RobotMap;
+import frc.robot.sarlacc.SarlaccCom;
 
 public class ElevatorPosition extends CommandBase {
 
@@ -42,13 +43,14 @@ public class ElevatorPosition extends CommandBase {
         limit = !limitSwitch.get();
         if (limit && !lastLimit) {
             elevator.resetElevatorEnc();
+            sarlaccSub.openArms();
             offset = 0;
             elevator.setSetpoint(RobotMap.startingPosition);
             active = 0;
         }
         lastLimit = limit;
 
-        adjust = driver.getRawAxis(OI.XBOX_RTRIGGER) - driver.getRawAxis(OI.XBOX_LTRIGGER);
+        adjust = OI.sf.getRawAxis(OI.XBOX_RTRIGGER) - OI.sf.getRawAxis(OI.XBOX_LTRIGGER);
         offset += (int)(adjust * RobotMap.maxOffsetRateController);
 
         // if (offset > RobotMap.maxOffsetController)
@@ -56,12 +58,27 @@ public class ElevatorPosition extends CommandBase {
         // else if (offset < -RobotMap.maxOffsetController)
         //     offset = -RobotMap.maxOffsetController;
 
-        if (driver.getRawButtonPressed(OI.XBOX_RBUMPER)) {
+        if (OI.sf.getRawButtonPressed(OI.XBOX_RBUMPER)) {
             active++; offset = 0;
-        } else if (driver.getRawButtonPressed(OI.XBOX_LBUMPER)) {
+            if (RobotMap.debugElevator) {
+                System.out.println("Elevator Position = " + active);
+            }
+
+        } else if (OI.sf.getRawButtonPressed(OI.XBOX_LBUMPER)) {
             active--; offset = 0;
-        } else if (driver.getBButtonPressed()) {
+            if (active == 0) {
+                sarlaccSub.closeArms();
+            }
+            if (RobotMap.debugElevator) {
+                System.out.println("Elevator Position = " + active);
+            }
+
+        } else if (OI.sf.getBButtonPressed()) {
+            sarlaccSub.closeArms();
             active = -2; offset = 0;
+            if (RobotMap.debugElevator) {
+                System.out.println("Elevator is resetting...");
+            }
         }
         
         if (active == -2) {
@@ -75,6 +92,7 @@ public class ElevatorPosition extends CommandBase {
             case 0:
                 setpoint = RobotMap.startingPosition;
                 setDisplayLocation(locations[0]);
+                // sarlaccSub.active = false;
                 break;
             case 1:
                 setpoint = RobotMap.bottomPosition;
@@ -89,7 +107,9 @@ public class ElevatorPosition extends CommandBase {
                 setDisplayLocation(locations[3]);
                 break;
             case -2:
+                // sarlaccSub.active = true;
                 setpoint = -10000;
+                // sarlaccSub.active = false;
                 break;
         }
 
