@@ -13,7 +13,14 @@ public class AutoClimb extends CommandBase {
     public boolean gate3 = false;
     public boolean gate4 = false;
     public long startTime;
+    public int climbingState;
+    public boolean timeGate;
 
+
+    public interface States {
+        public int timeRequired = 0;
+
+    }
     public AutoClimb() {
         requires(driveTrain);
         requires(sarlaccSub);
@@ -25,12 +32,13 @@ public class AutoClimb extends CommandBase {
         if (OI.driver.getRawButtonPressed(OI.XBOX_XBTN)) {
 	        startTime = System.currentTimeMillis();
             climbing = !climbing;
-	        sarlaccSub.frontPistonToggle();
-	    }
+            sarlaccSub.frontPistonToggle();
+            climbingState = 0;
+        }
         
     
 	    
-        while (climbing) {
+        if (climbing) {
 	    
             RobotMap.maxSpeed = RobotMap.limitedSpeed;
 	        RobotMap.maxTurn = RobotMap.limitedTurn;
@@ -126,5 +134,5 @@ public class AutoClimb extends CommandBase {
         return System.currentTimeMillis();
     }
 
-
+    //  
 }
