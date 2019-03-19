@@ -7,6 +7,7 @@ public class AutoDriveForward extends CommandBase {
     private double timeout;
 
     public AutoDriveForward(double timeout) {
+	    requires(driveTrain);
         this.timeout = timeout;
     }
 
@@ -16,8 +17,13 @@ public class AutoDriveForward extends CommandBase {
     }
 
     @Override
+    protected void execute() {
+        driveTrain.arcadeDrive(RobotMap.autoClimbSpeed, RobotMap.autoClimbTurn);
+    }
+
+    @Override
     protected boolean isFinished() {
-        return false;
+        return isTimedOut();
     }
 
 }
