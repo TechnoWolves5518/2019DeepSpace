@@ -1,6 +1,7 @@
 package frc.robot.auto;
 
 import frc.robot.CommandBase;
+import frc.robot.RobotMap;
 
 public class AutoDriveForward extends CommandBase {
 
