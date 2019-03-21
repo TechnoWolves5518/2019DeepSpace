@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.auto.ClimbGroup;
+import frc.robot.auto.PullOut;
 import frc.robot.manipulator.Intake;
 import frc.robot.manipulator.Outtake;
 
@@ -42,9 +43,11 @@ public class OI {
     d_b.whenPressed(new ClimbGroup());
 
     JoystickButton sf_a = new JoystickButton(sf, XBOX_ABTN);
-    JoystickButton sf_x = new JoystickButton(sf, XBOX_XBTN);
+		JoystickButton sf_x = new JoystickButton(sf, XBOX_XBTN);
+		JoystickButton sf_lstick = new JoystickButton(sf, XBOX_LSTICK);
     sf_a.whileHeld(new Outtake());
-    sf_x.whileHeld(new Intake());
+		sf_x.whileHeld(new Intake());
+		sf_lstick.whenPressed(new PullOut());
   }
 
 }
