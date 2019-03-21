@@ -38,13 +38,15 @@ public class OI {
 	public static int XBOX_START = 8;
 	public static int XBOX_BACK = 7;
 
+	JoystickButton d_b = new JoystickButton(driver, XBOX_BBTN);
+
+	JoystickButton sf_a = new JoystickButton(sf, XBOX_ABTN);
+	JoystickButton sf_x = new JoystickButton(sf, XBOX_XBTN);
+	JoystickButton sf_lstick = new JoystickButton(sf, XBOX_LSTICK);
+
   public OI() {
-    JoystickButton d_b = new JoystickButton(driver, XBOX_BBTN);
     d_b.whenPressed(new ClimbGroup());
 
-    JoystickButton sf_a = new JoystickButton(sf, XBOX_ABTN);
-		JoystickButton sf_x = new JoystickButton(sf, XBOX_XBTN);
-		JoystickButton sf_lstick = new JoystickButton(sf, XBOX_LSTICK);
     sf_a.whileHeld(new Outtake());
 		sf_x.whileHeld(new Intake());
 		sf_lstick.whenPressed(new PullOut());

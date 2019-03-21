@@ -1,6 +1,5 @@
 package frc.robot.drive;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.CommandBase;
 import frc.robot.OI;
@@ -11,8 +10,7 @@ public class DriveCom extends CommandBase {
     private static XboxController controller = OI.driver;
 
     // speed values taken in from controllers
-    private double h, v;
-    private double lx, ly, rx, ry;
+    private double ly, rx;
 
     // deadzone of controller joystick
     private double deadzone = 0.05;
@@ -25,16 +23,12 @@ public class DriveCom extends CommandBase {
     
     @Override
     protected void initialize() {
-        h = 0;
-        v = 0;
     }
 
     @Override
     protected void execute() {
-        lx = controller.getRawAxis(OI.XBOX_LSTICKX);
         ly = controller.getRawAxis(OI.XBOX_LSTICKY);
         rx = controller.getRawAxis(OI.XBOX_RSTICKX);
-        ry = controller.getRawAxis(OI.XBOX_RSTICKY);
     
         slow = OI.driver.getRawButton(OI.XBOX_RBUMPER);
         arcade(true);
