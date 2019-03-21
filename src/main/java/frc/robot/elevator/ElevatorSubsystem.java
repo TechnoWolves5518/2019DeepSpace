@@ -62,7 +62,8 @@ public class ElevatorSubsystem extends PIDSubsystem {
     }
 
     public void logPID() {
-        System.out.println("Value: " + getElevatorEnc() + "  Setpoint: " + getSetpoint());
+        if (System.currentTimeMillis() % 100 == 0)
+            System.out.println("Value: " + getElevatorEnc() + "  Setpoint: " + getSetpoint());
     }
 
     @Override
