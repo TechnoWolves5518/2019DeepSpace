@@ -7,46 +7,18 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-// import frc.robot.auto.HabDrop;
 import frc.robot.auto.ClimbGroup;
+import frc.robot.manipulator.Intake;
+import frc.robot.manipulator.Outtake;
 
 public class OI {
   public static boolean controllerToggle = true;
-
   
   public static XboxController driver = new XboxController(0);
   public static XboxController sf = new XboxController(1);
-  public static Joystick stick = new Joystick(1);
-
-
-  public static int rightMainTrigger = 1;
-  public static int rightFunButton = 2;
-  public static int rightTopRightButton = 3;
-  public static int rightMidRightButton = 4;
-  public static int rightMidLeftButton = 5;
-  public static int rightBottomTrigger = 6;
-  public static int leftThumb = 7;
-  public static int leftEButtonright1Up = 8;
-  public static int right1Up = 9;
-  public static int right1Down = 10;
-  public static int right2Up = 11;
-  public static int right2Down = 12;
-  public static int right3Up = 13;
-  public static int right3Down = 14;
-  public static int rightMainTriggerHard = 15;
-  public static int rightTopLeftUp = 16;
-
-  public static int rightJoyX = 0;
-  public static int rightJoyY = 1;
-  public static int leftJoyZ = 2;
-  public static int leftJoyX = 3;
-  public static int leftJoyY = 4;
-  public static int rightJoyZ = 5;
-  public static int leftJoySlider = 6;
 
   public static int XBOX_LSTICKX = 0;
 	public static int XBOX_LSTICKY = 1; 
@@ -67,8 +39,13 @@ public class OI {
 	public static int XBOX_BACK = 7;
 
   public OI() {
-    JoystickButton b = new JoystickButton(driver, XBOX_BBTN);
-    b.whenPressed(new ClimbGroup());
+    JoystickButton d_b = new JoystickButton(driver, XBOX_BBTN);
+    d_b.whenPressed(new ClimbGroup());
+
+    JoystickButton sf_a = new JoystickButton(sf, XBOX_ABTN);
+    JoystickButton sf_x = new JoystickButton(sf, XBOX_XBTN);
+    sf_a.whileHeld(new Outtake());
+    sf_x.whileHeld(new Intake());
   }
 
 }

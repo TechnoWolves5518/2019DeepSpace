@@ -13,7 +13,7 @@ public class IntakeSubsystem extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new IntakeCom());
+        // setDefaultCommand(new IntakeCom());
     }
 
     public void intake() {

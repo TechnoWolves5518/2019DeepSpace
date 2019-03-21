@@ -2,7 +2,6 @@ package frc.robot.auto;
 
 import frc.robot.OI;
 import frc.robot.RobotMap;
-import edu.wpi.first.wpilibj.command.TimedCommand;
 import frc.robot.CommandBase;
 
 public class AutoClimb extends CommandBase {

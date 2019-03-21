@@ -1,4 +1,4 @@
-package frc.robot.pullout;
+package frc.robot.auto;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
