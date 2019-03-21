@@ -26,10 +26,7 @@ public class RobotMap {
   public static double defaultTurn = 1.0;
 
   public static double limitedSpeed = 0.4;
-  public static double limitedTurn = 0.4;
-
-  // public static double maxSpeed = defaultSpeed;
-  // public static double maxTurn = defaultTurn;
+  public static double limitedTurn = 0.6;
   
   public static double autoClimbSpeed = -0.4;
   public static double autoClimbTurn = 0.0;
