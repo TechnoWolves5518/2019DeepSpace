@@ -60,8 +60,8 @@ public class RobotMap {
 
   public static final int dropDistance = 30;
 
-  public static final int maxOffsetRateController = 20;
-  public static final int maxOffsetController = 500;
+  public static final int maxOffsetRateController = 10;
+  public static final int maxOffsetController = 300;
   public static final int maxOffsetStick = 500;
 
   public static final int ELEVATOR_ENC_A = 4;
