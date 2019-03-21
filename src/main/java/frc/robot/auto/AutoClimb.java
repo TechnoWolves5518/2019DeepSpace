@@ -23,7 +23,7 @@ public class AutoClimb extends CommandBase {
     }
     public AutoClimb() {
         requires(driveTrain);
-        requires(sarlaccSub);
+        requires(sarlacc);
     }
 
 
@@ -32,7 +32,7 @@ public class AutoClimb extends CommandBase {
         if (OI.driver.getRawButtonPressed(OI.XBOX_XBTN)) {
 	        startTime = System.currentTimeMillis();
             climbing = !climbing;
-            sarlaccSub.frontPistonToggle();
+            sarlacc.frontPistonToggle();
             climbingState = 0;
         }
         
@@ -40,8 +40,8 @@ public class AutoClimb extends CommandBase {
 	    
         if (climbing) {
 	    
-            RobotMap.maxSpeed = RobotMap.limitedSpeed;
-	        RobotMap.maxTurn = RobotMap.limitedTurn;
+            RobotMap.defaultSpeed = RobotMap.limitedSpeed;
+	        RobotMap.defaultTurn = RobotMap.limitedTurn;
 	    
       
       
@@ -69,8 +69,8 @@ public class AutoClimb extends CommandBase {
             if ((((startTime - getTime()) < -1000) && (gate2 == false) && (gate1 == true))) { //time value needs to be tested
                 startTime = System.currentTimeMillis(); //the time this command was run
 	    	    gate2 = true; //make it so this command can't run again
-	          	sarlaccSub.frontPistonToggle(); //retract front
-		        sarlaccSub.backPistonToggle(); //extend back
+	          	sarlacc.frontPistonToggle(); //retract front
+		        sarlacc.backPistonToggle(); //extend back
 	        }
 	        
           
@@ -100,7 +100,7 @@ public class AutoClimb extends CommandBase {
             if ((((startTime - getTime()) < -1000) && (gate4 == false) && (gate3 == true))) { //time value needs to be tested
                 startTime = System.currentTimeMillis(); //the time this command was run
                 gate4 = true; //make it so this command can't run again
-		        sarlaccSub.backPistonToggle(); //retract back
+		        sarlacc.backPistonToggle(); //retract back
             }
 	    
       

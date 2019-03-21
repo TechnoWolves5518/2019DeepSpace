@@ -11,7 +11,7 @@ public class SarlaccSubsystem extends Subsystem {
 
     //  Pneumatic Components \\
     public Compressor compressor;
-    public DoubleSolenoid solenoid;
+    public DoubleSolenoid arms;
     public DoubleSolenoid front, back;
     public boolean frontActive;
     public boolean backActive;
@@ -22,17 +22,26 @@ public class SarlaccSubsystem extends Subsystem {
 
     public SarlaccSubsystem() {
         compressor = new Compressor(RobotMap.compressor);
-        solenoid = new DoubleSolenoid(RobotMap.forwardChannel, RobotMap.reverseChannel);
+        arms = new DoubleSolenoid(RobotMap.forwardChannel, RobotMap.reverseChannel);
 
         compressor.setClosedLoopControl(true); // Refills compressor automatically
         compressor.start(); // Starts compressor.
         back = new DoubleSolenoid(RobotMap.backSolenoidF, RobotMap.backSolenoidR);
         front = new DoubleSolenoid(RobotMap.frontSolenoidF, RobotMap.frontSolenoidR);
+        liftFront(false);
+        liftBack(false);
     }
 
     @Override
     protected void initDefaultCommand() {
         setDefaultCommand(new SarlaccCom());
+    }
+
+    public void toggleArms(boolean active) {
+        if (active)
+            arms.set(Value.kForward);
+        else
+            arms.set(Value.kReverse);
     }
 
     public void liftFront(boolean active) {
@@ -78,7 +87,7 @@ public class SarlaccSubsystem extends Subsystem {
     }
 
     public void openArms() {
-        solenoid.set(Value.kReverse);
+        arms.set(Value.kReverse);
         if (RobotMap.debugSarlacc) {
             System.out.println("ARMS OPEN");
         }
@@ -86,14 +95,14 @@ public class SarlaccSubsystem extends Subsystem {
 
 
     public void closeArms() {
-        solenoid.set(Value.kForward);
+        arms.set(Value.kForward);
         if (RobotMap.debugSarlacc) {
             System.out.println("ARMS CLOSED");
         }
     }
 
     public void armsOff() {
-        solenoid.set(Value.kOff);
+        arms.set(Value.kOff);
         if (RobotMap.debugSarlacc) {
             System.out.println("ARMS OFF");
         }

@@ -28,7 +28,7 @@ public class ElevatorSubsystem extends PIDSubsystem {
         elevatorEnc.setDistancePerPulse(kDistancePerPulse);
         elevatorEnc.setMaxPeriod(0.1);
 
-        winch1.setInverted(true);
+        winch2.setInverted(true);
 
         setSetpoint(RobotMap.startingPosition);
         enable();

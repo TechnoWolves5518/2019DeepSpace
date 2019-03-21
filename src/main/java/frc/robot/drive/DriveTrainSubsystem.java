@@ -66,7 +66,7 @@ public class DriveTrainSubsystem extends Subsystem {
     public void arcadeDrive(double speed, double rotation) {
         driveTrain.arcadeDrive(speed, -rotation);
         if (RobotMap.debugDriveSpeed); {
-            System.out.println("Speed Value : " + speed + " (Cap is " + RobotMap.maxSpeed + ")" + "      Turn Value : " + -rotation + " (Cap is " + RobotMap.maxTurn + ")");
+            // System.out.println("Speed Value : " + speed + " (Cap is " + RobotMap.defaultSpeed + ")" + "      Turn Value : " + -rotation + " (Cap is " + RobotMap.defaultTurn + ")");
         }
         if (RobotMap.debugDrivePosition) {
             System.out.println("Left: " + getLeftEncoder() + "  Right: " + getRightEncoder());

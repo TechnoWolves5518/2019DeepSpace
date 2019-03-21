@@ -12,7 +12,6 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import frc.robot.drive.DriveTrainSubsystem;
 
 public class Robot extends TimedRobot {
   
@@ -22,7 +21,6 @@ public class Robot extends TimedRobot {
 
   Command autoCom = null;
 
-  // DriveTrainSubsystem driveTrainSub = new DriveTrainSubsystem();
 
   @Override
   public void robotInit() {
@@ -54,7 +52,7 @@ public class Robot extends TimedRobot {
       autoCom.cancel();
     CommandBase.driveTrain.resetEncoders();
     CommandBase.elevator.setSetpoint(RobotMap.startingPosition);
-    CommandBase.sarlaccSub.closeArms();
+    CommandBase.sarlacc.closeArms();
   }
 
   @Override

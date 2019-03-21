@@ -23,13 +23,15 @@ public class RobotMap {
 
     // Constants
   public static double defaultSpeed = 0.75;
-  public static double limitedSpeed = 0.3;
   public static double defaultTurn = 1.0;
-  public static double limitedTurn = 0.2;
-  public static double maxSpeed = defaultSpeed;
-  public static double maxTurn = defaultTurn;
+
+  public static double limitedSpeed = 0.4;
+  public static double limitedTurn = 0.4;
+
+  // public static double maxSpeed = defaultSpeed;
+  // public static double maxTurn = defaultTurn;
   
-  public static double autoClimbSpeed = 0.4;
+  public static double autoClimbSpeed = -0.4;
   public static double autoClimbTurn = 0.0;
 
   public static final int backUpDistance = 100;
@@ -76,4 +78,8 @@ public class RobotMap {
   public static final int frontSolenoidR = 2;
   public static final int backSolenoidF = 5;
   public static final int backSolenoidR = 4;
+
+  /* Manipulator Constants */
+  public static final int leftManipulator = 2;
+  public static final int rightManipulator = 3;
 }
