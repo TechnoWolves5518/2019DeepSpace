@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 // import frc.robot.auto.HabDrop;
+import frc.robot.auto.ClimbGroup;
 
 public class OI {
   public static boolean controllerToggle = true;
@@ -53,11 +54,11 @@ public class OI {
 	public static int XBOX_RSTICKY = 5;
 	public static int XBOX_LTRIGGER = 2;
 	public static int XBOX_RTRIGGER = 3;
-	
+  
+  public static int XBOX_ABTN = 1;
+	public static int XBOX_BBTN = 2;
 	public static int XBOX_YBTN = 4;
 	public static int XBOX_XBTN = 3;
-	public static int XBOX_ABTN = 1;
-	public static int XBOX_BBTN = 2; 
 	public static int XBOX_RBUMPER = 6;
 	public static int XBOX_LBUMPER = 5;
 	public static int XBOX_LSTICK = 9;
@@ -66,8 +67,8 @@ public class OI {
 	public static int XBOX_BACK = 7;
 
   public OI() {
-    JoystickButton rightStick = new JoystickButton(driver, XBOX_RSTICK);
-    // rightStick.whenPressed(new HabDrop());
+    JoystickButton b = new JoystickButton(driver, XBOX_BBTN);
+    b.whenPressed(new ClimbGroup());
   }
 
 }

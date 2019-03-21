@@ -44,7 +44,7 @@ public class ElevatorPosition extends CommandBase {
         limit = !limitSwitch.get();
         if (limit && !lastLimit) {
             elevator.resetElevatorEnc();
-            sarlaccSub.openArms();
+            // sarlacc.openArms();
             offset = 0;
             elevator.setSetpoint(RobotMap.startingPosition);
             active = 0;
@@ -67,37 +67,37 @@ public class ElevatorPosition extends CommandBase {
             }
             
             //The following kills the motors under certain conditions.
-            if ((elevator.getElevatorEnc() != setpoint) && ((startTime - elevator.getTime()) < -2500)) {
-                setpoint = elevator.getElevatorEnc();
-            }
+            // if ((elevator.getElevatorEnc() != setpoint) && ((startTime - elevator.getTime()) < -2500)) {
+            //     setpoint = elevator.getElevatorEnc();
+            // }
 
         } else if (OI.sf.getRawButtonPressed(OI.XBOX_LBUMPER)) {
             startTime = System.currentTimeMillis();
             active--; offset = 0;
             if (active == 0) {
-                sarlaccSub.closeArms();
+                // sarlacc.closeArms();
             }
             //The following kills the motors under certain conditions.
-            if ((elevator.getElevatorEnc() != setpoint) && ((startTime - elevator.getTime()) < -2500)) {
-                setpoint = elevator.getElevatorEnc();
-            }
+            // if ((elevator.getElevatorEnc() != setpoint) && ((startTime - elevator.getTime()) < -2500)) {
+            //     setpoint = elevator.getElevatorEnc();
+            // }
 
             if (RobotMap.debugElevator) {
                 System.out.println("Elevator Position = " + active);
             }
 
-        } else if (OI.sf.getBButtonPressed()) {
-            sarlaccSub.closeArms();
+        } else if (OI.sf.getRawButtonPressed(OI.XBOX_RSTICK)) {
+            // sarlacc.closeArms();
             active = -2; offset = 0;
             if (RobotMap.debugElevator) {
                 System.out.println("Elevator is resetting...");
             }
         }
         
-            //The following kills the motors under certain conditions.
-            if ((elevator.getElevatorEnc() != setpoint) && ((startTime - elevator.getTime()) < -2500)) {
-                setpoint = elevator.getElevatorEnc();
-            }
+        //The following kills the motors under certain conditions.
+        // if ((elevator.getElevatorEnc() != setpoint) && ((startTime - elevator.getTime()) < -2500)) {
+        //     setpoint = elevator.getElevatorEnc();
+        // }
         
         if (active == -2) {
             // nothing
@@ -138,7 +138,7 @@ public class ElevatorPosition extends CommandBase {
             setpoint = RobotMap.topPosition;
 
         elevator.setSetpoint(setpoint);
-        // elevator.logPID();
+        elevator.logPID();
     }
 
     public void joystickControls() {

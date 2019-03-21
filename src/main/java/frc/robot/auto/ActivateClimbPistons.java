@@ -8,15 +8,15 @@ public class ActivateClimbPistons extends CommandBase {
     private boolean back;
 
     public ActivateClimbPistons(boolean front, boolean back) {
-        requires(sarlaccSub);
+        requires(sarlacc);
         this.front = front;
         this.back = back;
     }
 
     @Override
     protected void initialize() {
-        sarlaccSub.liftFront(front);
-        sarlaccSub.liftBack(back);
+        sarlacc.liftFront(front);
+        sarlacc.liftBack(back);
     }
 
     @Override
