@@ -18,8 +18,6 @@ public class ElevatorPosition extends CommandBase {
     int offset = 0;
     public long startTime;
 
-    private static Joystick stick = OI.stick;
-
     private DigitalInput limitSwitch = new DigitalInput(RobotMap.limitSwitch);
     private boolean limit = false;
     private boolean lastLimit = false;
@@ -31,11 +29,7 @@ public class ElevatorPosition extends CommandBase {
 
     @Override
     protected void execute() {
-        if (OI.controllerToggle) {
-            xboxControls();
-        } else {
-            joystickControls();
-        }
+        xboxControls();
     }
 
     public void xboxControls() {
@@ -115,28 +109,6 @@ public class ElevatorPosition extends CommandBase {
 
         if (RobotMap.debugElevator)
             elevator.logPID();
-    }
-
-    public void joystickControls() {
-        if (stick.getRawButtonPressed(OI.rightFunButton)) {
-            elevator.resetElevatorEnc();
-            offset = 0;
-            elevator.setSetpoint(RobotMap.startingPosition);
-        }
-        
-        adjust = stick.getRawAxis(OI.leftJoyY);
-        offset = (int)(adjust * RobotMap.maxOffsetStick);
-
-        if (stick.getRawButton(OI.right1Down)) {
-            setpoint = RobotMap.bottomPosition;
-        } else if (stick.getRawButton(OI.right2Down)) {
-            setpoint = RobotMap.middlePosition;
-        } else if (stick.getRawButton(OI.right3Down)) {
-            setpoint = RobotMap.topPosition;
-        }
-
-        elevator.setSetpoint(setpoint + offset);
-        elevator.logPID();
     }
 
     public void setDisplayLocation(String loc) {

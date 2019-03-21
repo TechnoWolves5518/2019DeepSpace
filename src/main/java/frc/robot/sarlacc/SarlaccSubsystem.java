@@ -13,10 +13,6 @@ public class SarlaccSubsystem extends Subsystem {
     public Compressor compressor;
     public DoubleSolenoid arms;
     public DoubleSolenoid front, back;
-    public boolean frontActive;
-    public boolean backActive;
-    public boolean frontActiveAuto;
-    public boolean backActiveAuto;
 
     // public boolean active;
 
@@ -68,44 +64,25 @@ public class SarlaccSubsystem extends Subsystem {
         }
     }
 
-    public void backPistonToggle() {
-        backActiveAuto = !backActiveAuto;
-        if (backActiveAuto) {
-            back.set(Value.kForward);
-        } else {
-            back.set(Value.kReverse);
-        }
-    }
+    // public void openArms() {
+    //     arms.set(Value.kReverse);
+    //     if (RobotMap.debugSarlacc) {
+    //         System.out.println("ARMS OPEN");
+    //     }
+    // }
 
-    public void frontPistonToggle() {
-        frontActiveAuto = !frontActiveAuto;
-        if (frontActiveAuto) {
-            back.set(Value.kForward);
-        } else {
-            back.set(Value.kReverse);
-        }
-    }
+    // public void closeArms() {
+    //     arms.set(Value.kForward);
+    //     if (RobotMap.debugSarlacc) {
+    //         System.out.println("ARMS CLOSED");
+    //     }
+    // }
 
-    public void openArms() {
-        arms.set(Value.kReverse);
-        if (RobotMap.debugSarlacc) {
-            System.out.println("ARMS OPEN");
-        }
-    }
-
-
-    public void closeArms() {
-        arms.set(Value.kForward);
-        if (RobotMap.debugSarlacc) {
-            System.out.println("ARMS CLOSED");
-        }
-    }
-
-    public void armsOff() {
-        arms.set(Value.kOff);
-        if (RobotMap.debugSarlacc) {
-            System.out.println("ARMS OFF");
-        }
-    }
+    // public void armsOff() {
+    //     arms.set(Value.kOff);
+    //     if (RobotMap.debugSarlacc) {
+    //         System.out.println("ARMS OFF");
+    //     }
+    // }
 
 }

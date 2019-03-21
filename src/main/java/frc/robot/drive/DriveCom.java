@@ -8,7 +8,6 @@ import frc.robot.RobotMap;
 
 public class DriveCom extends CommandBase {
 
-    private static Joystick stick = OI.stick;
     private static XboxController controller = OI.driver;
 
     // speed values taken in from controllers
@@ -18,8 +17,6 @@ public class DriveCom extends CommandBase {
     // deadzone of controller joystick
     private double deadzone = 0.05;
 
-    private boolean quickturn;
-    private boolean reverse;
     private boolean slow;
 
     public DriveCom() {
@@ -34,25 +31,13 @@ public class DriveCom extends CommandBase {
 
     @Override
     protected void execute() {
-        if (OI.controllerToggle) {
-            lx = controller.getRawAxis(OI.XBOX_LSTICKX);
-            ly = controller.getRawAxis(OI.XBOX_LSTICKY);
-            rx = controller.getRawAxis(OI.XBOX_RSTICKX);
-            ry = controller.getRawAxis(OI.XBOX_RSTICKY);
-            quickturn = !OI.driver.getAButton();
-            reverse = OI.driver.getYButtonPressed();
-        
-            slow = OI.driver.getRawButton(OI.XBOX_RBUMPER);
-            arcade(true);
-        } else {
-            h = stick.getRawAxis(OI.rightJoyX);
-            v = stick.getRawAxis(OI.rightJoyY);
-            quickturn = !stick.getRawButton(OI.rightMainTrigger);
-            // curvy(false);
-        }
-    }
-
-    public void tank(boolean config) {
+        lx = controller.getRawAxis(OI.XBOX_LSTICKX);
+        ly = controller.getRawAxis(OI.XBOX_LSTICKY);
+        rx = controller.getRawAxis(OI.XBOX_RSTICKX);
+        ry = controller.getRawAxis(OI.XBOX_RSTICKY);
+    
+        slow = OI.driver.getRawButton(OI.XBOX_RBUMPER);
+        arcade(true);
     }
 
     public void arcade(boolean config) {
@@ -65,21 +50,7 @@ public class DriveCom extends CommandBase {
         else {
             driveTrain.arcadeDrive(ly * RobotMap.defaultSpeed, rx * RobotMap.defaultTurn);
         }
-
-        if (reverse)
-            driveTrain.reverseMotors();
     }
-
-    // public void curvy(boolean config) {
-    //     if (config)
-    //         driveTrain.curvyDrive(configSpeed(v), h, quickturn);
-    //     else {
-    //         if (slow)
-    //             driveTrain.curvyDrive(v * RobotMap.limitedSpeed, h * RobotMap.limitedTurn, quickturn);
-    //         else
-    //             driveTrain.curvyDrive(v * RobotMap.maxSpeed, h * RobotMap.maxTurn, quickturn);
-    //     }
-    // }
 
     public double configSpeed(double s, double max) {
         // applies a deadzone to the raw controller speeds

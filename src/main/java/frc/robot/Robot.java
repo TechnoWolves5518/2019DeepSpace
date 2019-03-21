@@ -37,8 +37,6 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     CommandBase.driveTrain.resetEncoders();
-    // autoCom = new HabDrop();
-    // autoCom.start();
   }
 
   @Override
@@ -48,11 +46,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    if (autoCom != null)
-      autoCom.cancel();
     CommandBase.driveTrain.resetEncoders();
     CommandBase.elevator.setSetpoint(RobotMap.startingPosition);
-    CommandBase.sarlacc.closeArms();
   }
 
   @Override
