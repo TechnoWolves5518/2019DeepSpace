@@ -5,6 +5,7 @@ import frc.robot.CommandBase;
 public class Outtake extends CommandBase {
 
     public Outtake() {
+        System.out.println("outtake");
         requires(intake);
     }
 

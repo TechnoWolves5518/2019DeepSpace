@@ -5,6 +5,7 @@ import frc.robot.CommandBase;
 public class Stop extends CommandBase {
 
     public Stop() {
+        System.out.println("stop");
         requires(intake);
     }
 

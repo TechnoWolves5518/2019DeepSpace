@@ -28,7 +28,10 @@ public class RobotMap {
   public static double limitedSpeed = 0.4;
   public static double limitedTurn = 0.6;
   
-  public static double autoClimbSpeed = -0.4;
+  public static double climbSpeed = 0.6;
+  public static double climbTurn = 0.3;
+
+  public static double autoClimbSpeed = 0.4;
   public static double autoClimbTurn = 0.0;
 
   public static final int backUpDistance = 100;

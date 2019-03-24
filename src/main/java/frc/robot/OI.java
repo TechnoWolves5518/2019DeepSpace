@@ -42,14 +42,14 @@ public class OI {
 
 	JoystickButton sf_a = new JoystickButton(sf, XBOX_ABTN);
 	JoystickButton sf_x = new JoystickButton(sf, XBOX_XBTN);
-	JoystickButton sf_lstick = new JoystickButton(sf, XBOX_LSTICK);
+	// JoystickButton sf_lstick = new JoystickButton(sf, XBOX_LSTICK);
 
   public OI() {
-    d_b.whenPressed(new ClimbGroup());
+    // d_b.whenPressed(new ClimbGroup());
 
     sf_a.whileHeld(new Outtake());
 		sf_x.whileHeld(new Intake());
-		sf_lstick.whenPressed(new PullOut());
+		// sf_lstick.whenPressed(new PullOut());
   }
 
 }

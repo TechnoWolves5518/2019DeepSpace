@@ -25,6 +25,7 @@ public class SarlaccSubsystem extends Subsystem {
         front = new DoubleSolenoid(RobotMap.frontSolenoidF, RobotMap.frontSolenoidR);
         liftFront(false);
         liftBack(false);
+        arms.set(Value.kReverse);
     }
 
     @Override

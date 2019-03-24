@@ -2,12 +2,16 @@ package frc.robot.sarlacc;
 
 import frc.robot.CommandBase;
 import frc.robot.OI;
+import frc.robot.Robot;
 
 public class SarlaccCom extends CommandBase {
 
     boolean active = false;
     boolean climbA = false;
     boolean climbB = false;
+
+    boolean frontActive = false;
+    boolean backActive= false;
 
     int counter = 0;
 
@@ -17,26 +21,28 @@ public class SarlaccCom extends CommandBase {
 
     @Override
     protected void initialize() {
+        sarlacc.liftFront(false);
+        sarlacc.liftBack(false);
     }
 
     @Override
     protected void execute() { 
 
-        if (OI.sf.getRawButtonPressed(OI.XBOX_BBTN)) {
+        if (Robot.oi.sf.getRawButtonPressed(OI.XBOX_BBTN)) {
             active = !active;
             sarlacc.toggleArms(active);
         }
 
-        // if (OI.driver.getRawButtonPressed(OI.XBOX_ABTN)) {
-        //     sarlaccSub.frontActive = !sarlaccSub.frontActive;
-        //     System.out.println("---------------FRONT PRESSED, SLOW MODE ACTIVE------------");
-        //     sarlaccSub.liftFront(sarlaccSub.frontActive);
-        // }
-        // if (OI.driver.getRawButtonPressed(OI.XBOX_BBTN)) {
-        //     sarlaccSub.backActive = !sarlaccSub.backActive;
-        //     System.out.println("---------------BACK PRESSED, SLOW MODE ACTIVE------------");
-        //     sarlaccSub.liftBack(sarlaccSub.backActive);
-        // }
+        if (OI.driver.getRawButtonPressed(OI.XBOX_ABTN)) {
+            frontActive = !frontActive;
+            System.out.println("---------------FRONT PRESSED, SLOW MODE ACTIVE------------");
+            sarlacc.liftFront(frontActive);
+        }
+        if (OI.driver.getRawButtonPressed(OI.XBOX_BBTN)) {
+            backActive = !backActive;
+            System.out.println("---------------BACK PRESSED, SLOW MODE ACTIVE------------");
+            sarlacc.liftBack(backActive);
+        }
 
         // if (sarlaccSub.frontActive || sarlaccSub.backActive) {
         //     RobotMap.maxSpeed = RobotMap.limitedSpeed;

@@ -21,6 +21,7 @@ public class Robot extends TimedRobot {
 
   Command autoCom = null;
 
+  public static OI oi;
 
   @Override
   public void robotInit() {
@@ -28,6 +29,8 @@ public class Robot extends TimedRobot {
     CommandBase.init();
 
     camera.setResolution(480, 320);
+
+    oi = new OI();
   }
 
   @Override
@@ -47,7 +50,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopInit() {
     CommandBase.driveTrain.resetEncoders();
-    CommandBase.elevator.setSetpoint(RobotMap.startingPosition);
+    // CommandBase.elevator.setSetpoint(RobotMap.startingPosition);
   }
 
   @Override

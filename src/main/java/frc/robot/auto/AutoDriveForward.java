@@ -8,6 +8,7 @@ public class AutoDriveForward extends CommandBase {
     private double timeout;
 
     public AutoDriveForward(double timeout) {
+        System.out.println("drive forward");
 	    requires(driveTrain);
         this.timeout = timeout;
     }
