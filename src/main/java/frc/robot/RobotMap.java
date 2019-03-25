@@ -10,10 +10,14 @@ package frc.robot;
 public class RobotMap {
 
   //Debugging Control
+  public static final boolean debugIntake = false;
   public static final boolean debugSarlacc = false;
   public static final boolean debugDriveSpeed = false;
   public static final boolean debugDrivePosition = false;
   public static final boolean debugElevator = false;
+  public static final boolean debugAuto = false;
+  
+  public static final int debugRefreshRate = 500;
   /* Drive Train */
     // Motor Controllers
   public static final int leftMasterId = 1;
@@ -35,6 +39,8 @@ public class RobotMap {
   public static double autoClimbTurn = 0.0;
 
   public static final int backUpDistance = 100;
+  
+  public static final double triggerDeadZone = 0.2;
 
   public static final int LEFT_ENC_A = 2;
   public static final int LEFT_ENC_B = 3;
