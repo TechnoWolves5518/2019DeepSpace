@@ -1,0 +1,9 @@
+This is a text file describing the manipulator commands and subsytems.
+
+The Subsystem File will initialize and define all of the motors used for the manipulator.
+
+There are multiple files found within this folder, each named ''action'.java'
+
+These files contain a command which is run on the now-defined motors, and if a debug is toggled, they will print their actions as they do so.
+
+The command file maps these actions to a controller, so that when a button is pressed, an action is performed.

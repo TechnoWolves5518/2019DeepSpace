@@ -5,7 +5,7 @@ import frc.robot.CommandBase;
 public class Outtake extends CommandBase {
 
     public Outtake() {
-        if ((RobotMap.debugIntake) && (System.currentTimeMillis % RobotMap.debugRefreshRate)) {
+        if (RobotMap.debugIntake) {
             System.out.println("Outtake");
         }
         requires(intake);
