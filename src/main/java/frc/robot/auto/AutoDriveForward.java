@@ -8,6 +8,9 @@ public class AutoDriveForward extends CommandBase {
     private double timeout;
 
     public AutoDriveForward(double timeout) {
+	if (RobotMap.debugAuto) {
+		System.out.println("Automatically driving forward...");
+    	}
 	    requires(driveTrain);
         this.timeout = timeout;
     }
@@ -20,9 +23,6 @@ public class AutoDriveForward extends CommandBase {
     @Override
     protected void execute() {
         driveTrain.arcadeDrive(RobotMap.autoClimbSpeed, RobotMap.autoClimbTurn);
-	if ((RobotMap.debugAuto) && (System.currentTimeMillis % RobotMap.debugRefreshRate = 0)) {
-		System.out.println("Automatically driving forward...");
-    	}
     }
 
     @Override
