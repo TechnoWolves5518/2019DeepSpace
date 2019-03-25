@@ -13,7 +13,6 @@ public class SarlaccSubsystem extends Subsystem {
     public DoubleSolenoid arms;
     public DoubleSolenoid front, back;
 
-    // public boolean active;
 
     public SarlaccSubsystem() {
         compressor = new Compressor(RobotMap.compressor);
@@ -43,11 +42,15 @@ public class SarlaccSubsystem extends Subsystem {
     public void liftFront(boolean active) {
         if (active) {
             front.set(Value.kForward);
-            System.out.println("FRONT PISTON ACTIVE");
+	    if (RobotMap.debugSarlacc)  {
+            	System.out.println("FRONT PISTON ACTIVE");
+	    }
         } else {
             front.set(Value.kReverse);
-            System.out.println("FRONT PISTON INACTIVE");
-        }
+            if (RobotMap.debugSarlacc) {
+		System.out.println("FRONT PISTON INACTIVE");
+	    }        
+	}
     }
 
     public void liftBack(boolean active) {
@@ -63,26 +66,3 @@ public class SarlaccSubsystem extends Subsystem {
             }
         }
     }
-
-    // public void openArms() {
-    //     arms.set(Value.kReverse);
-    //     if (RobotMap.debugSarlacc) {
-    //         System.out.println("ARMS OPEN");
-    //     }
-    // }
-
-    // public void closeArms() {
-    //     arms.set(Value.kForward);
-    //     if (RobotMap.debugSarlacc) {
-    //         System.out.println("ARMS CLOSED");
-    //     }
-    // }
-
-    // public void armsOff() {
-    //     arms.set(Value.kOff);
-    //     if (RobotMap.debugSarlacc) {
-    //         System.out.println("ARMS OFF");
-    //     }
-    // }
-
-}

@@ -13,8 +13,6 @@ public class SarlaccCom extends CommandBase {
     boolean frontActive = false;
     boolean backActive= false;
 
-    int counter = 0;
-
     public SarlaccCom() {
         requires(sarlacc);
     }
@@ -35,23 +33,20 @@ public class SarlaccCom extends CommandBase {
 
         if (OI.driver.getRawButtonPressed(OI.XBOX_ABTN)) {
             frontActive = !frontActive;
-            System.out.println("---------------FRONT PRESSED, SLOW MODE ACTIVE------------");
+            if (System.currentTimeMillis % RobotMap.debugRefreshRate = 0) {
+		System.out.println("---------------FRONT PRESSED, SLOW MODE ACTIVE------------");
+	    }
             sarlacc.liftFront(frontActive);
         }
         if (OI.driver.getRawButtonPressed(OI.XBOX_BBTN)) {
             backActive = !backActive;
-            System.out.println("---------------BACK PRESSED, SLOW MODE ACTIVE------------");
-            sarlacc.liftBack(backActive);
+            if (System.currentTimeMillis % RobotMap.debugRefreshRate = 0) {
+		System.out.println("---------------BACK PRESSED, SLOW MODE ACTIVE------------");
+            }
+	    sarlacc.liftBack(backActive);
         }
 
-        // if (sarlaccSub.frontActive || sarlaccSub.backActive) {
-        //     RobotMap.maxSpeed = RobotMap.limitedSpeed;
-        //     RobotMap.maxTurn = RobotMap.limitedTurn;
-        // }
-        // if (!sarlaccSub.frontActive && !sarlaccSub.backActive) {
-        //     RobotMap.maxSpeed = RobotMap.defaultSpeed;
-        //     RobotMap.maxTurn = RobotMap.defaultTurn;
-        // }
+
     }
 
     @Override
