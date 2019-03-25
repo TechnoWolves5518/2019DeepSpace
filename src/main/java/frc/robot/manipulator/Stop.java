@@ -5,7 +5,9 @@ import frc.robot.CommandBase;
 public class Stop extends CommandBase {
 
     public Stop() {
-        System.out.println("stop");
+        if ((RobotMap.debugIntake) && (System.currentTimeMillis % RobotMap.debugRefreshRate)) {
+            System.out.println("Stop");
+        }
         requires(intake);
     }
 
