@@ -1,6 +1,7 @@
 package frc.robot.manipulator;
 
 import frc.robot.CommandBase;
+import frc.robot.RobotMap;
 
 public class Stop extends CommandBase {
 

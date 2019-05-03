@@ -3,6 +3,7 @@ package frc.robot.sarlacc;
 import frc.robot.CommandBase;
 import frc.robot.OI;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class SarlaccCom extends CommandBase {
 
@@ -33,14 +34,14 @@ public class SarlaccCom extends CommandBase {
 
         if (OI.driver.getRawButtonPressed(OI.XBOX_ABTN)) {
             frontActive = !frontActive;
-            if (System.currentTimeMillis % RobotMap.debugRefreshRate = 0) {
+            if (System.currentTimeMillis() % RobotMap.debugRefreshRate == 0) {
 		System.out.println("---------------FRONT PRESSED, SLOW MODE ACTIVE------------");
 	    }
             sarlacc.liftFront(frontActive);
         }
         if (OI.driver.getRawButtonPressed(OI.XBOX_BBTN)) {
             backActive = !backActive;
-            if (System.currentTimeMillis % RobotMap.debugRefreshRate = 0) {
+            if (System.currentTimeMillis() % RobotMap.debugRefreshRate == 0) {
 		System.out.println("---------------BACK PRESSED, SLOW MODE ACTIVE------------");
             }
 	    sarlacc.liftBack(backActive);

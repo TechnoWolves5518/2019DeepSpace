@@ -17,12 +17,7 @@ public class ElevatorPositionRaw extends CommandBase {
         else if (Robot.oi.sf.getRawAxis(Robot.oi.XBOX_LTRIGGER) > RobotMap.triggerDeadZone)
             elevatorRaw.runElevator(-1);
         else
-            elevatorRaw.runElevator(0)
-            
-        
-        if ((RobotMap.debugElevator) && (System.currentTimeMillis % RobotMap.debugRefreshRate = 0))
-                // System.out.println("Elevator Position = " + active);
-                System.out.println("Elevator Encoders = " + elevatorRaw.getElevatorRawEnc());
+            elevatorRaw.runElevator(0);       
     }
 
     @Override
